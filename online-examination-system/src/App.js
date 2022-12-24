@@ -1,4 +1,4 @@
-import BasePage from './Component/Layout/BasePage';
+import BasePage from './Layout/BasePage'
 import { BrowserRouter } from "react-router-dom";
 
 

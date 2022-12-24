@@ -1,110 +1,96 @@
+import { useState } from "react";
+import "./TeacherLoginPage.css";
 import {
   Avatar,
   Button,
   Checkbox,
   FormControlLabel,
   Grid,
+  Link,
   Paper,
   TextField,
+  Typography,
 } from "@mui/material";
-import React from "react";
-import { useNavigate } from "react-router-dom";
 
-const TeacherLoginPage = (props) => {
-  const paperStyle = {
-    width: 400,
-    margin: "20px auto",
-    background: "#31457d",
-    opacity: "0.4",
+const TeacherLoginPage = () => {
+  const [permission, setPermission] = useState(0);
+  const [error, setError] = useState(0);
+  const [userName, setUserName] = useState("");
+  const [password, setUserPassword] = useState("");
+
+  const loginHandle = () => {
+    if (userName && password >= 3) {
+      setPermission(1);
+      setError(0);
+    } else {
+      setError(1);
+      setPermission(0);
+    }
   };
-  const avatarStyle = { backgroundColor: "#1bbd7e" };
-  const btnstyle = { margin: "8px 0" , backgroundColor: "#892020" }
-    
-  const back = {backgroundImage: "url('https://www.xmple.com/wallpaper/purple-gradient-blue-linear-1920x1080-c2-87cefa-da70d6-a-195-f-14.svg')" }
 
-  const navigate = useNavigate();
-
-  const navigateToDashboard = () => {
-    navigate("/DashBoard");
+  const logoutHandle = () => {
+    // this.login.username.value = "";
+    // this.login.password.value = "";
+    setError(0);
+    setPermission(0);
   };
- 
+  const handleChange = (event) => {
+    console.log(event);
+  };
+
+  let errormessage = <p className="error-msg"> Invalid login attempt! </p>;
+
   return (
-    <>
-    <div style={back} className="pt-lg-2 pb-lg-5">
-      <Grid >
-        <Paper elevation={10} 
-        style={paperStyle}
-        >
-          <Grid align="center">
-            <Avatar style={avatarStyle}>{/* <LockOutlinedIcon /> */}</Avatar>
-            <h2>Login Page Of Teacher</h2>
-          </Grid>
-          <div className="row m-0">
-          <div className="col-lg-12">
-          <TextField
-          label="Email" sx={{ input: { color: 'white' } }}
-          color="info"
-          type={"email"}
-          name="Email"
-          variant="outlined"
-          placeholder="Enter Email"
-          fullWidth
-        />
-        </div>
-        </div>
-        <br/>
-        <div className="row m-0">
-          <div className="col-lg-12">
-        <TextField
-          label="Password"
-          name="password"
-          placeholder="Enter password"
-          type="password"
-          fullWidth
-          variant="standard"
-          required
-        />
-        </div>
-        </div>
-        <div className="row m-0">
-          <FormControlLabel
-            control={<Checkbox name="checkedB" color="primary" />}
-            label="Remember me"
-          />
+    <div className="login-app">
+      <div className={`box ${permission ? "content" : "login"}`}>
+        {permission ? (
+          <>
+            <div>
+              <h2>Wellcome!</h2>
+              <div className="btn btn-login" onClick={logoutHandle}>
+                Logout
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className="align-items-center d-flex flex-column justify-content-center">
+            <input
+              type="text"
+              // tabindex="1"
+              placeholder="Username"
+              onChange={handleChange}
+            />
+            <input
+              type="password"
+              // tabindex="1"
+              placeholder="Password"
+              onChange={handleChange}
+              className=""
+            />
+            {error ? errormessage : null}
+            <input
+              id="abc"
+              name="abc"
+              type="checkbox"
+              className="display-none"
+            />
+            <div className="d-flex align-items-center justify-content-space-between">
+              <FormControlLabel
+                control={<Checkbox name="checkedB" color="primary" />}
+                label="Remember me"
+              />
+              <Button className="text-capitalize forgotPassword">
+                Forgot Password ?
+              </Button>
+            </div>
+            <div className="btn btn-login mt-4" onClick={loginHandle}>
+              Login
+            </div>
+            <Button className="text-capitalize forgotPassword mt-4">Don't have an account? Sign up</Button>
           </div>
-        <div className="row m-2">
-
-          <Button
-            type="submit"
-            color="primary"
-            variant="contained"
-            style={btnstyle}
-            fullWidth
-            onClick={navigateToDashboard}
-          >
-            Login
-          </Button>
-          </div>
-
-          <h6 className="px-2">Do you have an account ?</h6>
-         
-          <div className="row m-2">
-          <Button
-            type="submit"
-            color="primary"
-            variant="contained"
-            style={btnstyle}
-            fullWidth
-            onClick={navigateToDashboard}
-          >
-            Student Login
-          </Button>          
-          </div>
-          {/* <a href="/SignInOutContainer">Student Login</a> */}
-        </Paper>
-      </Grid>
+        )}
+      </div>
     </div>
-    </>
   );
 };
 export default TeacherLoginPage;

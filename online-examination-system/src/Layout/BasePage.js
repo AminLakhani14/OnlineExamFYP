@@ -1,5 +1,5 @@
 import { Route, Routes  } from "react-router-dom";
-import DashBoard from "../Pages/DashBoard/DashBoard";
+import DashBoard from '../Pages/DashBoard/DashBoard'
 
 import SignInOutContainer from "../Pages/SignInOutContainer/SignInOutContainer";
 import StudentLoginPage from "../Pages/StudentLoginPage/StudentLoginPage";
