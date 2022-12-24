@@ -33,6 +33,7 @@ const SignInOutContainer = (props) => {
   }
 
   return (
+    <>
     <Paper elevation={20} style={paperStyle}>
       <Tabs
         value={value}
@@ -53,6 +54,7 @@ const SignInOutContainer = (props) => {
         <StudentSignUpPage />
       </TabPanel>
     </Paper>
+    </>
   );
 };
 

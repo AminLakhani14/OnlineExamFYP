@@ -9,8 +9,16 @@ const DashBoard = (props) => {
   
 
   return (
-    h1
+    <>
+    <div class="row">
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-6">
+        <h1>hello world</h1>
+      </div>
+    </div>
+    </>
   );
 };
 
-DashBoard
+export default DashBoard;

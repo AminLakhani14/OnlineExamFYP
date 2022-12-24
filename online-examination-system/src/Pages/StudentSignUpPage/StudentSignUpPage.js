@@ -60,22 +60,27 @@ import {
               Please fill this form to create an account !
             </Typography>
           </Grid>
-          <form>
+            <div className="row">
+            <div className="col-6">
             <TextField
               fullWidth
-              label="Name"
+              label="First Name"
               variant="standard"
               // onChange={(e) => handleNameChange(e.target.value)}
-              placeholder="Enter your name"
+              placeholder="Enter your first name"
             />
+            </div>
             <br />
+            <div className="col-6">
             <TextField
               fullWidth
-              label="Address"
+              label="Last Name"
               variant="standard"
               // onChange={(e) => handleAddressChange(e.target.value)}
-              placeholder="Enter your Address"
+              placeholder="Enter your last name"
             />
+            </div>
+            </div>
             <FormControl component="fieldset" style={marginTop}>
               <FormLabel component="legend">Gender</FormLabel>
               <RadioGroup
@@ -124,7 +129,6 @@ import {
             >
               Sign up
             </Button>
-          </form>
         </Paper>
       </Grid>
     );
