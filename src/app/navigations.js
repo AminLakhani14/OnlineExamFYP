@@ -27,7 +27,9 @@ export const navigations = [
   {
     name: 'Manage',
     icon: <ManageAccountsIcon/>,
-    children: [{ name: 'No Items', path: '/charts/echarts', iconText: 'E' }],
+    children: [
+      { name: 'No Items', path: '/charts/echarts', iconText: 'E' },
+    ],
   },
   {
     name: 'Examination',
