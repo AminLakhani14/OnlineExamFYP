@@ -116,7 +116,8 @@ const Layout1 = () => {
           </StyledScrollBar>
         )}
 
-        {!settings.perfectScrollbar && (
+{/* ------------{ here is your body start }------------ */}
+        {/* {!settings.perfectScrollbar && (
           <ContentBox>
             {layout1Settings.topbar.show && !layout1Settings.topbar.fixed && (
               <ThemeProvider theme={topbarTheme}>
@@ -132,7 +133,8 @@ const Layout1 = () => {
 
             {settings.footer.show && !settings.footer.fixed && <Footer />}
           </ContentBox>
-        )}
+        )} */}
+{/* ------------{ here is your body End }------------ */}
 
         {settings.footer.show && settings.footer.fixed && <Footer />}
       </LayoutContainer>
