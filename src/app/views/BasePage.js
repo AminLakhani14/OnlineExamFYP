@@ -1,5 +1,12 @@
 import Loadable from 'app/components/Loadable';
 import { lazy } from 'react';
+import AttemptMCQ from './AttemptExam/AttemptMCQs/AttemptMCQ';
+import AttemptQA from './AttemptExam/AttemptQA/AttemptQA';
+import Card from './Cards/Card1';
+import MCQ from './Examination/MCQs/MCQs';
+import QA from './Examination/QA/QA';
+import ViewMCQs from './Examination/ViewMCQs/ViewMCQs';
+import VQP from './Examination/VQP/VQP';
 
 // const AppTable = Loadable(lazy(() => import('./tables/AppTable')));
 // const AppForm = Loadable(lazy(() => import('./forms/AppForm')));
@@ -16,10 +23,28 @@ import { lazy } from 'react';
 // const AppExpansionPanel = Loadable(lazy(() => import('./expansion-panel/AppExpansionPanel')));
 
 const BasePage = [
-//   {
-//     path: '/material/snackbar',
-//     element: <AppSnackbar />,
-//   },
+  {
+    path: '/Examination/QA', element: <QA />,
+  },
+  {
+    path: '/Examination/MCQs', element: <MCQ />,
+  },
+  {
+    path: '/AttemptExam/AttemptMCQs', element: <AttemptMCQ />,
+  },
+  {
+    path: '/AttemptExam/AttemptQA', element: <AttemptQA />,
+  },
+  {
+    path: '/Examination/VQP', element: <VQP />,
+  },
+  {
+    path: '/Examination/ViewMCQs', element: <ViewMCQs />,
+  },
+  {
+    path: '/Cards/Card1', element: <Card />,
+  },
+
 ];
 
 export default BasePage;

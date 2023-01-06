@@ -6,7 +6,7 @@ export const navigations = [
   { name: 'Dashboard', path: '/dashboard/default', icon: 'dashboard' },
   // { label: 'PAGES', type: 'label' },
   // {
-  //   name: 'Session/Auth',
+  //   name: 'Session/Auth',x
   //   icon: 'security',
   //   children: [
   //     { name: 'Sign in', iconText: 'SI', path: '/session/signin' },
@@ -17,29 +17,36 @@ export const navigations = [
   // },
   { label: 'Menu', type: 'label' },
   {
-    name: 'Home',
-    icon: 'home',
-    // badge: { value: '30+', color: 'secondary' },
+    name: 'Upload Exam',
+    icon: 'books',
     children: [
-      { name: 'No Item', path: '/material/autocomplete', iconText: 'A' },
+      { name: 'Question/Answers', path: '/Examination/QA', iconText: 'A' },
+      { name: 'MCQs', path: '/Examination/MCQs', iconText: 'B' },
+      { name: 'View Question Paper', path: '/Examination/VQP', iconText: 'B' },
+      { name: 'View MCQs', path: '/Examination/ViewMCQs', iconText: 'B' },
+
     ],
   },
   {
     name: 'Manage',
     icon: <ManageAccountsIcon/>,
     children: [
-      { name: 'No Items', path: '/charts/echarts', iconText: 'E' },
+      { name: 'View Exams', path: '/charts/echarts', iconText: 'E' },
     ],
   },
   {
-    name: 'Examination',
-    icon: 'books',
-    children: [{ name: 'No Items', path: '/charts/echarts', iconText: 'E' }],
+    name: 'Attempt Exam',
+    icon: 'home',
+    children: [
+    { name: 'Question/Answers', path: '/AttemptExam/AttemptQA', iconText: 'A' },
+    { name: 'MCQs', path: '/AttemptExam/AttemptMCQs', iconText: 'A' },
+    ],
   },
-  {
+{
     name: 'Documentation',
     icon: 'launch',
     type: 'extLink',
     path: 'http://demos.ui-lib.com/matx-react-doc/',
   },
+  
 ];
