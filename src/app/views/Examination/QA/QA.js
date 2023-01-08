@@ -45,8 +45,16 @@ const QA = () => {
               Question1:{" "}
             </h3>
             <div className="align-items-center d-flex justify-content-end w-auto">
-              <label className="align-items-center d-flex px-2">marks:</label>
-              <input type={Text} className="h-75 w-50"></input>
+              <label className="align-items-center mt-2 d-flex px-2">marks:</label>
+              <TextField
+            className="mt-2 w-50"
+            fullWidth
+            size="small"
+            sx={{
+              "& legend": { display: "none" },
+              "& fieldset": { top: 0 },
+            }}
+          />
             </div>
           </div>
           <TextField
