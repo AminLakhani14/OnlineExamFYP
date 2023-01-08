@@ -8,6 +8,7 @@ import {
     MenuItem,
     Select,
     TextareaAutosize,
+    TextField,
     Typography,
   } from "@mui/material";
   import HomeIcon from "@mui/icons-material/Home";
@@ -28,28 +29,6 @@ import {
   
     return (
       <>
-        <div className="row m-0 mt-3">
-          <div className="col-3">
-            <Breadcrumbs aria-label="breadcrumb">
-              <Link
-                underline="hover"
-                sx={{ display: "flex", alignItems: "center" }}
-                color="inherit"
-                href="/"
-              >
-                <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-                DashBoard
-              </Link>
-              <Typography
-                sx={{ display: "flex", alignItems: "center" }}
-                color="text.primary"
-              >
-                Question/Answer
-              </Typography>
-            </Breadcrumbs>
-          </div>
-          <hr />
-        </div>
   
         <div className="row m-0">
           <div className="col-3" >
@@ -77,7 +56,13 @@ import {
   
         <div className="row m-0">
           <div className="col-12">
-            <textarea id="Answer" className="w-100 h-100"></textarea>
+          <TextField
+          fullWidth
+            sx={{
+              "& legend": { display: "none" },
+              "& fieldset": { top: 0 },
+            }}
+          />    
           </div>
         </div>
   

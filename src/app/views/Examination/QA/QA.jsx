@@ -8,11 +8,12 @@ import {
   MenuItem,
   Select,
   TextareaAutosize,
+  TextField,
   Typography,
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
-import DeleteIcon from '@mui/icons-material/Delete';
-import SendIcon from '@mui/icons-material/Send';
+import DeleteIcon from "@mui/icons-material/Delete";
+import SendIcon from "@mui/icons-material/Send";
 
 const QA = () => {
   const names = [
@@ -69,23 +70,24 @@ const QA = () => {
       </div>
 
       <div className="row m-0">
-        <div className="col-3" >
+        <div className="col-3">
           <h3 id="QuestionText">Question1: </h3>
         </div>
         <div className="col-7"></div>
         <div className="col-2">
           <label className="ms-4 px-2">marks:</label>
-          <input type={Text}  className="w-50"></input>
+          <input type={Text} className="w-50"></input>
         </div>
       </div>
       <div className="row m-0">
-        <div className="col-12" >
-        <input
-           type={Text}  
-           id="Answer"
-           className="w-100 "
-          >
-          </input> 
+        <div className="col-12">
+          <TextField
+          fullWidth
+            sx={{
+              "& legend": { display: "none" },
+              "& fieldset": { top: 0 },
+            }}
+          />
         </div>
       </div>
 
@@ -99,13 +101,13 @@ const QA = () => {
 
       <div className="row m-0">
         <div className="col-12">
-        <input
-           type={Text}  
-           id="Answer"
-           className="w-100 "
-          >
-          </input>
-          {/* <textarea id="Answer" className="w-100 h-100"></textarea> */}
+        <TextField
+          fullWidth
+            sx={{
+              "& legend": { display: "none" },
+              "& fieldset": { top: 0 },
+            }}
+          />
         </div>
       </div>
 
@@ -119,23 +121,49 @@ const QA = () => {
 
       <div className="row m-0">
         <div className="col-2 ">
-          <input
-           type={Text}  
-           
-          >
-          </input>
+        <TextField
+          fullWidth
+            sx={{
+              "& legend": { display: "none" },
+              "& fieldset": { top: 0 },
+            }}
+          />
         </div>
         <div className="col-2 mx-2">
-          <input type={Text}></input>
+        <TextField
+          fullWidth
+            sx={{
+              "& legend": { display: "none" },
+              "& fieldset": { top: 0 },
+            }}
+          />
         </div>
         <div className="col-2 mx-2">
-          <input type={Text} ></input>
+        <TextField
+          fullWidth
+            sx={{
+              "& legend": { display: "none" },
+              "& fieldset": { top: 0 },
+            }}
+          />
         </div>
         <div className="col-2 mx-2">
-          <input type={Text} ></input>
+        <TextField
+          fullWidth
+            sx={{
+              "& legend": { display: "none" },
+              "& fieldset": { top: 0 },
+            }}
+          />
         </div>
         <div className="col-2 mx-2">
-          <input type={Text} ></input>
+        <TextField
+          fullWidth
+            sx={{
+              "& legend": { display: "none" },
+              "& fieldset": { top: 0 },
+            }}
+          />
         </div>
       </div>
 
@@ -143,28 +171,31 @@ const QA = () => {
       <br />
       <br />
       <div className="row m-0">
-      <div className="col-12">
-
-      <Button variant="outlined" 
-      className="float-start" 
-       sx={{
-        width: 300,
-      }} startIcon={<SendIcon   />}>
-        Add Question
-      </Button>
-      {/* <Button variant="contained">Add Question</Button> */}
-      <Button variant="outlined" 
-      className="float-end" 
-       sx={{
-        width: 300,
-        color: 'red',
-      }} 
-      startIcon={<DeleteIcon />}>
-        Clear
-      </Button>
+        <div className="col-12">
+          <Button
+            variant="outlined"
+            className="float-start"
+            sx={{
+              width: 300,
+            }}
+            startIcon={<SendIcon />}
+          >
+            Add Question
+          </Button>
+          {/* <Button variant="contained">Add Question</Button> */}
+          <Button
+            variant="outlined"
+            className="float-end"
+            sx={{
+              width: 300,
+              color: "red",
+            }}
+            startIcon={<DeleteIcon />}
+          >
+            Clear
+          </Button>
+        </div>
       </div>
-      </div>
-
     </>
   );
 };

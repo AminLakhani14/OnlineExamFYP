@@ -8,6 +8,7 @@ import {
   MenuItem,
   Select,
   TextareaAutosize,
+  TextField,
   Typography,
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
@@ -79,7 +80,13 @@ const MCQ = () => {
       </div>
       <div className="row m-0">
         <div className="col-12">
-          <input type={Text} id="Question_MCQs" className="w-100 "></input>
+        <TextField
+          fullWidth
+            sx={{
+              "& legend": { display: "none" },
+              "& fieldset": { top: 0 },
+            }}
+          />
         </div>
       </div>
 
@@ -96,7 +103,13 @@ const MCQ = () => {
           <label>Option 1:</label>
         </div>
         <div className="col-1 my-2">
-          <input type={Text}></input>
+        <TextField
+          fullWidth
+            sx={{
+              "& legend": { display: "none" },
+              "& fieldset": { top: 0 },
+            }}
+          />    
         </div>
       </div>
 
@@ -105,7 +118,13 @@ const MCQ = () => {
           <label>Option 2:</label>
         </div>
         <div className="col-1 my-2">
-          <input type={Text}></input>
+        <TextField
+          fullWidth
+            sx={{
+              "& legend": { display: "none" },
+              "& fieldset": { top: 0 },
+            }}
+          />    
         </div>
       </div>
 
@@ -114,7 +133,14 @@ const MCQ = () => {
           <label>Option 3:</label>
         </div>
         <div className="col-1 my-2">
-          <input type={Text}></input>
+        <TextField
+          fullWidth
+            sx={{
+              "& legend": { display: "none" },
+              "& fieldset": { top: 0 },
+            }}
+          />    
+
         </div>
       </div>
       <div className="row m-0">
@@ -122,7 +148,13 @@ const MCQ = () => {
           <label>Option 4:</label>
         </div>
         <div className="col-1 my-2">
-          <input type={Text}></input>
+        <TextField
+          fullWidth
+            sx={{
+              "& legend": { display: "none" },
+              "& fieldset": { top: 0 },
+            }}
+          />    
         </div>
       </div>
 
@@ -132,7 +164,13 @@ const MCQ = () => {
         </div>
 
         <div className="col-1 my-2">
-          <input type={Text}></input>
+        <TextField
+          fullWidth
+            sx={{
+              "& legend": { display: "none" },
+              "& fieldset": { top: 0 },
+            }}
+          />    
         </div>
       </div>
 

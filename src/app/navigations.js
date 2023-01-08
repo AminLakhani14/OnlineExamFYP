@@ -22,8 +22,8 @@ export const navigations = [
     children: [
       { name: 'Question/Answers', path: '/Examination/QA', iconText: 'A' },
       { name: 'MCQs', path: '/Examination/MCQs', iconText: 'B' },
-      { name: 'View Question Paper', path: '/Examination/VQP', iconText: 'B' },
-      { name: 'View MCQs', path: '/Examination/ViewMCQs', iconText: 'B' },
+      { name: 'Update Question Paper', path: '/Examination/VQP', iconText: 'B' },
+      { name: 'Update MCQs', path: '/Examination/ViewMCQs', iconText: 'B' },
 
     ],
   },
@@ -31,7 +31,9 @@ export const navigations = [
     name: 'Manage',
     icon: <ManageAccountsIcon/>,
     children: [
-      { name: 'View Exams', path: '/charts/echarts', iconText: 'E' },
+      { name: 'View QA Paper', path: '/Manage/ViewQAExam', iconText: 'E' },
+      { name: 'View MCQs Paper', path: '/Manage/ViewMCQExam', iconText: 'E' },
+    
     ],
   },
   {
@@ -42,11 +44,14 @@ export const navigations = [
     { name: 'MCQs', path: '/AttemptExam/AttemptMCQs', iconText: 'A' },
     ],
   },
+  { name: 'View Result', path: '/Result/Result', icon: 'dashboard' },
+  { name: 'Rule', path: '/ExamRules/ExamRules', icon: 'dashboard' },
+
 {
     name: 'Documentation',
     icon: 'launch',
     type: 'extLink',
-    path: 'http://demos.ui-lib.com/matx-react-doc/',
+    path: 'https://github.com/AminLakhani14/OnlineExamFYP',
   },
   
 ];

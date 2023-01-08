@@ -25,29 +25,6 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 const AttemptMCQ = () => {
   return (
     <>
-      <div className="row m-0 mt-3">
-        <div className="col-3">
-          <Breadcrumbs aria-label="breadcrumb">
-            <Link
-              underline="hover"
-              sx={{ display: "flex", alignItems: "center" }}
-              color="inherit"
-              href="/"
-            >
-              <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-              DashBoard
-            </Link>
-            <Typography
-              sx={{ display: "flex", alignItems: "center" }}
-              color="text.primary"
-            >
-              Choice The Best Answer
-            </Typography>
-          </Breadcrumbs>
-        </div>
-        <hr />
-      </div>
-
       <div className="row m-0">
         <div className="col-3">
           <h3 id="QuestionText">Question1:</h3>

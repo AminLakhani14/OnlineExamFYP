@@ -7,6 +7,10 @@ import MCQ from './Examination/MCQs/MCQs';
 import QA from './Examination/QA/QA';
 import ViewMCQs from './Examination/ViewMCQs/ViewMCQs';
 import VQP from './Examination/VQP/VQP';
+import ExamRules from './ExamRules/ExamRules';
+import ViewExam from './Manage/ViewMCQExam/ViewExam';
+import ViewQAExam from './Manage/ViewQAExam/ViewQAExam';
+import Result from './Result/Result';
 
 // const AppTable = Loadable(lazy(() => import('./tables/AppTable')));
 // const AppForm = Loadable(lazy(() => import('./forms/AppForm')));
@@ -44,7 +48,20 @@ const BasePage = [
   {
     path: '/Cards/Card1', element: <Card />,
   },
-
+  {
+    path: '/Manage/ViewQAExam', element: <ViewQAExam />,
+  },
+  {
+    path: '/Manage/ViewMCQExam', element: <ViewExam />,
+  },
+  {
+    path: '/Result/Result', element: <Result />,
+  },
+  {
+    path: '/ExamRules/ExamRules', element: <ExamRules />,
+  },
+  
+  
 ];
 
 export default BasePage;
