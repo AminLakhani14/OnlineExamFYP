@@ -50,6 +50,7 @@ const validationSchema = Yup.object().shape({
     .min(6, 'Password must be 6 character length')
     .required('Password is required!'),
   email: Yup.string().email('Invalid Email address').required('Email is required!'),
+
 });
 
 const JwtRegister = () => {
@@ -73,14 +74,14 @@ const JwtRegister = () => {
 
   return (
     <JWTRegister className='bgImg'>
-      <Card className="card">
+      <Card className="card d-flex justify-content-center">
         <Grid container>
           <Grid item sm={6} xs={12}>
             <ContentBox>
               <img
                 width="100%"
                 alt="Register"
-                src="/assets/images/illustrations/posting_photo.svg"
+                src="/assets/images/illustrations/222.jpg"
               />
             </ContentBox>
           </Grid>
@@ -123,6 +124,7 @@ const JwtRegister = () => {
                       error={Boolean(errors.email && touched.email)}
                       sx={{ mb: 3 }}
                     />
+                    
                     <TextField
                       fullWidth
                       size="small"
