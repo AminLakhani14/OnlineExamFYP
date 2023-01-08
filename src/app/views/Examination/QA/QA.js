@@ -1,19 +1,14 @@
 import {
-  Breadcrumbs,
   Button,
   FormControl,
-  Input,
   InputLabel,
-  Link,
   MenuItem,
   Select,
-  TextareaAutosize,
   TextField,
-  Typography,
 } from "@mui/material";
-import HomeIcon from "@mui/icons-material/Home";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
+import HeadBreadCrumb from "app/components/BreadCrumb/HeadBreadCrumb";
 
 const QA = () => {
   const names = [
@@ -27,29 +22,7 @@ const QA = () => {
 
   return (
     <>
-      <div className="row m-0 mt-3">
-        <div className="mb-2 m-1">
-          <Breadcrumbs aria-label="breadcrumb">
-            <Link
-              underline="hover"
-              sx={{ display: "flex", alignItems: "center" }}
-              color="inherit"
-              href="/"
-              className="d-flex align-items-center"
-            >
-              <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-              <p className="m-0">DashBoard</p>
-            </Link>
-            <Typography
-              sx={{ display: "flex", alignItems: "center" }}
-              color="text.primary"
-            >
-              Question/Answer
-            </Typography>
-          </Breadcrumbs>
-        </div>
-        <hr />
-      </div>
+      <HeadBreadCrumb text1={'Dashboard'} text2={'Question/Answer'} url={'/'}/>
 
       <div className="row m-2">
         <div className="col-12">
