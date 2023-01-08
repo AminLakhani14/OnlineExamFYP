@@ -38,8 +38,8 @@ const JWTRoot = styled(JustifyBox)(() => ({
 
 // inital login credentials
 const initialValues = {
-  email: 'jason@ui-lib.com',
-  password: 'dummyPass',
+  email: 'amin@gmail.com',
+  password: 'amin12',
   remember: true,
 };
 
@@ -70,7 +70,7 @@ const JwtLogin = () => {
 
   return (
     <JWTRoot>
-      <Card className="card">
+      <Card className="card d-flex justify-content-center">
         <Grid container>
           <Grid item sm={6} xs={12}>
             <JustifyBox p={4} height="100%" sx={{ minWidth: 320 }}>
