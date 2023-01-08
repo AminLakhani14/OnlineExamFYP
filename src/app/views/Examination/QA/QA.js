@@ -52,6 +52,7 @@ const QA = () => {
           <TextField
             className="mt-2"
             fullWidth
+            size="small"
             sx={{
               "& legend": { display: "none" },
               "& fieldset": { top: 0 },
@@ -63,6 +64,7 @@ const QA = () => {
             </h3>
             <TextField
               fullWidth
+              size="small"
               sx={{
                 "& legend": { display: "none" },
                 "& fieldset": { top: 0 },
@@ -73,9 +75,10 @@ const QA = () => {
             <h3 id="AnswerText" className="m-0">
               Key Words:
             </h3>
-            <div className="d-flex">
+            <div className="d-flex mt-1">
               <TextField
                 fullWidth
+                size="small"
                 sx={{
                   "& legend": { display: "none" },
                   "& fieldset": { top: 0 },
@@ -84,6 +87,7 @@ const QA = () => {
               <TextField
                 className="ms-3"
                 fullWidth
+                size="small"
                 sx={{
                   "& legend": { display: "none" },
                   "& fieldset": { top: 0 },
@@ -91,6 +95,7 @@ const QA = () => {
               />
               <TextField
                 fullWidth
+                size="small"
                 className="ms-3"
                 sx={{
                   "& legend": { display: "none" },
@@ -99,6 +104,7 @@ const QA = () => {
               />
               <TextField
                 fullWidth
+                size="small"
                 className="ms-3"
                 sx={{
                   "& legend": { display: "none" },
@@ -107,6 +113,7 @@ const QA = () => {
               />
               <TextField
                 fullWidth
+                size="small"
                 className="ms-3"
                 sx={{
                   "& legend": { display: "none" },
