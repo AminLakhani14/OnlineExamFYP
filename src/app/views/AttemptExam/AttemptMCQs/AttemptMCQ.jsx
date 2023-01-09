@@ -13,6 +13,7 @@ import {
   Select,
   Stack,
   TextareaAutosize,
+  TextField,
   Typography,
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
@@ -25,14 +26,26 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 const AttemptMCQ = () => {
   return (
     <>
-      <div className="row m-0">
-        <div className="col-3">
-          <h3 id="QuestionText">Question1:</h3>
-        </div>
-        <div className="col-7"></div>
-        <div className="col-2">
-          <label className="ms-4 px-2">marks:</label>
-          <input type={Text} disabled className="w-50"></input>
+     <div className="row m-0">
+        <div className="d-flex justify-content-between mt-4">
+          <h3 id="QuestionText" className="m-0 mt-2">
+            Question1:{" "}
+          </h3>
+          <div className="align-items-center d-flex justify-content-end w-auto">
+            <label className="align-items-center mt-2 d-flex px-2">
+              marks:
+            </label>
+            <TextField
+              className="mt-2 w-50"
+              fullWidth
+              disabled
+              size="small"
+              sx={{
+                "& legend": { display: "none" },
+                "& fieldset": { top: 0 },
+              }}
+            />
+          </div>
         </div>
       </div>
       <div className="row m-0">

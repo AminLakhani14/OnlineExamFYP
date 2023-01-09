@@ -1,46 +1,10 @@
 import * as React from "react";
-import {
-  Breadcrumbs,
-  Button,
-  FormControl,
-  Input,
-  InputLabel,
-  Link,
-  MenuItem,
-  Select,
-  TextareaAutosize,
-  TextField,
-  Typography,
-} from "@mui/material";
-import HomeIcon from "@mui/icons-material/Home";
-import DeleteIcon from "@mui/icons-material/Delete";
-import SendIcon from "@mui/icons-material/Send";
+import HeadBreadCrumb from "app/components/BreadCrumb/HeadBreadCrumb";
 
 const ViewExam = () => {
   return (
     <>
-     <div className="row m-0 mt-3">
-        <div className="col-3">
-          <Breadcrumbs aria-label="breadcrumb">
-            <Link
-              underline="hover"
-              sx={{ display: "flex", alignItems: "center" }}
-              color="inherit"
-              href="/"
-            >
-              <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-              DashBoard
-            </Link>
-            <Typography
-              sx={{ display: "flex", alignItems: "center" }}
-              color="text.primary"
-            >
-             View MCQs
-            </Typography>
-          </Breadcrumbs>
-        </div>
-        <hr />
-      </div>
+     <HeadBreadCrumb text1={'Dashboard'} text2={'View MCQs'} url={'/'}/>
 
     
       <div className="row m-0 mt-3">

@@ -41,7 +41,7 @@ const QA = () => {
             </Select>
           </FormControl>
           <div className="d-flex justify-content-between mt-4">
-            <h3 id="QuestionText" className="m-0 mt-2">
+            <h3 id="QuestionText" className="m-0">
               Question1:{" "}
             </h3>
             <div className="align-items-center d-flex justify-content-end w-auto">
@@ -66,7 +66,7 @@ const QA = () => {
               "& fieldset": { top: 0 },
             }}
           />
-          <div className="mt-5">
+          <div className="mt-4">
             <h3 id="AnswerText" className="m-0">
               Answer:
             </h3>
@@ -79,7 +79,7 @@ const QA = () => {
               }}
             />
           </div>
-          <div className="mt-5">
+          <div className="mt-4">
             <h3 id="AnswerText" className="m-0">
               Key Words:
             </h3>
