@@ -4,10 +4,13 @@ import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Link } from "@mui/material";
+import HeadBreadCrumb from "app/components/BreadCrumb/HeadBreadCrumb";
 
 const ViewMCQs = () => {
   return (
     <>
+      <HeadBreadCrumb text1={'Dashboard'} text2={'Update MCQs'} url={'/'}/>
+
       <div className="row m-0 mt-3">
         <div className="col-12">
           <table class="table table-info table-striped table-bordered">

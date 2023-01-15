@@ -42,20 +42,6 @@ const MatxSearchBox = () => {
 
   return (
     <React.Fragment>
-      {!open && (
-        <IconButton onClick={toggle}>
-          <Icon sx={{ color: textColor }}>search</Icon>
-        </IconButton>
-      )}
-
-      {open && (
-        <SearchContainer>
-          <SearchInput type="text" placeholder="Search here..." autoFocus />
-          <IconButton onClick={toggle} sx={{ mx: 2, verticalAlign: 'middle' }}>
-            <Icon sx={{ color: textColor }}>close</Icon>
-          </IconButton>
-        </SearchContainer>
-      )}
     </React.Fragment>
   );
 };

@@ -1,7 +1,8 @@
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import SchoolIcon from '@mui/icons-material/School';
 import HomeIcon from '@mui/icons-material/Home';
-
+import PendingActionsIcon from '@mui/icons-material/PendingActions';
+import RuleIcon from '@mui/icons-material/Rule';
 export const navigations = [
   { name: 'Dashboard', path: '/dashboard/default', icon: 'dashboard' },
   // { label: 'PAGES', type: 'label' },
@@ -44,8 +45,8 @@ export const navigations = [
     { name: 'MCQs', path: '/AttemptExam/AttemptMCQs', iconText: 'A' },
     ],
   },
-  { name: 'View Result', path: '/Result/Result', icon: 'dashboard' },
-  { name: 'Rule', path: '/ExamRules/ExamRules', icon: 'dashboard' },
+  { name: 'View Result', path: '/Result/Result', icon: <PendingActionsIcon/> },
+  { name: 'Rule', path: '/ExamRules/ExamRules', icon: <RuleIcon/> },
 
 {
     name: 'Documentation',
