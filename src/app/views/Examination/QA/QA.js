@@ -130,12 +130,14 @@ const QA = () => {
               />
             </div>
           </div>
-          <div className="d-flex justify-content-between mt-5 my-5">
+        </div>
+      </div>
+      <div className="d-flex justify-content-between footerBtn">
             <Button
               variant="outlined"
               className=""
               sx={{
-                width: 300,
+                width: 200,
               }}
               startIcon={<SendIcon />}
             >
@@ -145,7 +147,7 @@ const QA = () => {
               variant="outlined"
               className=""
               sx={{
-                width: 300,
+                width: 200,
                 color: "red",
               }}
               startIcon={<DeleteIcon />}
@@ -153,8 +155,6 @@ const QA = () => {
               Clear
             </Button>
           </div>
-        </div>
-      </div>
     </>
   );
 };

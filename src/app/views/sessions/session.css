@@ -1,0 +1,37 @@
+.logoText {
+    color: rgb(22, 2, 2);
+}
+
+.loginHeading {
+    font-size: 50px;
+    color: #fff;
+}
+
+.loginHeading span {
+    font-size: 38px !important;
+}
+
+@media only screen and (max-width: 1204px) {
+    .loginHeading {
+      font-size: 36px !important;
+    }
+    .loginHeading span {
+        font-size: 25px !important;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .loginPage .row {
+        flex-direction: column-reverse;
+    }
+    .contentBox {
+        margin-top: 15px;
+    }
+    .loginHeading {
+        line-height: 50px;
+        font-size: 30px !important;
+    }
+      .loginHeading span {
+          font-size: 20px !important;
+      }
+}

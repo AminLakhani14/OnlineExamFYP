@@ -36,23 +36,30 @@ const Footer = () => {
   const footerTheme = settings.themes[settings.footer.theme] || theme;
 
   return (
-    <ThemeProvider theme={footerTheme}>
-      <AppBar color="primary" position="static" sx={{ zIndex: 96 }}>
-        <AppFooter>
-          <FooterContent>
-            {/* <a href="https://ui-lib.com/downloads/matx-pro-react-admin/">
-              <Button variant="contained" color="secondary">
-                Get MatX Pro
-              </Button>
-            </a> */}
-            <Span sx={{ m: 'auto' }}></Span>
-            <Paragraph sx={{ m: 0 }}>
-              Design and Developed by <a href="">IU Students</a>
-            </Paragraph>
-          </FooterContent>
-        </AppFooter>
-      </AppBar>
-    </ThemeProvider>
+    // <ThemeProvider theme={footerTheme}>
+    //   <AppBar color="primary" position="static" sx={{ zIndex: 96 }}>
+    //     <AppFooter>
+    //       <FooterContent>
+    //         {/* <a href="https://ui-lib.com/downloads/matx-pro-react-admin/">
+    //           <Button variant="contained" color="secondary">
+    //             Get MatX Pro
+    //           </Button>
+    //         </a> */}
+    //         <Span sx={{ m: 'auto' }}></Span>
+    //         <Paragraph sx={{ m: 0 }}>
+    //           Design and Developed by <a href="">IU Students</a>
+    //         </Paragraph>
+    //       </FooterContent>
+    //     </AppFooter>
+    //   </AppBar>
+    // </ThemeProvider>
+    <div className='footer'>
+        <div className='row h-100'>
+          <div className='col-12 h-100 d-flex justify-content-end align-items-center p-4'>
+            <h6 className='m-0'>Design and Developed by <a href="">IU Students</a></h6>
+          </div>
+        </div>
+      </div>
   );
 };
 
