@@ -1,62 +1,66 @@
-import { Card, Grid, styled, useTheme } from "@mui/material";
-import { Fragment } from "react";
-import HomeIcon from "@mui/icons-material/Home";
-import { size } from "lodash";
+import { Card, Grid, styled, useTheme } from '@mui/material';
+import { Fragment } from 'react';
+import DoughnutChart from './shared/Doughnut';
+import StatCards from './shared/StatCards';
+import TopSellingTable from './shared/TopSellingTable';
+import UpgradeCard from './shared/UpgradeCard';
 
 const Analytics = () => {
+  const ContentBox = styled('div')(({ theme }) => ({
+    margin: '30px',
+    paddingBottom: '40px',
+    [theme.breakpoints.down('sm')]: { margin: '16px' },
+  }));
   
-  function Card(props) {
-    return (
-      <div className="card">
-        <img className="card-img-top" src="/assets/images/illustrations/examshedule.png" alt={props.title} />
-      </div>
-    );
-}
-
-function Card1(props) {
-  return (
-    <div className="card">
-      <img className="card-img-top"  
-      src="/assets/images/illustrations/examresult.png" />
-    </div>
-  );
-}
-function Card2(props) {
-  return (
-    <div className="card">
-      <img className="card-img-top"  
-      src="/assets/images/illustrations/rule.png" />
-    </div>
-  );
-}
+  const Title = styled('span')(() => ({
+    fontSize: '1rem',
+    fontWeight: '500',
+    marginRight: '.5rem',
+    textTransform: 'capitalize',
+  }));
+  
+  const SubTitle = styled('span')(({ theme }) => ({
+    fontSize: '0.875rem',
+    color: theme.palette.text.secondary,
+  }));
+  
+  const H4 = styled('h4')(({ theme }) => ({
+    fontSize: '1rem',
+    fontWeight: '500',
+    marginBottom: '16px',
+    textTransform: 'capitalize',
+    color: theme.palette.text.secondary,
+  }));
 
 
 
   const { palette } = useTheme();
 
   return (
-    <Fragment>
-      <div className="row m-0 my-2">
-      <div className="col-2">
-      <Card
-        />
-      </div>
-      <div className="col-2">
-      <Card1
-        />
-      </div>
-      <div className="col-2">
-      <Card2
-        />
-      </div>
-      <div className="col-2">
-      <Card1
-        />
-      </div>
-      </div>
+    <Fragment className='dashboard'>
+      <ContentBox className="analytics">
+        <Grid container spacing={3}>
+          <Grid item lg={8} md={8} sm={12} xs={12}>
+            <StatCards />
+            <TopSellingTable />
+            {/* <StatCards2 /> */}
+          </Grid>
 
-     
+          <Grid item lg={4} md={4} sm={12} xs={12}>
+            <Card sx={{ px: 3, py: 2, mb: 3 }}>
+              <Title>All Semester Records</Title>
+              <SubTitle>Last 2 years</SubTitle>
 
+              <DoughnutChart
+                height="350px"
+                color={[palette.primary.dark, palette.primary.main, palette.primary.light]}
+              />
+            </Card>
+
+            <UpgradeCard />
+          </Grid>
+        </Grid>
+      </ContentBox>
     </Fragment>
   );
 };
