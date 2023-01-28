@@ -1,194 +1,81 @@
 import * as React from "react";
 import IconButton from "@mui/material/IconButton";
-import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { Link } from "@mui/material";
+import { Box, Link } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
+
+const columns = [
+  { field: 'id', headerName: 'QNo.#', width: 100 ,type: 'number',editable: true},
+  {
+    field: 'Subject',
+    headerName: 'Subject',
+    width: 150,
+    editable: true,
+  },
+  {
+    field: 'Question',
+    headerName: 'Question',
+    width: 600,
+    editable: true,
+  },
+  {
+    field: 'Marks',
+    headerName: 'Marks',
+    description: 'This column has a value getter and is not sortable.',
+    sortable: false,
+    width: 200,
+    // valueGetter: (params) =>
+    //   `${params.row.Subject || ''} ${params.row.Question || ''}`,
+  },
+  {
+    field: 'Action',
+    headerName: 'Action',
+    description: 'This column has a value getter and is not sortable.',
+    renderCell: () => (
+      <strong>
+        <IconButton aria-label="Delete" color="primary">
+                    <DeleteIcon />
+                  </IconButton>
+
+                  <IconButton aria-label="Edit" color="success">
+                    <EditIcon />
+                  </IconButton>
+      </strong>
+    ),
+    
+    sortable: false,
+    width: 160,
+  }
+];
+
+const rows = [
+  { id: 1, Subject: 'English', Question: 'what is noun?', Marks: 35 },
+  { id: 2, Subject: 'Science', Question: 'How many solar planet are there in space?', Marks: 42 },
+  { id: 3, Subject: 'Science', Question: 'How many solar planet are there in space?', Marks: 45 },
+  { id: 4, Subject: 'Science', Question: 'How many solar planet are there in space?', Marks: 16 },
+  { id: 5, Subject: 'Science', Question: 'How many solar planet are there in space?', Marks: 11 },
+  { id: 6, Subject: 'Science', Question: 'How many solar planet are there in space?', Marks: 150 },
+  { id: 7, Subject: 'Science', Question: 'How many solar planet are there in space?', Marks: 44 },
+  { id: 8, Subject: 'Science', Question: 'How many solar planet are there in space?', Marks: 36 },
+  { id: 9, Subject: 'Science', Question: 'How many solar planet are there in space?', Marks: 65 },
+];
 
 const VQP = () => {
   return (
     <>
       <div className="row m-0 mt-3">
         <div className="col-12">
-          <table class="table table-info table-striped table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">QNo.#</th>
-                <th scope="col">Subject</th>
-                <th scope="col">Question</th>
-                <th scope="col">Marks</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>English</td>
-                <td>what is noun?</td>
-                <td>2</td>
-                <td>
-                  <IconButton aria-label="Delete" color="primary">
-                    <DeleteIcon />
-                  </IconButton>
-
-                  <IconButton aria-label="Edit" color="success">
-                    <EditIcon />
-                  </IconButton>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Science</td>
-                <td>How many solar planet are there in space?</td>
-                <td>10</td>
-                <td>
-                  <IconButton aria-label="Delete" color="primary">
-                    <DeleteIcon />
-                  </IconButton>
-
-                  <IconButton aria-label="Edit" color="success">
-                    <EditIcon />
-                  </IconButton>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Programming</td>
-                <td>What is OOP?</td>
-                <td>3</td>
-                <td>
-                  <IconButton aria-label="delete" color="primary">
-                    <DeleteIcon />
-                  </IconButton>
-
-                  <IconButton aria-label="delete" color="success">
-                    <EditIcon />
-                  </IconButton>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td>Programming</td>
-                <td>What is OOP?</td>
-                <td>3</td>
-                <td>
-                  <IconButton aria-label="delete" color="primary">
-                    <DeleteIcon />
-                  </IconButton>
-
-                  <IconButton aria-label="delete" color="success">
-                    <EditIcon />
-                  </IconButton>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">5</th>
-                <td>Programming</td>
-                <td>What is OOP?</td>
-                <td>3</td>
-                <td>
-                  <IconButton aria-label="delete" color="primary">
-                    <DeleteIcon />
-                  </IconButton>
-
-                  <IconButton aria-label="delete" color="success">
-                    <EditIcon />
-                  </IconButton>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">6</th>
-                <td>Programming</td>
-                <td>What is OOP?</td>
-                <td>3</td>
-                <td>
-                  <IconButton aria-label="delete" color="primary">
-                    <DeleteIcon />
-                  </IconButton>
-
-                  <IconButton aria-label="delete" color="success">
-                    <EditIcon />
-                  </IconButton>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">7</th>
-                <td>Programming</td>
-                <td>What is OOP?</td>
-                <td>3</td>
-                <td>
-                  <IconButton aria-label="delete" color="primary">
-                    <DeleteIcon />
-                  </IconButton>
-
-                  <IconButton aria-label="delete" color="success">
-                    <EditIcon />
-                  </IconButton>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">8</th>
-                <td>Programming</td>
-                <td>What is OOP?</td>
-                <td>3</td>
-                <td>
-                  <IconButton aria-label="delete" color="primary">
-                    <DeleteIcon />
-                  </IconButton>
-
-                  <IconButton aria-label="delete" color="success">
-                    <EditIcon />
-                  </IconButton>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">9</th>
-                <td>Programming</td>
-                <td>What is OOP?</td>
-                <td>3</td>
-                <td>
-                  <IconButton aria-label="delete" color="primary">
-                  <Link
-                      href="/Examination/QA"
-                    >
-                    </Link>
-                    <DeleteIcon />
-                  </IconButton>
-
-                  <IconButton aria-label="delete" color="success">
-                    <Link
-                      href="/Examination/QA"
-                    >
-                    </Link>
-                    <EditIcon />
-                  </IconButton>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">10</th>
-                <td>Programming</td>
-                <td>What is OOP?</td>
-                <td>3</td>
-                <td>
-                  <IconButton aria-label="delete" color="primary">
-                  <Link
-                      href="/Examination/QA"
-                    >
-                    </Link>
-                    <DeleteIcon />
-                  </IconButton>
-
-                  <IconButton aria-label="delete" color="success">
-                  <Link
-                      href="/Examination/QA"
-                    >
-                    </Link>
-                    <EditIcon />
-                  </IconButton>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <Box sx={{ height: 500, width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={10}
+        rowsPerPageOptions={[10]}
+        disableSelectionOnClick
+        experimentalFeatures={{ newEditingApi: true }}
+      />
+    </Box>
         </div>
       </div>
     </>
