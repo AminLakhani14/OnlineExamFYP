@@ -39,7 +39,7 @@ const StatCards = () => {
   return (
     <Grid container spacing={3} sx={{ mb: '24px' }}>
       {cardList.map((item, index) => (
-        <Grid item xs={12} md={6} key={index}>
+        <Grid item sm={6} xs={12} key={index}>
           <StyledCard elevation={6}a>
             <ContentBox>
               <Icon className="icon">{item.icon}</Icon>
