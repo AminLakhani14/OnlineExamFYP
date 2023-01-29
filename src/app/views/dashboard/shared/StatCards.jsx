@@ -9,6 +9,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
   padding: '24px !important',
   background: theme.palette.background.paper,
   [theme.breakpoints.down('sm')]: { padding: '16px !important' },
+  height: '200px'
 }));
 
 const ContentBox = styled(Box)(({ theme }) => ({
@@ -39,7 +40,7 @@ const StatCards = () => {
     <Grid container spacing={3} sx={{ mb: '24px' }}>
       {cardList.map((item, index) => (
         <Grid item xs={12} md={6} key={index}>
-          <StyledCard elevation={6}>
+          <StyledCard elevation={6}a>
             <ContentBox>
               <Icon className="icon">{item.icon}</Icon>
               <Box ml="12px">

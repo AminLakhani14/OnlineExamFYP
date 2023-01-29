@@ -41,7 +41,8 @@ const Analytics = () => {
       <ContentBox className="analytics">
         <Grid container spacing={3}>
           <Grid item lg={8} md={8} sm={12} xs={12}>
-            <StatCards />
+            {/* <StatCards /> */}
+            <UpgradeCard />
             <TopSellingTable />
             {/* <StatCards2 /> */}
           </Grid>
@@ -52,12 +53,12 @@ const Analytics = () => {
               <SubTitle>Last 2 years</SubTitle>
 
               <DoughnutChart
-                height="350px"
+                height="340px"
                 color={[palette.primary.dark, palette.primary.main, palette.primary.light]}
               />
             </Card>
 
-            <UpgradeCard />
+            <StatCards />
           </Grid>
         </Grid>
       </ContentBox>
