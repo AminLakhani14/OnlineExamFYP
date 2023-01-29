@@ -64,7 +64,7 @@ const TopSellingTable = () => {
   return (
     <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
       <CardHeader>
-        <Title>Your Subjects</Title>
+        <Title>Semester Subjects</Title>
         {/* <Select size="small" defaultValue="this_month" label=''>
           <MenuItem value="this_month">This Month</MenuItem>
           <MenuItem value="last_month">Last Month</MenuItem>

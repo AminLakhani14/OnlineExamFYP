@@ -7,7 +7,7 @@ const DoughnutChart = ({ height, color = [] }) => {
 
   const option = {
     legend: {
-      show: true,
+      show: false,
       itemGap: 12,
       icon: 'circle',
       bottom: 0,
@@ -70,7 +70,7 @@ const DoughnutChart = ({ height, color = [] }) => {
               fontWeight: 'normal',
               // color: "rgba(15, 21, 77, 1)"
             },
-            formatter: '{b} \n{c} ({d}%)',
+            formatter: '{b} \n{c} CGPA',
           },
         },
         labelLine: {
@@ -80,32 +80,36 @@ const DoughnutChart = ({ height, color = [] }) => {
         },
         data: [
           {
-            value: 12.5,
+            value: 3.53,
             name: 'Semester 1',
           },
           {
-            value: 12.5,
+            value: 2.43,
             name: 'Semester 2',
           },
           {
-            value: 12.5,
+            value: 2.18,
             name: 'Semester 3',
           },
           {
-            value: 12.5,
+            value: 1.81,
             name: 'Semester 4',
           },
           {
-            value: 12.5
+            value: 3.66,
+            name: 'Semester 5',
           },
           {
-            value: 12.5
+            value: 1.5,
+            name: 'Semester 6',
           },
           {
-            value: 12.5
+            value: 2.5,
+            name: 'Semester 7',
           },
           {
-            value: 12.5
+            value: 2.5,
+            name: 'Semester 8',
           },
         ],
         itemStyle: {

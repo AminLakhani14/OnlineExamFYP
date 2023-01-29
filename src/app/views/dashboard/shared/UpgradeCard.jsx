@@ -27,75 +27,58 @@ const Paragraph = styled('p')(({ theme }) => ({
 
 const UpgradeCard = () => {
   const theme = useTheme();
-  const option = {
-    grid: { top: '10%', bottom: '10%', left: '5%', right: '5%' },
-    legend: {
-      itemGap: 20,
-      icon: 'circle',
-      textStyle: { color: theme.palette.text.secondary, fontSize: 13, fontFamily: 'roboto' },
+
+  const barChartOption = {
+    grid: { top: '10%', bottom: '10%', right: '5%' },
+    tooltip: {
+      show: false,
+      trigger: 'item',
+      formatter: '{a}: {c}',
+    },
+    legend: { show: false },
+    color: ['#223388', 'rgba(34, 51, 136, 0.8)'],
+    barGap: 0,
+    barMaxWidth: '64px',
+    dataset: {
+      source: [
+        ['Month', 'Website', 'App'],
+        ['Subject 1', 3.5,4],
+        ['Subject 2', 2.1,4],
+        ['Subject 3', 1.2,4],
+        ['Subject 4', 2.2,4],
+        ['Subject 4', 2.1,4],
+      ],
     },
     xAxis: {
       type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
       axisLine: { show: false },
+      splitLine: { show: false },
       axisTick: { show: false },
       axisLabel: {
-        fontSize: 14,
+        fontSize: 13,
         fontFamily: 'roboto',
         color: theme.palette.text.secondary,
       },
     },
     yAxis: {
-      type: 'value',
       axisLine: { show: false },
       axisTick: { show: false },
       splitLine: {
         lineStyle: { color: theme.palette.text.secondary, opacity: 0.15 },
       },
-      axisLabel: { color: theme.palette.text.secondary, fontSize: 13, fontFamily: 'roboto' },
+      axisLabel: {
+        fontSize: 13,
+        fontFamily: 'roboto',
+        color: theme.palette.text.secondary,
+      },
     },
-    series: [
-      {
-        data: [10, 40, 20, 60, 70, 80, 90],
-        type: 'line',
-        stack: 'Subject 1',
-        name: 'Subject 1',
-        smooth: true,
-        symbolSize: 4,
-        lineStyle: { width: 4 },
-      },
-      {
-        data: [20, 50, 15, 50, 30, 70, 95],
-        type: 'line',
-        stack: 'Subject 2',
-        name: 'Subject 2',
-        smooth: true,
-        symbolSize: 4,
-        lineStyle: { width: 4 },
-      },
-      {
-        data: [30, 40, 20, 50, 40, 80, 90],
-        type: 'line',
-        stack: 'Subject 3',
-        name: 'Subject 3',
-        smooth: true,
-        symbolSize: 4,
-        lineStyle: { width: 4 },
-      },
-      {
-        data: [60, 70, 15, 50, 30, 70, 95],
-        type: 'line',
-        stack: 'Subject 4',
-        name: 'Subject 4',
-        smooth: true,
-        symbolSize: 4,
-        lineStyle: { width: 4 },
-      },
-    ],
+    // Declare several bar series, each will be mapped
+    // to a column of dataset.source by default.
+    series: [{ type: 'bar' }, { type: 'bar' }],
   };
   return (
     <CardRoot>
-        <ReactEcharts style={{ height: '350px' }} option={{ ...option, color: [theme.palette.primary.main, theme.palette.primary.light] }} />
+        <ReactEcharts style={{ height: '350px' }} option={{ ...barChartOption }} />
     </CardRoot>
   );
 };

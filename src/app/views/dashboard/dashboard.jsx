@@ -49,8 +49,8 @@ const Analytics = () => {
 
           <Grid item lg={4} md={4} sm={12} xs={12}>
             <Card sx={{ px: 3, py: 2, mb: 3 }}>
-              <Title>All Semester Records</Title>
-              <SubTitle>Last 2 years</SubTitle>
+              <Title>CGPA Records</Title>
+              <SubTitle>Last 4 years</SubTitle>
 
               <DoughnutChart
                 height="340px"
