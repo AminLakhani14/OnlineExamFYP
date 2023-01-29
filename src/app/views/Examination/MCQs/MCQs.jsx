@@ -152,7 +152,9 @@ const MCQ = () => {
           />    
         </div>
       </div>
-          <div className="d-flex justify-content-between mt-5 my-5">
+        </div>
+      </div>
+      <div className="footerBtn d-flex justify-content-between mt-5 my-5">
             <Button
               variant="outlined"
               className=""
@@ -175,8 +177,6 @@ const MCQ = () => {
               Clear
             </Button>
           </div>
-        </div>
-      </div>
     </>
     // <>
     //    <div className="row m-2">
