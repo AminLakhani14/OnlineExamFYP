@@ -1,5 +1,6 @@
 import * as React from "react";
 import {
+  Box,
     Breadcrumbs,
     Button,
     FormControl,
@@ -15,6 +16,58 @@ import {
   import HomeIcon from "@mui/icons-material/Home";
   import DeleteIcon from "@mui/icons-material/Delete";
   import SendIcon from "@mui/icons-material/Send";
+import { DataGrid } from "@mui/x-data-grid";
+
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 60 ,type: 'number',editable: true},
+    {
+      field: 'Name',
+      headerName: 'Name',
+      width: 300,
+      editable: true,
+    },
+    {
+      field: 'Subject',
+      headerName: 'Subject',
+      width: 300,
+      editable: true,
+    },
+    {
+      field: 'QAMarks',
+      headerName: 'QA Marks',
+      width: 150,
+      editable: true,
+    },
+    {
+      field: 'MCQsMarks',
+      headerName: 'MCQs marks',
+      width: 150,
+      editable: true,
+    },
+    {
+      field: 'Outof',
+      headerName: 'Out of',
+      width: 150,
+      editable: true,
+    },
+    {
+      field: 'TotalMarks',
+      headerName: 'Total marks',
+      width: 150,
+      editable: true,
+    },
+
+    
+  ];
+  
+  const rows = [
+    { id: 1, Name: 'Amin',Subject:'english', QAMarks: '1',MCQsMarks : '1',Outof : '1' ,TotalMarks : '1'},
+    { id: 2, Name: 'Amin',Subject:'english', QAMarks: '1',MCQsMarks : '1',Outof : '1' ,TotalMarks : '1' },
+    { id: 3, Name: 'Amin',Subject:'english', QAMarks: '1',MCQsMarks : '1',Outof : '1' ,TotalMarks : '1'},
+    { id: 4, Name: 'Amin',Subject:'english', QAMarks: '1',MCQsMarks : '1',Outof : '1' ,TotalMarks : '1'},
+  
+  ];
+
 
 const Result = () => {
   return (
@@ -44,75 +97,16 @@ const Result = () => {
 
       <div className="row m-0 mt-3">
         <div className="col-12">
-          <table class="table table-info table-striped table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">No.#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Subject</th>
-                <th scope="col">Marks</th>
-                <th scope="col">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Amin</td>
-                <td>Science</td>
-                <td>1</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Amin</td>
-                <td>Science</td>
-                <td>1</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Amin</td>
-                <td>Science</td>
-                <td>1</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td>Amin</td>
-                <td>Science</td>
-                <td>1</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <th scope="row">5</th>
-                <td>Amin</td>
-                <td>Science</td>
-                <td>1</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <th scope="row">6</th>
-                <td>Amin</td>
-                <td>Science</td>
-                <td>1</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <th scope="row">7</th>
-                <td>Amin</td>
-                <td>Science</td>
-                <td>1</td>
-                <td>10</td>
-                </tr>
-              <tr>
-                <th scope="row">8</th>
-                <td>Amin</td>
-                <td>Science</td>
-                <td>1</td>
-                <td>10</td>
-              </tr>
-          </tbody>
-          </table>
+        <Box sx={{ height: 500, width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={10}
+        rowsPerPageOptions={[10]}
+        disableSelectionOnClick
+        experimentalFeatures={{ newEditingApi: true }}
+      />
+    </Box>
         </div>
       </div>
     </>

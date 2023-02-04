@@ -107,12 +107,12 @@ const TopSellingTable = () => {
                 <TableCell sx={{ px: 0 }} align="left" colSpan={2}>
                   {product.available ? (
                     product.available < 20 ? (
-                      <Small bgcolor={bgSecondary}>{product.available} available</Small>
+                      <Small bgcolor={bgSecondary}>{product.available} Passed</Small>
                     ) : (
-                      <Small bgcolor={bgPrimary}>in stock</Small>
+                      <Small bgcolor={bgPrimary}>Pending</Small>
                     )
                   ) : (
-                    <Small bgcolor={bgError}>out of stock</Small>
+                    <Small bgcolor={bgError}>Failed</Small>
                   )}
                 </TableCell>
 
@@ -133,32 +133,32 @@ const TopSellingTable = () => {
 const productList = [
   {
     imgUrl: '/assets/images/products/headphone-2.jpg',
-    name: 'earphone',
-    price: 100,
+    name: 'Science',
+    price: 'B+',
     available: 15,
   },
   {
     imgUrl: '/assets/images/products/headphone-3.jpg',
-    name: 'earphone',
-    price: 1500,
+    name: 'Programming Fundamental',
+    price: 'A',
     available: 30,
   },
   {
     imgUrl: '/assets/images/products/iphone-2.jpg',
-    name: 'iPhone x',
-    price: 1900,
+    name: 'English',
+    price: 'C',
     available: 35,
   },
   {
     imgUrl: '/assets/images/products/iphone-1.jpg',
-    name: 'iPhone x',
-    price: 100,
+    name: 'Pakistan Studies',
+    price: 'C+',
     available: 0,
   },
   {
     imgUrl: '/assets/images/products/headphone-3.jpg',
-    name: 'Head phone',
-    price: 1190,
+    name: 'Object Oriented Programming',
+    price: 'A+',
     available: 5,
   },
 ];

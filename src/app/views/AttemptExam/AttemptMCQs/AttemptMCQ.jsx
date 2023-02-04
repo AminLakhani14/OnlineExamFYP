@@ -124,14 +124,7 @@ const AttemptMCQ = () => {
           </Button>
         </div>
       </div>
-      <div className="row ">
-        <div className="col-4"></div>
-        <div className="col-4 mt-5">
-          <Stack spacing={4}>
-            <Pagination count={10} variant="outlined" shape="rounded" />
-          </Stack>
-        </div>
-      </div>
+      
     </>
   );
 };

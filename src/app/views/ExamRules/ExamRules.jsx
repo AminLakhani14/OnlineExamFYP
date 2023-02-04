@@ -51,78 +51,78 @@ import {
 
         <div className="row m-0">
           <div className="col-12">
-            <h5>
+            <h6>
           1-Participant should reach examination room at least 10 minutes before the scheduled time. No additional time shall be given to Participant arriving late.
-          </h5>
+          </h6>
         </div>
         <div className="col-12">
-        <h5>
-          2-Participant who has short attendance in any of the course(s) shall not be allowed to sit in the examination room.</h5>
+        <h6>
+          2-Participant who has short attendance in any of the course(s) shall not be allowed to sit in the examination room.</h6>
           </div>
           <div className="col-12">
-          <h5>
-          3-DON'T BRING YOUR MOBILE PHONE AND ANY OTHER UNAUTHORIZED ELECTRONIC GADGETS!</h5>
+          <h6>
+          3-DON'T BRING YOUR MOBILE PHONE AND ANY OTHER UNAUTHORIZED ELECTRONIC GADGETS!</h6>
           </div>
           <div className="col-12">
-          <h5>
+          <h6>
           If you bring it to an exam, you should be aware of the following:
             i. The University of Management and Technology accepts no responsibility for any loss or damage to your belongings.
-            ii. On finding any of the unauthorized electronic gadgets, can lead the participant to Unfair Means Case.</h5>
+            ii. On finding any of the unauthorized electronic gadgets, can lead the participant to Unfair Means Case.</h6>
         </div>
         <div className="col-12">
-        <h5>
+        <h6>
             4-Participant must maintain complete silence in the examination room. If a participant has any kind of query he/she should raise his/her hand and wait for the invigilator.
-        </h5>
+        </h6>
             </div>
             <div className="col-12">
-            <h5>
+            <h6>
             5-Lending/borrowing of pen, pencil, ruler, calculator, etc. is strictly prohibited in the examination room.
-            </h5>
+            </h6>
             </div>
             <div className="col-12">
-            <h5>
+            <h6>
             6-Participant must display UMT ID Card.
-            </h5>
+            </h6>
             </div>
             <div className="col-12">
-            <h5>
+            <h6>
             7-No rough work is to be done on the question paper.
-            </h5>
+            </h6>
             </div>
             <div className="col-12">
-            <h5>
+            <h6>
             8-Participant must mark his/her attendance on the attendance sheet during the examinations. In case, his/her name is not listed, they need to report to an invigilator immediately.
-            </h5>
+            </h6>
             </div>
             <div className="col-12">
-            <h5>
+            <h6>
             9-Participant found cheating, chatting, gesturing or miHSMhaving in the examination room shall be dealt with under the UMC rules.
-            </h5>
+            </h6>
             </div>
             <div className="col-12">
-            <h5>
+            <h6>
             10-Any participant using abusive or obscene language in the answer sheet shall be dealt with under disciplinary rules.
-            </h5>
+            </h6>
             </div>
             <div className="col-12">
-            <h5>
+            <h6>
             11-Participant cannot leave the examination room without prior permission of the invigilator.
-            </h5>
+            </h6>
             </div>
             <div className="col-12">
-            <h5>
+            <h6>
             12-In case of open book/open notes exams, participant must follow instructions given on the front page by the resource person and should not indulge themselves in conversation with one another.
-            </h5>
+            </h6>
             </div>
             <div className="col-12">
-            <h5>
+            <h6>
             13-Participant is not allowed to leave his/her seat during the exam without getting permission from the invigilator.
-            </h5>
+            </h6>
             </div>
             <div className="col-12">
-            <h5>
+            <h6>
             14-An attempt to gain access to a question paper before the examinations shall be dealt under the iqra rules.
-            </h5>
+            </h6>
           </div>
           </div>
 
