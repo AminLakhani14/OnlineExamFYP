@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Learning.Migrations
 {
     [DbContext(typeof(QuestionAPIDbcontext))]
-    [Migration("20230202152836_initial Migration")]
-    partial class initialMigration
+    [Migration("20230205124919_Initial Migration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,9 +26,11 @@ namespace Learning.Migrations
 
             modelBuilder.Entity("Learning.Models.QuestionAnswer", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<string>("Answer")
                         .IsRequired()

@@ -24,9 +24,11 @@ namespace Learning.Migrations
 
             modelBuilder.Entity("Learning.Models.QuestionAnswer", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<string>("Answer")
                         .IsRequired()

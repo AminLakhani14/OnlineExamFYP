@@ -2252,23 +2252,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ahsan\\.nuget\\packages\\": {},
+    "C:\\Users\\shahi\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ahsan\\source\\repos\\Learning\\Learning\\Learning.csproj",
+      "projectUniqueName": "C:\\Users\\shahi\\OneDrive\\Desktop\\Learning\\Learning\\Learning.csproj",
       "projectName": "Learning",
-      "projectPath": "C:\\Users\\ahsan\\source\\repos\\Learning\\Learning\\Learning.csproj",
-      "packagesPath": "C:\\Users\\ahsan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ahsan\\source\\repos\\Learning\\Learning\\obj\\",
+      "projectPath": "C:\\Users\\shahi\\OneDrive\\Desktop\\Learning\\Learning\\Learning.csproj",
+      "packagesPath": "C:\\Users\\shahi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\shahi\\OneDrive\\Desktop\\Learning\\Learning\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\ahsan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\shahi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

@@ -43,7 +43,6 @@ namespace Learning.Controllers
         {
             var question = new QuestionAnswer()
             {
-                ID = Guid.NewGuid(),
                 Answer = addQuestion.Answer,
                 Keyword1 = addQuestion.Keyword1,
                 Keyword2 = addQuestion.Keyword2,
@@ -64,13 +63,13 @@ namespace Learning.Controllers
         }
 
         [HttpPut]
-        [Route("{id:guid}")]
+        [Route("{ID}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public async Task<IActionResult> UpdateQuestion([FromRoute] Guid id, UpdateQuestion updateQuestion)
+        public async Task<IActionResult> UpdateQuestion([FromRoute] int ID, UpdateQuestion updateQuestion)
         {
-            var question = await dbcontext.QuestionAnswer.FindAsync(id);
+            var question = await dbcontext.QuestionAnswer.FindAsync(ID);
 
             if(question != null) 
             {
@@ -91,12 +90,12 @@ namespace Learning.Controllers
         }
 
         [HttpDelete]
-        [Route("{id:guid}")]
+        [Route("{ID}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteQuestion([FromRoute] Guid id)
+        public async Task<IActionResult> DeleteQuestion([FromRoute] int ID)
         {
-            var question = await dbcontext.QuestionAnswer.FindAsync(id);
+            var question = await dbcontext.QuestionAnswer.FindAsync(ID);
 
             if(question != null)
             {

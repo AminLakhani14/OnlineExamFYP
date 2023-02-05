@@ -4,7 +4,7 @@ namespace Learning.Models
 {
     public class QuestionAnswer
     {
-        public Guid ID { get; set; }
+        public int ID { get; set; }
         public string course { get; set; }
         public string Question { get; set; }
         public string  Answer { get; set; }
