@@ -10,6 +10,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Span } from '../../../components/Typography';
 import NotificationBar from '../../NotificationBar/NotificationBar';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.text.primary,
@@ -120,12 +121,12 @@ const Layout1Topbar = () => {
               </UserMenu>
             }
           >
-            {/* <StyledItem>
-              <Link to="/">
-                <Icon> home </Icon>
-                <Span> Home </Span>
+            <StyledItem>
+              <Link to="/sessions/Signup">
+              <AdminPanelSettingsIcon/>
+                <Span className={"mx-2"}> Admin </Span>
               </Link>
-            </StyledItem> */}
+            </StyledItem>
 
             <StyledItem>
               <Link to="/page-layouts/user-profile">

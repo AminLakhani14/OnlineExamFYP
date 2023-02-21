@@ -1,0 +1,18 @@
+.container{
+    border: 1px solid black;
+    height: 350px;
+    width: 65vw !important;
+    border-radius: 10px;
+}
+
+.column{
+    border-bottom: 1px solid black;
+    height: 50px;
+    background: gainsboro;
+    border-top-right-radius: 9px;
+    border-top-left-radius: 9px;
+}
+.body{
+    background: floralwhite;
+
+}

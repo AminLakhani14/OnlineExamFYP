@@ -33,17 +33,7 @@ const columns = [
 
 
 
-// const rows = [
-//   { id: 1, Subject: 'English', Question: 'what is noun?', Marks: 35 },
-//   { id: 2, Subject: 'Science', Question: 'How many solar planet are there in space?', Marks: 42 },
-//   { id: 3, Subject: 'Science', Question: 'How many solar planet are there in space?', Marks: 45 },
-//   { id: 4, Subject: 'Science', Question: 'How many solar planet are there in space?', Marks: 16 },
-//   { id: 5, Subject: 'Science', Question: 'How many solar planet are there in space?', Marks: 11 },
-//   { id: 6, Subject: 'Science', Question: 'How many solar planet are there in space?', Marks: 150 },
-//   { id: 7, Subject: 'Science', Question: 'How many solar planet are there in space?', Marks: 44 },
-//   { id: 8, Subject: 'Science', Question: 'How many solar planet are there in space?', Marks: 36 },
-//   { id: 9, Subject: 'Science', Question: 'How many solar planet are there in space?', Marks: 65 },
-// ];
+
 
 const ViewQAExam = () => {
   useEffect(() => {

@@ -11,6 +11,7 @@ import ExamRules from './ExamRules/ExamRules';
 import ViewExam from './Manage/ViewMCQExam/ViewExam';
 import ViewQAExam from './Manage/ViewQAExam/ViewQAExam';
 import Result from './Result/Result';
+import Signup from './sessions/Signup';
 
 // const AppTable = Loadable(lazy(() => import('./tables/AppTable')));
 // const AppForm = Loadable(lazy(() => import('./forms/AppForm')));
@@ -59,6 +60,9 @@ const BasePage = [
   },
   {
     path: '/ExamRules/ExamRules', element: <ExamRules />,
+  },
+  {
+    path: '/sessions/Signup', element: <Signup />,
   },
   
   
