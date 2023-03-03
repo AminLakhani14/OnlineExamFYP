@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<QuestionAPIDbcontext>(option => 
 option.UseSqlServer(builder.Configuration.GetConnectionString("QuestionApiConnectionString")));
 
+
 var app = builder.Build();
 app.UseCors(builder =>
 {

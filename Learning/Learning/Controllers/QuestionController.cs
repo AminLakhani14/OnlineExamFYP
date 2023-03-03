@@ -23,20 +23,6 @@ namespace Learning.Controllers
             return Ok(dbcontext.QuestionAnswer.ToList());
         }
 
-        //[HttpGet]
-        //[Route("{id:guid")]
-
-        //public async Task<IActionResult> GetQuestion([FromRoute] Guid ID)
-        //{
-        //    var question = await dbcontext.QuestionAnswer.FindAsync(ID);
-
-        //    if(question == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(question);
-        //}
-
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> AddQuestion(AddQuestion addQuestion)

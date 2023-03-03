@@ -5,10 +5,13 @@ namespace Learning.Data
 {
     public class QuestionAPIDbcontext : DbContext
     {
-        public QuestionAPIDbcontext(DbContextOptions options ) : base( options ) 
+        public QuestionAPIDbcontext(DbContextOptions<QuestionAPIDbcontext> options ) : base( options ) 
         { 
         }
 
         public DbSet<QuestionAnswer> QuestionAnswer { get; set; }
+        public DbSet<Register> Register { get; set; }
+
+
     }
 }
