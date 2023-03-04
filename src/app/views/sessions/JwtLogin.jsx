@@ -68,7 +68,7 @@ const JwtLogin = () => {
   return (
     <>
       <JWTRoot>
-        <div className="loginPage container">
+        <div className="loginPage">
           <div className="row">
             <div className="col-12 col-md-6 col-lg-5 col-xl-4 contentBox">
               <ContentBox className="d-flex flex-column w-100 align-items-center justify-content-center">

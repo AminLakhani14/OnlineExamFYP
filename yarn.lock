@@ -1679,10 +1679,10 @@
     "prop-types" "^15.8.1"
     "react-is" "^18.2.0"
 
-"@mui/x-data-grid@^5.17.22":
-  "integrity" "sha512-75nc+BL5G8/KzMOBl7NQ622D9n6mLx3tsRnF0HmccGYLMrZ7jlBMz50M9thrDee7b27CsrZolay7tq+cPFrq4Q=="
-  "resolved" "https://registry.npmjs.org/@mui/x-data-grid/-/x-data-grid-5.17.22.tgz"
-  "version" "5.17.22"
+"@mui/x-data-grid@^5.17.26":
+  "integrity" "sha512-eGJq9J0g9cDGLFfMmugOadZx0mJeOd/yQpHwEa5gUXyONS6qF0OhXSWyDOhDdA3l2TOoQzotMN5dY/T4Wl1KYA=="
+  "resolved" "https://registry.npmjs.org/@mui/x-data-grid/-/x-data-grid-5.17.26.tgz"
+  "version" "5.17.26"
   dependencies:
     "@babel/runtime" "^7.18.9"
     "@mui/utils" "^5.10.3"

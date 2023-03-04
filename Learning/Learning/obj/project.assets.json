@@ -2432,23 +2432,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\shahi\\.nuget\\packages\\": {},
+    "C:\\Users\\aminl\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\shahi\\OneDrive\\Desktop\\Main branch\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj",
+      "projectUniqueName": "C:\\Users\\aminl\\OneDrive\\Desktop\\main branch\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj",
       "projectName": "Learning",
-      "projectPath": "C:\\Users\\shahi\\OneDrive\\Desktop\\Main branch\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj",
-      "packagesPath": "C:\\Users\\shahi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\shahi\\OneDrive\\Desktop\\Main branch\\OnlineExamFYP\\Learning\\Learning\\obj\\",
+      "projectPath": "C:\\Users\\aminl\\OneDrive\\Desktop\\main branch\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj",
+      "packagesPath": "C:\\Users\\aminl\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\aminl\\OneDrive\\Desktop\\main branch\\OnlineExamFYP\\Learning\\Learning\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\shahi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\aminl\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2528,7 +2528,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
