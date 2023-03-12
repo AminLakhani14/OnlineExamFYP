@@ -6,22 +6,22 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 
 const columns = [
-  { field: 'id', headerName: 'id', width: 100 ,type: 'number',editable: true},
+  { field: 'id', headerName: 'QNo.#', width: 100 ,type: 'number',editable: false},
   {
     field: 'course',
-    headerName: 'course',
+    headerName: 'Subject',
     width: 150,
-    editable: true,
+    editable: false,
   },
   {
     field: 'question',
-    headerName: 'question',
+    headerName: 'Question',
     width: 800,
-    editable: true,
+    editable: false,
   },
   {
     field: 'marks',
-    headerName: 'marks',
+    headerName: 'Marks',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
     width: 200,

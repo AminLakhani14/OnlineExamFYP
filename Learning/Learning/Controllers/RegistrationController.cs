@@ -44,7 +44,7 @@ namespace Learning.Controllers
             {
              await dbcontext.Register.AddAsync(addData);
             await dbcontext.SaveChangesAsync();
-                SendEmail(AddUser.Email,AddUser.UserName,AddUser.Password);
+                SendEmail(AddUser.Email,AddUser.UserName,AddUser.Password,AddUser.Type);
             }
             catch
             {
@@ -61,6 +61,7 @@ namespace Learning.Controllers
             {
                 UserName = loginUser.UserName,
                 Password = loginUser.Password,
+                Type=loginUser.Type,
             };
             try
             {
@@ -81,7 +82,7 @@ namespace Learning.Controllers
             }
         }
 
-        public static bool SendEmail(string Emailto, string Usnername, string Password)
+        public static bool SendEmail(string Emailto, string Usnername, string Password, string Type)
         {
             try
             {
@@ -90,7 +91,8 @@ namespace Learning.Controllers
                 string SMTPClientHostAddress = "smtp.surview.ae";
                 string SMTPPassword = "Demo@123!!";
                 string SMTPUserID = "surview@mg.surview.ae";
-                string emailbody = "<h1>your username</h1>" + Usnername + "<h1>your password</h1>" + Password;
+                string emailbody = "<table style='width: 43.9%; height: 100%; font-family: Roboto; border-collapse: collapse; min-width: 442px; '><tr style='height: 64px; background-color: rgb(233,233,233); border-bottom: 1px solid rgba(39, 60, 65, 0.5);'><td style='width: 50px; padding-left: 22px; '><img src='https://upload.wikimedia.org/wikipedia/commons/4/43/Iqra_University_logo.png' alt='' height='40px' width='150px' style='padding-top: 0px;'></td><td style='padding-left: 3px; width: 70px;'><h1 style='padding-top: 2px; font-family: Roboto; margin: 0px; color: #273C41; font-style: normal; font-weight: 300; font-size: 26px; letter-spacing: -0.5px;'>Online</h1></td><td style='padding-left: 1px;'><p style='padding-top: 10.5px; font-family: Roboto; margin: 0px; color: #506165;'>Examination System</p></td></tr></table>" +
+                   "<h3 style='display: contents; '>This username and password is for</h3>" + " " + Type + "<h3>your username</h3>" + Usnername + "<h3>your password</h3>" + Password;
                 //using (MailMessage mail = new MailMessage())
                 //{
                 //    mail.From = new MailAddress(SMTPMailAddress);

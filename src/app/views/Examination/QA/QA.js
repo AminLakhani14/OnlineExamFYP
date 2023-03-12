@@ -1,6 +1,9 @@
 import {
   Button,
+  Dialog,
+  DialogTitle,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
   Select,
@@ -10,8 +13,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
 import HeadBreadCrumb from "app/components/BreadCrumb/HeadBreadCrumb";
 import axios from "axios";
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
 import { useEffect, useState } from "react";
-
+import CloseIcon from '@mui/icons-material/Close';
 const INITIAL_STATE = {
   course: "",
   question: "",
@@ -23,7 +29,33 @@ const INITIAL_STATE = {
   keyword4: "",
   keyword5: "",
 };
+
+function BootstrapDialogTitle(props) {
+  const { children, onClose, ...other } = props;
+
+  return (
+    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+      {children}
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </DialogTitle>
+  );
+}
 const QA = () => {
+
+
   const [post, setpost] = useState();
   const [formData, setformData] = useState({ ...INITIAL_STATE });
 
@@ -60,6 +92,7 @@ const QA = () => {
         debugger;
         console.error(err);
       });
+      handleClose();
   };
 
   const names = [
@@ -70,6 +103,7 @@ const QA = () => {
     "BlockChain",
     "Parallel and Distributive Programming",
   ];
+ 
 
   const handleChange = (e) => {
     try {
@@ -82,9 +116,72 @@ const QA = () => {
     } catch (error) {}
   };
 
+  // const style = {
+  //   position: 'absolute',
+  //   top: '50%',
+  //   left: '50%',
+  //   transform: 'translate(-50%, -50%)',
+  //   width: 400,
+  //   bgcolor: 'background.paper',
+  //   border: '2px solid #000',
+  //   boxShadow: 24,
+  //   p: 4,
+  // };
+    const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <>
       <HeadBreadCrumb text1={"Dashboard"} text2={"Question/Answer"} url={"/"} />
+      
+       <Dialog
+       
+        keepMounted
+        open={open}
+        // onClose={handleClose}
+        onClose={(event, reason) => {
+          if(reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
+              setOpen(false);
+          }
+      }
+    }
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description"
+            sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+      >
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+        </BootstrapDialogTitle>
+        <Box>
+          <Typography id="keep-mounted-modal-title" variant="h6" component="h2" className="mt-3 mx-4 mb-4">
+            Do you want to Add this Question?
+          </Typography>
+          <div className="mb-4">
+        <Button
+          variant="outlined"
+          className="ms-4"
+          sx={{
+            width: 100,
+            color: "red",
+          }}
+          onClick={handleClose}
+        >
+          NO
+        </Button>
+        <Button
+          variant="outlined"
+          className="float-end me-4"
+          sx={{
+            width: 100,
+          }}
+          onClick={getpost}
+        >
+          YES
+          
+        </Button>
+        </div>
+        </Box>
+      </Dialog>
 
       <div className="row m-2">
         <div className="col-12">
@@ -243,7 +340,8 @@ const QA = () => {
           sx={{
             width: 200,
           }}
-          onClick={getpost}
+          onClick={handleOpen}
+          // onClick={getpost}
           startIcon={<SendIcon />}
         >
           Add Question

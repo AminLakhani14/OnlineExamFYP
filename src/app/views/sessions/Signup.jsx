@@ -55,7 +55,7 @@ const Signup = () => {
 const getpost = () =>{
   debugger
   axios 
-  .post('https://localhost:7040/api/Registration',formData)
+  .post('https://localhost:7040/api/Registration/post-Register',formData)
   .then((res)=>{
     debugger
     if(res.status===200){ 

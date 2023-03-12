@@ -2,7 +2,6 @@ import Loadable from 'app/components/Loadable';
 import { lazy } from 'react';
 import AttemptMCQ from './AttemptExam/AttemptMCQs/AttemptMCQ';
 import AttemptQA from './AttemptExam/AttemptQA/AttemptQA';
-import Card from './Cards/Card1';
 import MCQ from './Examination/MCQs/MCQs';
 import QA from './Examination/QA/QA';
 import ViewMCQs from './Examination/ViewMCQs/ViewMCQs';
@@ -45,9 +44,6 @@ const BasePage = [
   },
   {
     path: '/Examination/ViewMCQs', element: <ViewMCQs />,
-  },
-  {
-    path: '/Cards/Card1', element: <Card />,
   },
   {
     path: '/Manage/ViewQAExam', element: <ViewQAExam />,

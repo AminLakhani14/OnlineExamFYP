@@ -1,7 +1,11 @@
 import {
+  Box,
   Breadcrumbs,
   Button,
+  Dialog,
+  DialogTitle,
   FormControl,
+  IconButton,
   Input,
   InputLabel,
   Link,
@@ -16,6 +20,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
 import HeadBreadCrumb from "app/components/BreadCrumb/HeadBreadCrumb";
 import { useState } from "react";
+import { Modal } from "antd";
+import CloseIcon from '@mui/icons-material/Close';
+
 
 const INITIAL_STATE = {
   course: "",
@@ -28,6 +35,31 @@ const INITIAL_STATE = {
   correctAnswer: "",
 };
 const MCQ = () => {
+
+  function BootstrapDialogTitle(props) {
+    const { children, onClose, ...other } = props;
+  
+    return (
+      <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+        {children}
+        {onClose ? (
+          <IconButton
+            aria-label="close"
+            onClick={onClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        ) : null}
+      </DialogTitle>
+    );
+  }
+
   const names = [
     "Programming Fundamentals",
     "OOP",
@@ -51,9 +83,59 @@ const MCQ = () => {
       correctAnswer: "",
     });
   }
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <>
       <HeadBreadCrumb text1={"Dashboard"} text2={"MCQs"} url={"/"} />
+      <Dialog
+       
+       keepMounted
+       open={open}
+       // onClose={handleClose}
+       onClose={(event, reason) => {
+         if(reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
+             setOpen(false);
+         }
+     }
+   }
+       aria-labelledby="keep-mounted-modal-title"
+       aria-describedby="keep-mounted-modal-description"
+           sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+     >
+       <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+       </BootstrapDialogTitle>
+       <Box>
+         <Typography id="keep-mounted-modal-title" variant="h6" component="h2" className="mt-3 mx-4 mb-4">
+           Do you want to Add this Question?
+         </Typography>
+         <div className="mb-4">
+       <Button
+         variant="outlined"
+         className="ms-4"
+         sx={{
+           width: 100,
+           color: "red",
+         }}
+         onClick={handleClose}
+       >
+         NO
+       </Button>
+       <Button
+         variant="outlined"
+         className="float-end me-4"
+         sx={{
+           width: 100,
+         }}
+        //  onClick={getpost}
+       >
+         YES
+         
+       </Button>
+       </div>
+       </Box>
+     </Dialog>
 
       <div className="row m-2">
         <div className="col-12">
@@ -233,6 +315,7 @@ const MCQ = () => {
             width: 300,
           }}
           startIcon={<SendIcon />}
+          onClick={handleOpen}
         >
           Add Question
         </Button>

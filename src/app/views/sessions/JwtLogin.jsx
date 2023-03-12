@@ -1,5 +1,5 @@
 import { LoadingButton } from "@mui/lab";
-import { Card, Checkbox, Grid, TextField } from "@mui/material";
+import { Card, Checkbox, Grid, Modal, TextField, Typography } from "@mui/material";
 import { Box, styled, useTheme } from "@mui/system";
 import { Paragraph } from "app/components/Typography";
 import useAuth from "app/hooks/useAuth";
@@ -68,7 +68,7 @@ const JwtLogin = () => {
   return (
     <>
       <JWTRoot>
-        <div className="loginPage container">
+        <div className="loginPage">
           <div className="row">
             <div className="col-12 col-md-6 col-lg-5 col-xl-4 contentBox">
               <ContentBox className="d-flex flex-column w-100 align-items-center justify-content-center">
@@ -157,7 +157,7 @@ const JwtLogin = () => {
                         Login
                       </LoadingButton>
 
-                      <Paragraph className={"d-flex justify-content-center"}>
+                      {/* <Paragraph className={"d-flex justify-content-center"}>
                         Don't have an account?
                         <NavLink
                           to="/session/signup"
@@ -165,7 +165,7 @@ const JwtLogin = () => {
                         >
                           Register
                         </NavLink>
-                      </Paragraph>
+                      </Paragraph> */}
                     </form>
                   )}
                 </Formik>
