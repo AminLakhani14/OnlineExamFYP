@@ -4,6 +4,8 @@ import EditIcon from '@mui/icons-material/Edit'
 import {
   Box,
   Button,
+  Dialog,
+  DialogTitle,
   FormControl,
   InputAdornment,
   InputLabel,
@@ -12,6 +14,7 @@ import {
   OutlinedInput,
   Select,
   TextField,
+  Typography,
 } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import React, { useEffect, useState } from 'react'
@@ -21,10 +24,43 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'
 import SendIcon from "@mui/icons-material/Send";
 import * as Yup from "yup";
 import axios from 'axios'
+import CloseIcon from '@mui/icons-material/Close';
 
 const INITIAL_STATE={
-
+      type: "",
+      userName: "",
+      age: "",
+      email: "",
+      password: "",
+      country: "",
+      city: "",
 }
+
+function BootstrapDialogTitle(props) {
+  const { children, onClose, ...other } = props;
+
+  return (
+    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+      {children}
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </DialogTitle>
+  );
+}
+
+
 const Signup = () => {
   const [post, setpost] = useState();
 
@@ -44,12 +80,23 @@ const Signup = () => {
       .required("Email is required!"),
   });
 
-  const [formData, setformData] = useState({...INITIAL_STATE});
+  function reset(prevState) {
+    prevState.preventDefault();
+    setformData({
+      type: "",
+      userName: "",
+      age: "",
+      email: "",
+      password: "",
+      country: "",
+      city: "",
+    });
+  }
 
-  // function reset(ev) {
-  //   ev.preventDefault();
-  //   setState({ UserName: "", Age: "", Email: "", Password: "", City: "", Country: "", Type: ""});
-  // }
+  const [formData, setformData] = useState({...INITIAL_STATE});
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
 
 const getpost = () =>{
@@ -69,6 +116,7 @@ const getpost = () =>{
     debugger
     console.error(err)
   });
+  handleClose();
 };
 
 const handleChange=(e)=>{
@@ -92,10 +140,57 @@ const handleChange=(e)=>{
         text2={'Registration Form'}
         url={'/'}
       />
+       <Dialog
+       
+       keepMounted
+       open={open}
+       // onClose={handleClose}
+       onClose={(event, reason) => {
+         if(reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
+             setOpen(false);
+         }
+     }
+   }
+       aria-labelledby="keep-mounted-modal-title"
+       aria-describedby="keep-mounted-modal-description"
+           sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+     >
+       <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+       </BootstrapDialogTitle>
+       <Box>
+         <Typography id="keep-mounted-modal-title" variant="h6" component="h2" className="mt-3 mx-4 mb-4">
+           Do you want to Add this Question?
+         </Typography>
+         <div className="mb-4">
+       <Button
+         variant="outlined"
+         className="ms-4"
+         sx={{
+           width: 100,
+           color: "red",
+         }}
+         onClick={handleClose}
+       >
+         NO
+       </Button>
+       <Button
+         variant="outlined"
+         className="float-end me-4"
+         sx={{
+           width: 100,
+         }}
+         onClick={getpost}
+       >
+         YES
+         
+       </Button>
+       </div>
+       </Box>
+     </Dialog>
         <div className='container'>
       <div className="row mt-0">
         <div className="column col-12">
-          <h3>Registration Form</h3>
+          <h3 className='my-2'>Registration Form</h3>
         </div>
         <div className="col-6 mt-4">
           <FormControl  sx={{ width: 200 }}size="small">
@@ -221,10 +316,11 @@ const handleChange=(e)=>{
     <div className="d-flex justify-content-center mt-5">
     <Button
       variant="outlined"
-      className=""
+      className="me-4"
       sx={{
         width: 200,
       }}
+      onClick={reset}
       startIcon={<SendIcon />}
     >
       Reset
@@ -236,7 +332,7 @@ const handleChange=(e)=>{
         width: 200,
       }}
       startIcon={<SendIcon />}
-      onClick={getpost}
+      onClick={handleOpen}
     >
       Register
     </Button>

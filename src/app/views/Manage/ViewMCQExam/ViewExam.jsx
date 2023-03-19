@@ -5,85 +5,84 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Box, Link } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import HeadBreadCrumb from "app/components/BreadCrumb/HeadBreadCrumb";
+import { useEffect, useState } from "react";
+
 
 const columns = [
   { field: 'id', headerName: 'QNo.#', width: 60 ,type: 'number',editable: true},
   {
-    field: 'Subject',
+    field: 'course',
     headerName: 'Subject',
     width: 120,
     editable: true,
   },
   {
-    field: 'Question',
+    field: 'question',
     headerName: 'Question',
     width: 400,
     editable: true,
   },
   {
-    field: 'Option1',
+    field: 'optionA',
     headerName: 'Option 1',
     width: 120,
     editable: true,
   },
   {
-    field: 'Option2',
+    field: 'optionB',
     headerName: 'Option 2',
     width: 120,
     editable: true,
   },
   {
-    field: 'Option3',
+    field: 'optionC',
     headerName: 'Option 3',
     width: 120,
     editable: true,
   },
   {
-    field: 'Option4',
+    field: 'optionD',
     headerName: 'Option 4',
     width: 120,
     editable: true,
   },
   {
-    field: 'Marks',
+    field: 'marks',
     headerName: 'Marks',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
     width: 100,
-    // valueGetter: (params) =>
-    //   `${params.row.Subject || ''} ${params.row.Question || ''}`,
   },
- 
-];
-
-const rows = [
-  { id: 1, Subject: 'English', Question: 'what is noun?',Option1 : 'a',Option2 : 'b' ,Option3 : 'c', Option4 : 'd', Marks: 1 },
-  { id: 2, Subject: 'English', Question: 'what is noun?',Option1 : 'a',Option2 : 'b' ,Option3 : 'c', Option4 : 'd', Marks: 1 },
-  { id: 3, Subject: 'English', Question: 'what is noun?',Option1 : 'a',Option2 : 'b' ,Option3 : 'c', Option4 : 'd', Marks: 1 },
-  { id: 4, Subject: 'English', Question: 'what is noun?',Option1 : 'a',Option2 : 'b' ,Option3 : 'c', Option4 : 'd', Marks: 1 },
-  { id: 5, Subject: 'English', Question: 'what is noun?',Option1 : 'a',Option2 : 'b' ,Option3 : 'c', Option4 : 'd', Marks: 1 },
-  { id: 6, Subject: 'English', Question: 'what is noun?',Option1 : 'a',Option2 : 'b' ,Option3 : 'c', Option4 : 'd', Marks: 1 },
-  { id: 7, Subject: 'English', Question: 'what is noun?',Option1 : 'a',Option2 : 'b' ,Option3 : 'c', Option4 : 'd', Marks: 1 },
-  { id: 8, Subject: 'English', Question: 'what is noun?',Option1 : 'a',Option2 : 'b' ,Option3 : 'c', Option4 : 'd', Marks: 1 },
-  { id: 9, Subject: 'English', Question: 'what is noun?',Option1 : 'a',Option2 : 'b' ,Option3 : 'c', Option4 : 'd', Marks: 1 },
-  { id: 10, Subject: 'English', Question: 'what is noun?',Option1 : 'a',Option2 : 'b' ,Option3 : 'c', Option4 : 'd', Marks: 1 },
-
+  
 ];
 
 const ViewExam = () => {
+  useEffect(() => {
+    fetch("https://localhost:7040/api/MCQs/Get-MCQs")
+      .then((data) => data.json())
+      .then((data) => setTableData(data))
+
+  }, [])
+
+  console.log(tableData)
+
+
+
+  const [tableData, setTableData] = useState([])
+
   return (
     <>
 
     <div className="row m-0 mt-3">
       <div className="col-12">
       <Box sx={{ height: 500, width: '100%' }}>
-    <DataGrid
-      rows={rows}
+     <DataGrid
+      rows={tableData}
       columns={columns}
       pageSize={10}
-      rowsPerPageOptions={[10]}
-      disableSelectionOnClick
-      experimentalFeatures={{ newEditingApi: true }}
+      // rowsPerPageOptions={[10]}
+      // disableSelectionOnClick
+      // experimentalFeatures={{ newEditingApi: true }}
     />
   </Box>
       </div>

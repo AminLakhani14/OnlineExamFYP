@@ -11,6 +11,7 @@ namespace Learning.Data
 
         public DbSet<QuestionAnswer> QuestionAnswer { get; set; }
         public DbSet<Register> Register { get; set; }
+        public DbSet<MCQs> MCQs { get; set; }
 
 
     }

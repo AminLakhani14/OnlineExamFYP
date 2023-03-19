@@ -22,43 +22,81 @@ import HeadBreadCrumb from "app/components/BreadCrumb/HeadBreadCrumb";
 import { useState } from "react";
 import { Modal } from "antd";
 import CloseIcon from '@mui/icons-material/Close';
+import axios from "axios";
 
 
 const INITIAL_STATE = {
   course: "",
   question: "",
   marks: "",
-  option1: "",
-  option2: "",
-  option3: "",
-  option4: "",
+  optionA: "",
+  optionB: "",
+  optionC: "",
+  optionD: "",
   correctAnswer: "",
 };
+
+function BootstrapDialogTitle(props) {
+  const { children, onClose, ...other } = props;
+
+  return (
+    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+      {children}
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </DialogTitle>
+  );
+}
 const MCQ = () => {
 
-  function BootstrapDialogTitle(props) {
-    const { children, onClose, ...other } = props;
   
-    return (
-      <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
-        {children}
-        {onClose ? (
-          <IconButton
-            aria-label="close"
-            onClick={onClose}
-            sx={{
-              position: 'absolute',
-              right: 8,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-        ) : null}
-      </DialogTitle>
-    );
+  const [post, setpost] = useState();
+  const [formData, setformData] = useState({ ...INITIAL_STATE });
+
+  
+  function reset(ev) {
+    ev.preventDefault();
+    setformData({
+      course: "",
+      question: "",
+      marks: "",
+      optionA: "",
+      optionB: "",
+      optionC: "",
+      optionD: "",
+      correctAnswer: "",
+    });
   }
+  const getpost = () => {
+    axios
+      .post(`https://localhost:7040/api/MCQs/post-MCQs`, formData)
+      .then((res) => {
+        debugger;
+        if (res.status === 200) {
+          setpost(res.data);
+          console.log("nikl laura", res.data);
+        } else {
+          console.log("something went wrong");
+        }
+      })
+      .catch((err) => {
+        debugger;
+        console.error(err);
+      });
+      handleClose();
+  };
 
   const names = [
     "Programming Fundamentals",
@@ -68,21 +106,20 @@ const MCQ = () => {
     "BlockChain",
     "Parallel and Distributive Programming",
   ];
-  const [state, setState] = useState({ ...INITIAL_STATE });
 
-  function reset(ev) {
-    ev.preventDefault();
-    setState({
-      course: "",
-      question: "",
-      marks: "",
-      option1: "",
-      option2: "",
-      option3: "",
-      option4: "",
-      correctAnswer: "",
-    });
-  }
+  const handleChange = (e) => {
+    try {
+      let name = e.target.name;
+      let value = e.target.value;
+      setformData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    } catch (error) {
+
+    }
+  };
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -128,7 +165,7 @@ const MCQ = () => {
          sx={{
            width: 100,
          }}
-        //  onClick={getpost}
+         onClick={getpost}
        >
          YES
          
@@ -145,10 +182,9 @@ const MCQ = () => {
               labelId="demo-select-small"
               id="demo-select-small"
               label="Subject"
-              value={state.course}
-              onChange={(ev) => {
-                setState({ ...state, course: ev.target.value });
-              }}
+              name="course"
+              onChange={handleChange}
+              value={formData.course}
             >
               {names.map((name) => (
                 <MenuItem key={name} value={name}>
@@ -169,10 +205,9 @@ const MCQ = () => {
                 className="mt-2 w-50"
                 fullWidth
                 size="small"
-                value={state.marks}
-                onChange={(ev) => {
-                  setState({ ...state, marks: ev.target.value });
-                }}
+                name="marks"
+                onChange={handleChange}
+                value={formData.marks}
                 sx={{
                   "& legend": { display: "none" },
                   "& fieldset": { top: 0 },
@@ -184,10 +219,9 @@ const MCQ = () => {
             className="mt-2"
             fullWidth
             size="small"
-            value={state.question}
-            onChange={(ev) => {
-              setState({ ...state, question: ev.target.value });
-            }}
+            name="question"
+            onChange={handleChange}
+            value={formData.question}
             sx={{
               "& legend": { display: "none" },
               "& fieldset": { top: 0 },
@@ -203,13 +237,12 @@ const MCQ = () => {
             <div className="col-2 my-2">
               <label>Option 1:</label>
             </div>
-            <div className="col-1 my-2">
+            <div className="col-2 my-2">
               <TextField
                 fullWidth
-                value={state.option1}
-                onChange={(ev) => {
-                  setState({ ...state, option1: ev.target.value });
-                }}
+                name="optionA"
+                onChange={handleChange}
+                value={formData.optionA}
                 sx={{
                   "& legend": { display: "none" },
                   "& fieldset": { top: 0 },
@@ -222,13 +255,12 @@ const MCQ = () => {
             <div className="col-2 my-2">
               <label>Option 2:</label>
             </div>
-            <div className="col-1 my-2">
+            <div className="col-2 my-2">
               <TextField
                 fullWidth
-                value={state.option2}
-                onChange={(ev) => {
-                  setState({ ...state, option2: ev.target.value });
-                }}
+                name="optionB"
+                onChange={handleChange}
+                value={formData.optionB}
                 sx={{
                   "& legend": { display: "none" },
                   "& fieldset": { top: 0 },
@@ -241,13 +273,12 @@ const MCQ = () => {
             <div className="col-2 my-2">
               <label>Option 3:</label>
             </div>
-            <div className="col-1 my-2">
+            <div className="col-2 my-2">
               <TextField
                 fullWidth
-                value={state.option3}
-                onChange={(ev) => {
-                  setState({ ...state, option3: ev.target.value });
-                }}
+                name="optionC"
+                onChange={handleChange}
+                value={formData.optionC}
                 sx={{
                   "& legend": { display: "none" },
                   "& fieldset": { top: 0 },
@@ -259,13 +290,12 @@ const MCQ = () => {
             <div className="col-2 my-2">
               <label>Option 4:</label>
             </div>
-            <div className="col-1 my-2">
+            <div className="col-2 my-2">
               <TextField
                 fullWidth
-                value={state.option4}
-                onChange={(ev) => {
-                  setState({ ...state, option4: ev.target.value });
-                }}
+                name="optionD"
+                onChange={handleChange}
+                value={formData.optionD}
                 sx={{
                   "& legend": { display: "none" },
                   "& fieldset": { top: 0 },
@@ -279,13 +309,12 @@ const MCQ = () => {
               <label>Correct Answer:</label>
             </div>
 
-            <div className="col-1 my-2">
+            <div className="col-2 my-2">
               <TextField
                 fullWidth
-                value={state.correctAnswer}
-                onChange={(ev) => {
-                  setState({ ...state, correctAnswer: ev.target.value });
-                }}
+                name="correctAnswer"
+                onChange={handleChange}
+                value={formData.correctAnswer}
                 sx={{
                   "& legend": { display: "none" },
                   "& fieldset": { top: 0 },
@@ -301,7 +330,7 @@ const MCQ = () => {
           className=""
           onClick={reset}
           sx={{
-            width: 300,
+            width: 200,
             color: "red",
           }}
           startIcon={<DeleteIcon />}
@@ -312,7 +341,7 @@ const MCQ = () => {
           variant="outlined"
           className=""
           sx={{
-            width: 300,
+            width: 200,
           }}
           startIcon={<SendIcon />}
           onClick={handleOpen}
