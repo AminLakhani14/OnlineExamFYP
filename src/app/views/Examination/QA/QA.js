@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Dialog,
   DialogTitle,
@@ -7,6 +8,8 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Snackbar,
+  Stack,
   TextField,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -54,6 +57,7 @@ function BootstrapDialogTitle(props) {
   );
 }
 const QA = () => {
+  const [snack, setsnack] = useState(false);
 
 
   const [post, setpost] = useState();
@@ -73,6 +77,37 @@ const QA = () => {
       keyword5: "",
     });
   }
+
+  const snackes = () => {
+
+
+    const handleClick = () => {
+      setsnack(true);
+    };
+  
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setsnack(false);
+    };
+   return(
+    <>
+     <Stack spacing={2} sx={{ width: '100%' }}>
+      <Button variant="outlined" onClick={handleClick}>
+        Open success snackbar
+      </Button>
+      <Snackbar open={snack} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          This is a success message!
+        </Alert>
+      </Snackbar>
+    </Stack>
+    </>
+   )
+  };
+
 
   const getpost = () => {
     debugger;
