@@ -17,7 +17,6 @@ namespace Learning.Models
         public string marks { get; set;}
 
         public DateTime Created { get; set; }
-        public DateTime? Completed { get; set; }
 
 
 

@@ -18,16 +18,16 @@ namespace Learning.Controllers
         // GET: api/Mcqs
         [HttpGet]
         [Route("Get-MCQs")]
-        public async Task<ActionResult<IEnumerable<MCQs>>> GetMcqs()
+        public async Task<IActionResult> GetMcqs()
         {
-            return await dbcontext.MCQs.ToListAsync();
+            return Ok(dbcontext.MCQs.ToList());
         }
 
 
         [HttpPost]
         [Route("post-MCQs")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<MCQs>> PostMcq(AddMcqs AddMcqs)
+        public async Task<IActionResult> PostMcq(AddMcqs AddMcqs)
         {
             var question = new MCQs()
             {

@@ -2,7 +2,7 @@ import * as React from "react";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { Box, Link, Typography } from "@mui/material";
+import { Alert, Box, Link, Snackbar, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import HeadBreadCrumb from "app/components/BreadCrumb/HeadBreadCrumb";
 import { useState } from "react";
@@ -133,6 +133,32 @@ const ViewMCQs = () => {
     setDeleteModal(false);
   };  
 
+  const [openS, setOpenS] = useState(false);
+
+  const handleClick = () => {
+    setOpenS(true);
+  };
+
+  const handleClosed = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenS(false);
+  };
+
+  const [news, setnews] = useState(false);
+
+  const handleClicked = () => {
+    setnews(true);
+  };
+
+  const handleCloseded = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setnews(false);
+  };
+
   const getpost = () => {
     debugger;
   
@@ -148,9 +174,11 @@ const ViewMCQs = () => {
         }
       })
       .catch((err) => {
-        debugger;
-        console.error(err);
+        handleClicked(true)
+
       });
+      handleClick(true)
+      handleCancel(true)
   };
   
   useEffect(() => {
@@ -165,6 +193,27 @@ const ViewMCQs = () => {
 
   return (
     <>
+    <Snackbar
+        anchorOrigin={{ vertical:"top", horizontal:"right" }}
+        open={news}
+        autoHideDuration={1000}
+        onClose={handleCloseded}
+      >
+      <Alert severity="success" sx={{ width: '100%' }}>
+        Data Add successfully!
+      </Alert>
+      </Snackbar>
+
+      <Snackbar
+        anchorOrigin={{ vertical:"top", horizontal:"right" }}
+        open={openS}
+        autoHideDuration={1000}
+        onClose={handleClosed}
+      >
+      <Alert severity="error" sx={{ width: '100%' }}>
+        Something Went wrong!
+      </Alert>
+      </Snackbar>
      <Modal title="Delete MCQs" open={DeleteModal} okText="Yes"
         cancelText="No" onOk={handleOks} onCancel={handleCancels}>
     <Box>

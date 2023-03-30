@@ -57,8 +57,6 @@ function BootstrapDialogTitle(props) {
   );
 }
 const QA = () => {
-  const [snack, setsnack] = useState(false);
-
 
   const [post, setpost] = useState();
   const [formData, setformData] = useState({ ...INITIAL_STATE });
@@ -78,37 +76,6 @@ const QA = () => {
     });
   }
 
-  const snackes = () => {
-
-
-    const handleClick = () => {
-      setsnack(true);
-    };
-  
-    const handleClose = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-  
-      setsnack(false);
-    };
-   return(
-    <>
-     <Stack spacing={2} sx={{ width: '100%' }}>
-      <Button variant="outlined" onClick={handleClick}>
-        Open success snackbar
-      </Button>
-      <Snackbar open={snack} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-          This is a success message!
-        </Alert>
-      </Snackbar>
-    </Stack>
-    </>
-   )
-  };
-
-
   const getpost = () => {
     debugger;
 
@@ -124,9 +91,11 @@ const QA = () => {
         }
       })
       .catch((err) => {
-        debugger;
-        console.error(err);
+        handleClicked(true)
+        console.log(err);
+        
       });
+      handleClick(true)
       handleClose();
   };
 
@@ -150,24 +119,63 @@ const QA = () => {
       }));
     } catch (error) {}
   };
-
-  // const style = {
-  //   position: 'absolute',
-  //   top: '50%',
-  //   left: '50%',
-  //   transform: 'translate(-50%, -50%)',
-  //   width: 400,
-  //   bgcolor: 'background.paper',
-  //   border: '2px solid #000',
-  //   boxShadow: 24,
-  //   p: 4,
-  // };
+  
     const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  //success
+  const [openS, setOpenS] = useState(false);
+
+  const handleClick = () => {
+    setOpenS(true);
+  };
+
+  const handleClosed = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenS(false);
+  };
+
+  //warning
+  const [news, setnews] = useState(false);
+
+  const handleClicked = () => {
+    setnews(true);
+  };
+
+  const handleCloseded = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setnews(false);
+  };
+
   return (
     <>
+    <Snackbar
+        anchorOrigin={{ vertical:"top", horizontal:"right" }}
+        open={openS}
+        autoHideDuration={1000}
+        onClose={handleClosed}
+      >
+      <Alert severity="success" sx={{ width: '100%' }}>
+      Data Add successfully!
+      </Alert>
+      </Snackbar>
+
+      <Snackbar
+        anchorOrigin={{ vertical:"top", horizontal:"right" }}
+        open={news}
+        autoHideDuration={1000}
+        onClose={handleCloseded}
+      >
+      <Alert severity="error" sx={{ width: '100%' }}>
+        Something Went wrong!
+      </Alert>
+      </Snackbar>
+
       <HeadBreadCrumb text1={"Dashboard"} text2={"Question/Answer"} url={"/"} />
       
        <Dialog

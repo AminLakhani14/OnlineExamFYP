@@ -2,6 +2,7 @@ import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import {
+  Alert,
   Box,
   Button,
   Dialog,
@@ -13,6 +14,7 @@ import {
   MenuItem,
   OutlinedInput,
   Select,
+  Snackbar,
   TextField,
   Typography,
 } from '@mui/material'
@@ -113,10 +115,12 @@ const getpost = () =>{
     }
   })
   .catch((err)=> {
-    debugger
-    console.error(err)
+    handleClicked(true)
+    console.log(err);
   });
+  handleClick(true)
   handleClose();
+
 };
 
 const handleChange=(e)=>{
@@ -131,11 +135,60 @@ const handleChange=(e)=>{
       
     }
   }
+  //success
+  const [openS, setOpenS] = useState(false);
+
+  const handleClick = () => {
+    setOpenS(true);
+  };
+
+  const handleClosed = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenS(false);
+  };
+
+  //warning
+  const [news, setnews] = useState(false);
+
+  const handleClicked = () => {
+    setnews(true);
+  };
+
+  const handleCloseded = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setnews(false);
+  };
 
   
   return (
     <>
-      <HeadBreadCrumb
+     
+      <Snackbar
+        anchorOrigin={{ vertical:"top", horizontal:"right" }}
+        open={openS}
+        autoHideDuration={1000}
+        onClose={handleClosed}
+      >
+      <Alert severity="success" sx={{ width: '100%' }}>
+        Data Add successfully!
+      </Alert>
+      </Snackbar>
+
+      <Snackbar
+        anchorOrigin={{ vertical:"top", horizontal:"right" }}
+        open={news}
+        autoHideDuration={1000}
+        onClose={handleCloseded}
+      >
+      <Alert severity="error" sx={{ width: '100%' }}>
+        Something Went wrong!
+      </Alert>
+      </Snackbar>
+       <HeadBreadCrumb
         text1={'Dashboard'}
         text2={'Registration Form'}
         url={'/'}

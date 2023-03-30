@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Breadcrumbs,
   Button,
@@ -11,6 +12,7 @@ import {
   Link,
   MenuItem,
   Select,
+  Snackbar,
   TextareaAutosize,
   TextField,
   Typography,
@@ -92,9 +94,10 @@ const MCQ = () => {
         }
       })
       .catch((err) => {
-        debugger;
-        console.error(err);
+        handleClicked(true)
+        console.log(err);
       });
+      handleClick(true)
       handleClose();
   };
 
@@ -123,9 +126,58 @@ const MCQ = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [openS, setOpenS] = useState(false);
+
+  const handleClick = () => {
+    setOpenS(true);
+  };
+
+  const handleClosed = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenS(false);
+  };
+
+  const [news, setnews] = useState(false);
+
+  const handleClicked = () => {
+    setnews(true);
+  };
+
+  const handleCloseded = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setnews(false);
+  };
+
   return (
     <>
+      <Snackbar
+        anchorOrigin={{ vertical:"top", horizontal:"right" }}
+        open={openS}
+        autoHideDuration={1000}
+        onClose={handleClosed}
+      >
+      <Alert severity="success" sx={{ width: '100%' }}>
+        Data Add successfully!
+      </Alert>
+      </Snackbar>
+
+      <Snackbar
+        anchorOrigin={{ vertical:"top", horizontal:"right" }}
+        open={news}
+        autoHideDuration={1000}
+        onClose={handleCloseded}
+      >
+      <Alert severity="error" sx={{ width: '100%' }}>
+        Something Went wrong!
+      </Alert>
+      </Snackbar>
+      
       <HeadBreadCrumb text1={"Dashboard"} text2={"MCQs"} url={"/"} />
+
       <Dialog
        
        keepMounted
