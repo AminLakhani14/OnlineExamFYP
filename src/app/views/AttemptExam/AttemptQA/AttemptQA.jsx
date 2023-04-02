@@ -22,11 +22,14 @@ import { Modal } from "antd";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import DialogBox from "app/components/DialogBox/DialogBox";
 
 const AttemptQA = () => {
 
   const [ScoreModal, setScoreModal] = useState(false);
-
+  const [openDialogbox, setOpenDialogBox] = useState(false);
+  const [answerData, setanswerData] = useState("");
+  const [Obtainedmarks,setObtainedmarks]=useState(0)
   const showScoreModal = () => {
     setScoreModal(true);
   };
@@ -42,9 +45,12 @@ const AttemptQA = () => {
   const [tableData, setTableData] = useState([])
   const [currentQuestion, setcurrentQuestion] = useState({})
  
+  const closeDialogBox=()=>{
+    setOpenDialogBox(false)
+  }
   const getpost = () => {
     debugger;
-  
+    
     axios
       .get(`https://localhost:7040/api/Question/get-question`)
       .then((res) => {
@@ -72,22 +78,47 @@ const AttemptQA = () => {
   console.log(tableData)
 
   const  clickNextQuestion=(e)=>{
-    if(currentQuestion?.id===tableData.slice(-1)[0]?.id ){
-      showScoreModal();
-      // handle submit
+    if(!answerData){
+      setOpenDialogBox(true)
     }else{
-      // handle next question
-      let array=[...tableData]
-      let obj=array.find(x=>x.id===currentQuestion.id+1)
-      debugger
-      setcurrentQuestion(obj)
-      
+      if(currentQuestion?.id===tableData.slice(-1)[0]?.id ){
+        showScoreModal();
+        // handle submit
+      }else{
+        // handle next question
+        handleSaveResult()
+      }
     }
-  }
 
+  }
+  const handleSaveResult=()=>{
+    let array=[...tableData]
+    let obj=array.find(x=>x.id===currentQuestion.id)
+    let answerStr=answerData.split(" ")
+    let result=answerStr.filter(x=>x.toLowerCase() ===obj.keyword1.toLowerCase() || x===obj.keyword2.toLowerCase() || x===obj.keyword3.toLowerCase() || x===obj.keyword4.toLowerCase()|| x===obj.keyword5.toLowerCase())
+    console.log(result,"result")
+    if(result.length===5 || answerData===obj.answer){
+      setObtainedmarks(prev=> prev + obj.marks)
+      console.log(Obtainedmarks + +obj.marks,"result")
+    }else{
+      let calculateMarks=obj.marks/5
+      let getMarks= result.length===1 ? calculateMarks : calculateMarks * result.length
+      console.log(getMarks,"getMarks")
+      setObtainedmarks(prev=> prev + getMarks)
+    }
+    // let obj1=array.find(x=>x.id===currentQuestion.id+1)
+    // setcurrentQuestion(obj1)
+  }
 
   return (
     <>
+   {openDialogbox &&
+    <DialogBox
+    openDialog={openDialogbox}
+    title="Please fill the answer first"
+    handleOk={closeDialogBox}
+    Okaybtn={true}
+    />}
     <Modal title="Result" open={ScoreModal} okText="Ok" onCancel={handleCancel}
          onOk={handleOk}>
     <Box>
@@ -131,6 +162,8 @@ const AttemptQA = () => {
             </h3>
             <TextField
               fullWidth
+              value={answerData}
+              onChange={(e)=>setanswerData(e.target.value)}
               sx={{
                 "& legend": { display: "none" },
                 "& fieldset": { top: 0 },

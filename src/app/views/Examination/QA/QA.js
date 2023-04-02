@@ -113,10 +113,17 @@ const QA = () => {
     try {
       let name = e.target.name;
       let value = e.target.value;
-      setformData((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
+      if(name==="keyword1" || name==="keyword2" || name==="keyword3" || name==="keyword4" || name==="keyword5"){
+        setformData((prevState) => ({
+          ...prevState,
+          [name]: value.toLowerCase(),
+        }));
+      }else{
+        setformData((prevState) => ({
+          ...prevState,
+          [name]: value,
+        }));
+      }
     } catch (error) {}
   };
   
