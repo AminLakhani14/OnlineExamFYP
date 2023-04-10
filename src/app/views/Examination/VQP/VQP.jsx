@@ -15,6 +15,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
+import VQPEdit from "./VQPEdit";
 
 const VQP = () => {
 
@@ -89,13 +90,14 @@ const VQP = () => {
       field: 'Action',
       headerName: 'Action',
       description: 'This column has a value getter and is not sortable.',
-      renderCell: () => (
+      renderCell: (e) => (
+       
         <strong>
-                    <IconButton onClick={showModal} aria-label="Edit" color="success">
+                    <IconButton onClick={()=>showModal(e)} aria-label="Edit" color="success">
                       <EditIcon />
                     </IconButton>
 
-                    <IconButton aria-label="Delete" onClick={showDeleteModal} color="primary">
+                    <IconButton aria-label="Delete" onClick={()=>showDeleteModal(e)} color="primary">
                       <DeleteIcon />
                     </IconButton>
         </strong>
@@ -132,7 +134,9 @@ const VQP = () => {
     }
     setnews(false);
   };
-
+  useEffect(() => {
+    getpost();
+  }, [])
   
   
 
@@ -156,43 +160,56 @@ const VQP = () => {
         handleClicked(true)
       });
       handleClick(true)
-      handleCancel(true)
+      // handleCancel(true)
   };
-  
-  useEffect(() => {
-    getpost();
-  }, [])
   
   console.log(tableData)
 
   const [tableData, setTableData] = useState([])
 
   const [formData, setformData] = useState({ ...INITIAL_STATE });
+  const [editObj, seteditObj] = useState({});
+  const [deleteId, setDeleteId] = useState("");
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const showModal = () => {
+  const showModal = (e) => {
+    console.log(e,'row')
+    seteditObj(e.row)
     setIsModalOpen(true);
   };
   
-  
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  
-  const handleCancel = () => {
+  const handlecloseEdit = () => {
     setIsModalOpen(false);
   };
 
   const [DeleteModal, setDeleteModal] = useState(false);
 
-  const showDeleteModal = () => {
+  const showDeleteModal = (e) => {
+    setDeleteId(e.row.id)
     setDeleteModal(true);
   };
   
   
-  const handleOks = () => {
-    setDeleteModal(false);
+  const handleDeleteQuestion = () => {
+    axios
+    .delete(`https://localhost:7040/api/Question/${deleteId}`)
+    .then((res) => {
+      debugger;
+      if (res.status === 200) {
+        getpost()
+        setDeleteModal(false);
+        console.log("hello world", res.data);
+      } else {
+        console.log("something went wrong");
+      }
+    })
+    .catch((err) => {
+      debugger;
+      handleClicked(true)
+      console.error(err);
+    });
+    handleClick(true)
   };
   
   const handleCancels = () => {
@@ -206,7 +223,7 @@ const VQP = () => {
         anchorOrigin={{ vertical:"top", horizontal:"right" }}
         open={news}
         autoHideDuration={1000}
-        onClose={handleCloseded}
+        onClose={handleClosed}
       >
       <Alert severity="success" sx={{ width: '100%' }}>
         Data Add successfully!
@@ -217,14 +234,14 @@ const VQP = () => {
         anchorOrigin={{ vertical:"top", horizontal:"right" }}
         open={openS}
         autoHideDuration={1000}
-        onClose={handleClosed}
+        onClose={handleCloseded}
       >
       <Alert severity="error" sx={{ width: '100%' }}>
         Something Went wrong!
       </Alert>
       </Snackbar>
     <Modal title="Delete Question Answer" open={DeleteModal} okText="Yes"
-        cancelText="No" onOk={handleOks} onCancel={handleCancels}>
+        cancelText="No" onOk={handleDeleteQuestion} onCancel={handleCancels}>
     <Box>
           <Typography id="keep-mounted-modal-title" variant="h6" component="h2" className="mt-3 mx-4 mb-4">
             Do you want to delete this Question?
@@ -234,146 +251,14 @@ const VQP = () => {
         </Box>
     </Modal>
 
-      <Modal title="Edit Question Answer  " width={1000} open={isModalOpen} okText="Update"
-        cancelText="Cancel" onOk={handleOk} onCancel={handleCancel}>
-      <div className="row m-2">
-        <div className="col-12">
-          <FormControl className="mt-4" sx={{ minWidth: 400 }} size="small">
-            <InputLabel id="demo-select-small">Subject</InputLabel>
-            <Select
-              labelId="demo-select-small"
-              id="demo-select-small"
-              label="Subject"
-              name="course"
-              // onChange={handleChange}
-              // value={formData.course}
-            >
-              {names.map((name) => (
-                <MenuItem key={name} value={name}>
-                  {name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <div className="d-flex justify-content-between mt-4">
-            <h3 id="QuestionText" className="m-0">
-              Question1:{" "}
-            </h3>
-            <div className="align-items-center d-flex justify-content-end w-auto">
-              <label className="align-items-center mt-2 d-flex px-2">
-                marks:
-              </label>
-              <TextField
-                className="mt-2 w-50"
-                fullWidth
-                size="small"
-                name="marks"
-                // onChange={handleChange}
-                // value={formData.marks}
-                sx={{
-                  "& legend": { display: "none" },
-                  "& fieldset": { top: 0 },
-                }}
-              />
-            </div>
-          </div>
-          <TextField
-            className="mt-2"
-            fullWidth
-            name="question"
-            // onChange={handleChange}
-            // value={formData.question}
-            size="small"
-            sx={{
-              "& legend": { display: "none" },
-              "& fieldset": { top: 0 },
-            }}
-          />
-          <div className="mt-4">
-            <h3 id="AnswerText" className="m-0">
-              Answer:
-            </h3>
-            <TextField
-              fullWidth
-              size="small"
-              name="answer"
-              // onChange={handleChange}
-              // value={formData.answer}
-              sx={{
-                "& legend": { display: "none" },
-                "& fieldset": { top: 0 },
-              }}
-            />
-          </div>
-          <div className="mt-4">
-            <h3 id="AnswerText" className="m-0">
-              Key Words:
-            </h3>
-            <div className="d-flex mt-1">
-              <TextField
-                fullWidth
-                name="keyword1"
-                // onChange={handleChange}
-                // value={formData.keyword1}
-                size="small"
-                sx={{
-                  "& legend": { display: "none" },
-                  "& fieldset": { top: 0 },
-                }}
-              />
-              <TextField
-                className="ms-3"
-                fullWidth
-                name="keyword2"
-                // value={formData.keyword2}
-                // onChange={handleChange}
-                size="small"
-                sx={{
-                  "& legend": { display: "none" },
-                  "& fieldset": { top: 0 },
-                }}
-              />
-              <TextField
-                fullWidth
-                size="small"
-                name="keyword3"
-                // value={formData.keyword3}
-                // onChange={handleChange}
-                className="ms-3"
-                sx={{
-                  "& legend": { display: "none" },
-                  "& fieldset": { top: 0 },
-                }}
-              />
-              <TextField
-                fullWidth
-                name="keyword4"
-                // value={formData.keyword4}
-                // onChange={handleChange}
-                size="small"
-                className="ms-3"
-                sx={{
-                  "& legend": { display: "none" },
-                  "& fieldset": { top: 0 },
-                }}
-              />
-              <TextField
-                fullWidth
-                name="keyword5"
-                // value={formData.keyword5}
-                // onChange={handleChange}
-                size="small"
-                className="ms-3"
-                sx={{
-                  "& legend": { display: "none" },
-                  "& fieldset": { top: 0 },
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-        </Modal>
+    {isModalOpen && 
+      <VQPEdit 
+        openModal={isModalOpen}
+        subjectNames={names}
+        handleCancel={handlecloseEdit}
+        rowObject={editObj}
+        getpost={getpost}
+      />}
       <div className="row m-0 mt-3">
         <div className="col-12">
         <Box sx={{ height: 500, width: '100%' }}>
