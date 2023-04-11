@@ -46,20 +46,42 @@ const AttemptQA = () => {
   const [tableData, setTableData] = useState([])
   const [currentQuestion, setcurrentQuestion] = useState({})
 
-  const [time, setTime] = useState(300);
+  // const [time, setTime] = useState(60);
 
-  useEffect(() => {
-    let timer = setInterval(() => {
-      setTime((time) => {
-        if (time === 0) {
-          clearInterval(timer);
-          setScoreModal(true);
-          return 0;
-        } else return time - 1;
-      });
-    }, 1000);
-  }, []);
+  // useEffect(() => {
+  //   let timer = setInterval(() => {
+  //     setTime((time) => {
+  //       if (time === 0) {
+  //         clearInterval(timer);
+  //         setScoreModal(true);
+  //         return 0;
+  //       } else return time - 1;
+  //     });
+  //   }, 1000);
+  // }, []);
  
+  // useEffect(() => {
+  //   function handleVisibilityChange() {
+  //     if (document.visibilityState === 'hidden') {
+  //       // The user switched to another tab or minimized the browser window
+  //       // Perform some actions here, such as pausing a video or showing a warning
+  //        alert('Please stay on this page');
+  //       setScoreModal(true);
+
+  //     } else {
+  //       // The user switched back to the tab
+  //       // Perform some actions here, such as resuming a video or hiding the warning
+  //     }
+  //   }
+
+  //   document.addEventListener('visibilitychange', handleVisibilityChange);
+
+  //   return () => {
+  //     document.removeEventListener('visibilitychange', handleVisibilityChange);
+  //   };
+  // }, []);
+
+
   const closeDialogBox=()=>{
     setOpenDialogBox(false)
   }
@@ -152,14 +174,14 @@ const AttemptQA = () => {
         </Box>
     </Modal>}
       <HeadBreadCrumb text1={"Dashboard"} text2={"Question/Answer"} url={"/"} />
-      <div className="row m-2">
+      {/* <div className="row m-2">
       <div className="col-12">
       <p className="text-center text-bg-danger">
       Time left: {`${Math.floor(time / 60)}`.padStart(2, 0)}:
       {`${time % 60}`.padStart(2, 0)}
       </p>
       </div>
-      </div>
+      </div> */}
 
       <div className="row m-2">
         <div className="col-12">
