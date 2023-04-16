@@ -4,6 +4,7 @@ using Learning.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Learning.Migrations
 {
     [DbContext(typeof(QuestionAPIDbcontext))]
-    partial class QuestionAPIDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20230413083549_MCQsMarks Migration")]
+    partial class MCQsMarksMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,9 +35,6 @@ namespace Learning.Migrations
                     b.Property<int>("MCQMarks")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ResultId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TotalMarks")
                         .HasColumnType("int");
 
@@ -44,8 +43,6 @@ namespace Learning.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("ResultId");
 
                     b.ToTable("MCQmarks");
                 });
@@ -106,9 +103,6 @@ namespace Learning.Migrations
                     b.Property<int>("QMarks")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ResultId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TotalMarks")
                         .HasColumnType("int");
 
@@ -117,8 +111,6 @@ namespace Learning.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("ResultId");
 
                     b.ToTable("QAMarks");
                 });
@@ -203,9 +195,6 @@ namespace Learning.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ResultId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -216,52 +205,7 @@ namespace Learning.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ResultId");
-
                     b.ToTable("Register");
-                });
-
-            modelBuilder.Entity("Learning.Models.Result", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Result");
-                });
-
-            modelBuilder.Entity("Learning.Models.MCQmarks", b =>
-                {
-                    b.HasOne("Learning.Models.Result", null)
-                        .WithMany("MCQmarks")
-                        .HasForeignKey("ResultId");
-                });
-
-            modelBuilder.Entity("Learning.Models.QAMarks", b =>
-                {
-                    b.HasOne("Learning.Models.Result", null)
-                        .WithMany("QAMarks")
-                        .HasForeignKey("ResultId");
-                });
-
-            modelBuilder.Entity("Learning.Models.Register", b =>
-                {
-                    b.HasOne("Learning.Models.Result", null)
-                        .WithMany("Register")
-                        .HasForeignKey("ResultId");
-                });
-
-            modelBuilder.Entity("Learning.Models.Result", b =>
-                {
-                    b.Navigation("MCQmarks");
-
-                    b.Navigation("QAMarks");
-
-                    b.Navigation("Register");
                 });
 #pragma warning restore 612, 618
         }

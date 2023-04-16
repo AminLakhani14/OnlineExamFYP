@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\aminl\\OneDrive\\Desktop\\main branch\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj": {}
+    "F:\\AminBranch\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj": {}
   },
   "projects": {
-    "C:\\Users\\aminl\\OneDrive\\Desktop\\main branch\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj": {
+    "F:\\AminBranch\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\aminl\\OneDrive\\Desktop\\main branch\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj",
+        "projectUniqueName": "F:\\AminBranch\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj",
         "projectName": "Learning",
-        "projectPath": "C:\\Users\\aminl\\OneDrive\\Desktop\\main branch\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj",
+        "projectPath": "F:\\AminBranch\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj",
         "packagesPath": "C:\\Users\\aminl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\aminl\\OneDrive\\Desktop\\main branch\\OnlineExamFYP\\Learning\\Learning\\obj\\",
+        "outputPath": "F:\\AminBranch\\OnlineExamFYP\\Learning\\Learning\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -48,6 +48,10 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.11, )"
+            },
+            "Microsoft.AspNetCore.Mvc.ViewFeatures": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
