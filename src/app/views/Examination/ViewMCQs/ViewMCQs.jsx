@@ -16,6 +16,7 @@ import {
 import { Modal } from "antd";
 import axios from "axios";
 import { useEffect } from "react";
+import VMCQsEdit from "./VMCQsEdit";
 
 const ViewMCQs = () => {
   const INITIAL_STATE = {
@@ -87,14 +88,16 @@ const ViewMCQs = () => {
       field: 'Action',
       headerName: 'Action',
       description: 'This column has a value getter and is not sortable.',
-      renderCell: () => (
+      renderCell: (e) => (
+       
         <strong>
-       <IconButton onClick={showModal} aria-label="Edit" color="success">
-       <EditIcon />
-       </IconButton>
-       <IconButton aria-label="Delete" color="primary" onClick={showDeleteModal}>
-       <DeleteIcon />
-       </IconButton>
+                    <IconButton onClick={()=>showModal(e)} aria-label="Edit" color="success">
+                      <EditIcon />
+                    </IconButton>
+
+                    <IconButton aria-label="Delete" onClick={()=>showDeleteModal(e)} color="primary">
+                      <DeleteIcon />
+                    </IconButton>
         </strong>
       ),
       
@@ -104,27 +107,43 @@ const ViewMCQs = () => {
   ];
   
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editObj, seteditObj] = useState({});
+  const [deleteId, setDeleteId] = useState("");
 
-  const showModal = () => {
+  const showModal = (e) => {
+    console.log(e,'row')
+    seteditObj(e.row)
     setIsModalOpen(true);
   };
   
-  
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
 
-  const [DeleteModal, setDeleteModal] = useState(false);
-
-  const showDeleteModal = () => {
+  const showDeleteModal = (e) => {
+    setDeleteId(e.row.id)
     setDeleteModal(true);
   };
   
   
+  const handleDeleteQuestion = () => {
+    axios
+    .delete(`https://localhost:7040/api/MCQs/${deleteId}`)
+    .then((res) => {
+      debugger;
+      if (res.status === 200) {
+        getpost()
+        setDeleteModal(false);
+        console.log("hello world", res.data);
+      } else {
+        console.log("something went wrong");
+      }
+    })
+    .catch((err) => {
+      debugger;
+      console.error(err);
+    });
+  };
+  
+  const [DeleteModal, setDeleteModal] = useState(false);
+
   const handleOks = () => {
     setDeleteModal(false);
   };
@@ -132,6 +151,10 @@ const ViewMCQs = () => {
   const handleCancels = () => {
     setDeleteModal(false);
   };  
+
+  const handlecloseEdit = () => {
+    setIsModalOpen(false);
+  };
 
   const [openS, setOpenS] = useState(false);
 
@@ -178,7 +201,7 @@ const ViewMCQs = () => {
 
       });
       handleClick(true)
-      handleCancel(true)
+      // handleCancel(true)
   };
   
   useEffect(() => {
@@ -193,7 +216,7 @@ const ViewMCQs = () => {
 
   return (
     <>
-    <Snackbar
+    {/* <Snackbar
         anchorOrigin={{ vertical:"top", horizontal:"right" }}
         open={news}
         autoHideDuration={1000}
@@ -213,9 +236,9 @@ const ViewMCQs = () => {
       <Alert severity="error" sx={{ width: '100%' }}>
         Something Went wrong!
       </Alert>
-      </Snackbar>
+      </Snackbar> */}
      <Modal title="Delete MCQs" open={DeleteModal} okText="Yes"
-        cancelText="No" onOk={handleOks} onCancel={handleCancels}>
+        cancelText="No" onOk={handleDeleteQuestion} onCancel={handleCancels}>
     <Box>
           <Typography id="keep-mounted-modal-title" variant="h6" component="h2" className="mt-3 mx-4 mb-4">
             Do you want to delete this Question?
@@ -224,169 +247,15 @@ const ViewMCQs = () => {
         </div>
         </Box>
     </Modal>
-    <Modal title="Edit MCQs" width={1000} height={800} open={isModalOpen} okText="Update"
-        cancelText="Cancel" onOk={handleOk} onCancel={handleCancel}>
-
-      <div className="row m-2">
-        <div className="col-12">
-          <FormControl className="mt-4" sx={{ minWidth: 400 }} size="small">
-            <InputLabel id="demo-select-small">Subject</InputLabel>
-            <Select
-              labelId="demo-select-small"
-              id="demo-select-small"
-              label="Subject"
-              // value={state.course}
-              // onChange={(ev) => {
-              //   setState({ ...state, course: ev.target.value });
-              // }}
-            >
-              {names.map((name) => (
-                <MenuItem key={name} value={name}>
-                  {name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <div className="d-flex justify-content-between mt-4">
-            <h3 id="QuestionText" className="m-0 mt-2">
-              Question1:{" "}
-            </h3>
-            <div className="align-items-center d-flex justify-content-end w-auto">
-              <label className="align-items-center mt-2 d-flex px-2">
-                marks:
-              </label>
-              <TextField
-                className="mt-2 w-50"
-                fullWidth
-                size="small"
-                // value={state.marks}
-                // onChange={(ev) => {
-                //   setState({ ...state, marks: ev.target.value });
-                // }}
-                sx={{
-                  "& legend": { display: "none" },
-                  "& fieldset": { top: 0 },
-                }}
-              />
-            </div>
-          </div>
-          <TextField
-            className="mt-2"
-            fullWidth
-            size="small"
-            // value={state.question}
-            // onChange={(ev) => {
-            //   setState({ ...state, question: ev.target.value });
-            // }}
-            sx={{
-              "& legend": { display: "none" },
-              "& fieldset": { top: 0 },
-            }}
-          />
-          <div className="d-flex justify-content-between mt-4">
-            <div className="col-3">
-              <h3 id="Answer_MCQs">Answer:</h3>
-            </div>
-          </div>
-
-          <div className="row m-0">
-            <div className="col-2 my-2">
-              <label>Option 1:</label>
-            </div>
-            <div className="col-1 my-2">
-              <TextField
-                fullWidth
-                // value={state.option1}
-                // onChange={(ev) => {
-                //   setState({ ...state, option1: ev.target.value });
-                // }}
-                sx={{
-                  "& legend": { display: "none" },
-                  "& fieldset": { top: 0 },
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="row m-0">
-            <div className="col-2 my-2">
-              <label>Option 2:</label>
-            </div>
-            <div className="col-1 my-2">
-              <TextField
-                fullWidth
-                // value={state.option2}
-                // onChange={(ev) => {
-                //   setState({ ...state, option2: ev.target.value });
-                // }}
-                sx={{
-                  "& legend": { display: "none" },
-                  "& fieldset": { top: 0 },
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="row m-0">
-            <div className="col-2 my-2">
-              <label>Option 3:</label>
-            </div>
-            <div className="col-1 my-2">
-              <TextField
-                fullWidth
-                // value={state.option3}
-                // onChange={(ev) => {
-                //   setState({ ...state, option3: ev.target.value });
-                // }}
-                sx={{
-                  "& legend": { display: "none" },
-                  "& fieldset": { top: 0 },
-                }}
-              />
-            </div>
-          </div>
-          <div className="row m-0">
-            <div className="col-2 my-2">
-              <label>Option 4:</label>
-            </div>
-            <div className="col-1 my-2">
-              <TextField
-                fullWidth
-                // value={state.option4}
-                // onChange={(ev) => {
-                //   setState({ ...state, option4: ev.target.value });
-                // }}
-                sx={{
-                  "& legend": { display: "none" },
-                  "& fieldset": { top: 0 },
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="row m-0">
-            <div className="col-2 my-2">
-              <label>Correct Answer:</label>
-            </div>
-
-            <div className="col-1 my-2">
-              <TextField
-                fullWidth
-                // value={state.correctAnswer}
-                // onChange={(ev) => {
-                //   setState({ ...state, correctAnswer: ev.target.value });
-                // }}
-                sx={{
-                  "& legend": { display: "none" },
-                  "& fieldset": { top: 0 },
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+    {isModalOpen && 
+      <VMCQsEdit 
+        openModal={isModalOpen}
+        subjectNames={names}
+        handleCancel={handlecloseEdit}
+        rowObject={editObj}
+        getpost={getpost}
+      />}
     
-        </Modal>
 
       <div className="row m-0 mt-3">
         <div className="col-12">
