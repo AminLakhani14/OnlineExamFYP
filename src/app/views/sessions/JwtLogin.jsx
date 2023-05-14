@@ -1,5 +1,5 @@
 import { LoadingButton } from "@mui/lab";
-import { Card, Checkbox, Grid, Modal, TextField, Typography } from "@mui/material";
+import { Card, Checkbox, Grid, Modal, TextField, Typography,FormControl,MenuItem,InputLabel,Select } from "@mui/material";
 import { Box, styled, useTheme } from "@mui/system";
 import { Paragraph } from "app/components/Typography";
 import useAuth from "app/hooks/useAuth";
@@ -8,6 +8,7 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import "./session.css";
+import axios from "axios";
 
 const FlexBox = styled(Box)(() => ({ display: "flex", alignItems: "center" }));
 
@@ -31,12 +32,6 @@ const JWTRoot = styled(JustifyBox)(() => ({
   width: "100% !important",
 }));
 
-// inital login credentials
-const initialValues = {
-  email: "amin@gmail.com",
-  password: "amin12",
-  remember: true,
-};
 
 // form field validation schema
 const validationSchema = Yup.object().shape({
@@ -48,17 +43,36 @@ const validationSchema = Yup.object().shape({
     .required("Email is required!"),
 });
 
+// inital login credentials
+const initialValues = {
+  userName: "",
+  password: "",
+  type:""
+};
+
 const JwtLogin = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [formData, setformData] = useState({...initialValues});
 
   const { login } = useAuth();
 
-  const handleFormSubmit = async (values) => {
-    setLoading(true);
+  const handleChange=({target})=>{
     try {
-      await login(values.email, values.password);
+      setformData((prev)=>({
+        ...prev,
+        [target.name]:target.value
+      }))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const handleFormSubmit = async () => {
+    try {
+      setLoading(true);
+      await login(formData);
+      setLoading(false);
       navigate("/");
     } catch (e) {
       setLoading(false);
@@ -84,32 +98,17 @@ const JwtLogin = () => {
                     Examination System
                   </h5>
                 </div>
-                <Formik
-                  onSubmit={handleFormSubmit}
-                  initialValues={initialValues}
-                  validationSchema={validationSchema}
-                >
-                  {({
-                    values,
-                    errors,
-                    touched,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                  }) => (
-                    <form onSubmit={handleSubmit}>
                       <TextField
                         fullWidth
                         size="small"
-                        type="email"
-                        name="email"
-                        label="Email"
+                        type="text"
+                        name="userName"
+                        label="User Name"
                         variant="outlined"
-                        onBlur={handleBlur}
-                        value={values.email}
+                        value={formData.userName ?? ''}
                         onChange={handleChange}
-                        helperText={touched.email && errors.email}
-                        error={Boolean(errors.email && touched.email)}
+                        // helperText={touched.email && errors.email}
+                        // error={Boolean(errors.email && touched.email)}
                         sx={{ mb: 3 }}
                       />
 
@@ -120,21 +119,39 @@ const JwtLogin = () => {
                         type="password"
                         label="Password"
                         variant="outlined"
-                        onBlur={handleBlur}
-                        value={values.password}
+                        value={formData.password ?? ''}
                         onChange={handleChange}
-                        helperText={touched.password && errors.password}
-                        error={Boolean(errors.password && touched.password)}
+                        // onBlur={handleBlur}
+                        // helperText={touched.password && errors.password}
+                        // error={Boolean(errors.password && touched.password)}
                         sx={{ mb: 1.5 }}
                       />
+
+                      <FormControl size="small" className="w-100">
+                        <InputLabel id="demo-select-small">Select</InputLabel>
+                        <Select
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          label="Type"
+                          margin='dense'
+                          name='type'
+                          onChange={handleChange}
+                          value={formData.type ?? ''}
+                          variant="outlined"
+                        >
+                      <MenuItem value={"Student"}>Student</MenuItem>
+                      <MenuItem value={"Teacher"}>Teacher</MenuItem>
+                        </Select>
+                      </FormControl>
+
 
                       <FlexBox justifyContent="space-between">
                         <FlexBox gap={1}>
                           <Checkbox
                             size="small"
                             name="remember"
-                            onChange={handleChange}
-                            checked={values.remember}
+                            // onChange={handleChange}
+                            // checked={values.remember}
                             sx={{ padding: 0 }}
                           />
 
@@ -153,22 +170,10 @@ const JwtLogin = () => {
                         variant="contained"
                         sx={{ my: 2 }}
                         className="w-100"
+                        onClick={handleFormSubmit}
                       >
                         Login
                       </LoadingButton>
-
-                      {/* <Paragraph className={"d-flex justify-content-center"}>
-                        Don't have an account?
-                        <NavLink
-                          to="/session/signup"
-                          style={{ color: "red", marginLeft: 5 }}
-                        >
-                          Register
-                        </NavLink>
-                      </Paragraph> */}
-                    </form>
-                  )}
-                </Formik>
               </ContentBox>
             </div>
             <div className="col-12 col-md-6 col-lg-7 col-xl-8 align-self-end">

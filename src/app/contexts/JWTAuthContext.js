@@ -83,15 +83,9 @@ const AuthContext = createContext({
 export const AuthProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
-    const login = async (email, password) => {
-        const response = await axios.post('/api/auth/login', {
-            email,
-            password,
-        })
-        const { accessToken, user } = response.data
-
-        setSession(accessToken)
-
+    const login = async (formData) => {
+        const response = await axios.post('https://localhost:7040/api/Registration/Login',formData)
+         let user = response.data
         dispatch({
             type: 'LOGIN',
             payload: {
@@ -109,8 +103,6 @@ export const AuthProvider = ({ children }) => {
 
         const { accessToken, user } = response.data
 
-        setSession(accessToken)
-
         dispatch({
             type: 'REGISTER',
             payload: {
@@ -120,7 +112,6 @@ export const AuthProvider = ({ children }) => {
     }
 
     const logout = () => {
-        setSession(null)
         dispatch({ type: 'LOGOUT' })
     }
 
@@ -130,7 +121,6 @@ export const AuthProvider = ({ children }) => {
                 const accessToken = window.localStorage.getItem('accessToken')
 
                 if (accessToken && isValidToken(accessToken)) {
-                    setSession(accessToken)
                     const response = await axios.get('/api/auth/profile')
                     const { user } = response.data
 

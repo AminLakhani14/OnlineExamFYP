@@ -26,6 +26,7 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import DialogBox from 'app/components/DialogBox/DialogBox'
 import { useNavigate } from 'react-router-dom'
+import { CalculateResult } from '../CalculateExamResult/CaculateResultApi'
 
 const AttemptMCQ = () => {
   const [tableData, setTableData] = useState([])
@@ -36,10 +37,19 @@ const AttemptMCQ = () => {
   const [Obtainedmarks, setObtainedmarks] = useState(0)
   const navigate=useNavigate()
 
-  const handleOk = () => {
+  const handleOk = async() => {
     setScoreModal(false)
     localStorage.setItem('MCQsMarks',Obtainedmarks)
-    navigate("/")
+    let courseData=tableData.map(x=>x.course).join(',')
+    let obj={
+      mcqMarks:Obtainedmarks ?? 0,
+      totalMarks:tableData.reduce( (acc, obj) => acc + +obj.marks, 0) ?? 0,
+      course:courseData ?? ''
+    }
+   
+    await CalculateResult('https://localhost:7040/api/QAmarks/Post-MCQsMarks',obj)
+    .then(res=>res.status===200 ? navigate("/") : console.log('something went wrong!'))
+    .catch(err=>console.log(err))
   }
 
   const handleCancel = () => {
@@ -47,12 +57,9 @@ const AttemptMCQ = () => {
   }
 
   const getpost = () => {
-    debugger
-
     axios
       .get(`https://localhost:7040/api/MCQs/Get-MCQs`)
       .then((res) => {
-        debugger
         if (res.status === 200) {
           if (res.data.length) {
             setTableData(res.data)
@@ -64,7 +71,6 @@ const AttemptMCQ = () => {
         }
       })
       .catch((err) => {
-        debugger
         console.error(err)
       })
   }
@@ -85,11 +91,11 @@ const AttemptMCQ = () => {
       setOpenDialogBox(true)
     } else {
       handleSaveResult()
+      setSelectedOption('')
     }
   }
 
   const handleSaveResult = () => {
-    debugger
     let array = [...tableData]
     let selectedQuestion = array.find((x) => x.id === currentQuestion.id)
     if (selectedOption === selectedQuestion.correctAnswer) {
@@ -194,6 +200,7 @@ const AttemptMCQ = () => {
               aria-labelledby="demo-radio-buttons-group-label"
               name="radio-buttons-group"
               onChange={handleRadio}
+              value={selectedOption}
             >
               <FormControlLabel
                 label={currentQuestion?.optionA ?? ''}
