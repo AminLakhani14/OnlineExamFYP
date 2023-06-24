@@ -254,6 +254,7 @@ const handleChange=(e)=>{
               label="Type"
               margin='dense'
               name='type'
+              autoComplete="off"
               onChange={handleChange}
               value={formData.type}
               variant="outlined"
@@ -273,6 +274,8 @@ const handleChange=(e)=>{
         name='userName'
         margin='dense'
         size="small"
+        autoComplete="off"
+         type={'text'}
         value={formData.userName}
         onChange={handleChange}
         variant="outlined"
@@ -287,6 +290,7 @@ const handleChange=(e)=>{
         variant="outlined"
         size="small"
         value={formData.age}
+        autoComplete="off"
         onChange={handleChange}
         margin='dense'
         type='number'
@@ -302,6 +306,7 @@ const handleChange=(e)=>{
         name='email'
         margin='dense'
         type={'email'}
+        autoComplete="off"
         size="small"
         value={formData.email}
         onChange={handleChange}
@@ -317,6 +322,7 @@ const handleChange=(e)=>{
         <OutlinedInput
           id="outlined-adornment-password"
           value={formData.password}
+          autoComplete="off"
           name='password'
           type={showPassword ? 'text' : 'password'} 
           onChange={handleChange}
@@ -341,6 +347,7 @@ const handleChange=(e)=>{
       fullWidth
       name='country'
       margin='dense'
+      autoComplete="off"
       type={'text'}
       size="small"
       value={formData.country}
@@ -355,6 +362,7 @@ const handleChange=(e)=>{
       fullWidth
       name='city'
       variant="outlined"
+      autoComplete="off"
       size="small"
       margin='dense'
       value={formData.city}

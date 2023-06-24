@@ -68,18 +68,8 @@ const MCQ = () => {
   const [formData, setformData] = useState({ ...INITIAL_STATE });
 
   
-  function reset(ev) {
-    ev.preventDefault();
-    setformData({
-      course: "",
-      question: "",
-      marks: "",
-      optionA: "",
-      optionB: "",
-      optionC: "",
-      optionD: "",
-      correctAnswer: "",
-    });
+  function reset() {
+    setformData({...INITIAL_STATE});
   }
   const getpost = () => {
     axios
@@ -99,6 +89,7 @@ const MCQ = () => {
       });
       handleClick(true)
       handleClose();
+      reset()
   };
 
   const names = [

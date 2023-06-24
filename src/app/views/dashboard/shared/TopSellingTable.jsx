@@ -95,13 +95,13 @@ const TopSellingTable = () => {
               <TableRow key={index} hover>
                 <TableCell colSpan={4} align="left" sx={{ px: 0, textTransform: 'capitalize' }}>
                   <Box display="flex" alignItems="center">
-                    {/* <Avatar src={product.imgUrl} /> */}
-                    <Paragraph sx={{ m: 0, ml: 1 }}>{product.name}</Paragraph>
+                    <Avatar src={product.imgUrl} />
+                    <Paragraph sx={{ m: 0, ml: 4 }}>{product.name}</Paragraph>
                   </Box>
                 </TableCell>
 
-                <TableCell align="left" colSpan={2} sx={{ px: 0, textTransform: 'capitalize'}}>
-                  {product.price > 999 ? (product.price / 1000).toFixed(1) + 'k' : product.price}
+                <TableCell align="left" colSpan={2} sx={{ px: 0, textTransform: 'capitalize' }}>
+                  ${product.price > 999 ? (product.price / 1000).toFixed(1) + 'k' : product.price}
                 </TableCell>
 
                 <TableCell sx={{ px: 0 }} align="left" colSpan={2}>
@@ -118,7 +118,7 @@ const TopSellingTable = () => {
 
                 <TableCell sx={{ px: 0 }} colSpan={1}>
                   <IconButton>
-                    <Icon color="primary">pending</Icon>
+                    <Icon color="primary">edit</Icon>
                   </IconButton>
                 </TableCell>
               </TableRow>
@@ -132,29 +132,34 @@ const TopSellingTable = () => {
 
 const productList = [
   {
+    imgUrl: '/assets/images/products/headphone-2.jpg',
     name: 'Science',
     price: 'B+',
-    available: "Pending",
+    available: 15,
   },
   {
+    imgUrl: '/assets/images/products/headphone-3.jpg',
     name: 'Programming Fundamental',
     price: 'A',
-    available: "Pending",
+    available: 30,
   },
   {
+    imgUrl: '/assets/images/products/iphone-2.jpg',
     name: 'English',
     price: 'C',
-    available: "Pending",
+    available: 35,
   },
   {
+    imgUrl: '/assets/images/products/iphone-1.jpg',
     name: 'Pakistan Studies',
     price: 'C+',
-    available: "Pending",
+    available: 0,
   },
   {
+    imgUrl: '/assets/images/products/headphone-3.jpg',
     name: 'Object Oriented Programming',
     price: 'A+',
-    available: "Pending",
+    available: 5,
   },
 ];
 

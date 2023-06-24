@@ -27,6 +27,7 @@ import { useEffect } from 'react'
 import DialogBox from 'app/components/DialogBox/DialogBox'
 import { useNavigate } from 'react-router-dom'
 import { CalculateResult } from '../CalculateExamResult/CaculateResultApi'
+import { getUserId } from 'app/utils/utils'
 
 const AttemptMCQ = () => {
   const [tableData, setTableData] = useState([])
@@ -44,7 +45,8 @@ const AttemptMCQ = () => {
     let obj={
       mcqMarks:Obtainedmarks ?? 0,
       totalMarks:tableData.reduce( (acc, obj) => acc + +obj.marks, 0) ?? 0,
-      course:courseData ?? ''
+      course:courseData ?? '',
+      registerID: getUserId()
     }
    
     await CalculateResult('https://localhost:7040/api/QAmarks/Post-MCQsMarks',obj)

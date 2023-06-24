@@ -53,7 +53,8 @@ function VQPEdit(props) {
     }
   return (  
     <>
-    <Modal title="Edit Question Answer  " width={1000} open={props.openModal} okText="Update"
+    <Modal title="Edit Question Answer" maskClosable={false}
+    width={1000} open={props.openModal} okText="Update"
     cancelText="Cancel" onOk={handleOk} onCancel={props.handleCancel}>
   <div className="row m-2">
     <div className="col-12">

@@ -157,9 +157,9 @@ const VQP = () => {
       .catch((err) => {
         debugger;
         console.error(err);
-        handleClicked(true)
+        // handleClicked(true)
       });
-      handleClick(true)
+      // handleClick(true)
       // handleCancel(true)
   };
   
@@ -206,10 +206,10 @@ const VQP = () => {
     })
     .catch((err) => {
       debugger;
-      handleClicked(true)
+      // handleClicked(true)
       console.error(err);
     });
-    handleClick(true)
+    // handleClick(true)
   };
   
   const handleCancels = () => {
@@ -240,7 +240,8 @@ const VQP = () => {
         Something Went wrong!
       </Alert>
       </Snackbar>
-    <Modal title="Delete Question Answer" open={DeleteModal} okText="Yes"
+    <Modal title="Delete Question Answer" maskClosable={false}
+    open={DeleteModal} okText="Yes"
         cancelText="No" onOk={handleDeleteQuestion} onCancel={handleCancels}>
     <Box>
           <Typography id="keep-mounted-modal-title" variant="h6" component="h2" className="mt-3 mx-4 mb-4">

@@ -30,10 +30,10 @@ const Heading = styled('h6')(({ theme }) => ({
 
 const StatCards = () => {
   const cardList = [
-    { name: 'Scholarship Requirements', amount: 80% "Necessory", icon: 'schedule' },
-    { name: 'Semester Schedule', amount: 'Day & Time', icon: 'schedule' },
-    { name: 'Exam Schedule', amount: 'Check Here', icon: 'schedule' },
-    { name: 'Academic Calender', amount: 'Pending Dues', icon: 'schedule' },
+    { name: 'New Leads', amount: 3050, icon: 'group' },
+    { name: 'This week Sales', amount: '$80,500', icon: 'attach_money' },
+    { name: 'Inventory Status', amount: '8.5% Stock Surplus', icon: 'store' },
+    { name: 'Orders to deliver', amount: '305 Orders', icon: 'shopping_cart' },
   ];
 
   return (

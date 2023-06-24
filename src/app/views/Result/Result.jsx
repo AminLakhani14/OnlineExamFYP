@@ -27,12 +27,12 @@ const columns = [
     width: 300,
     editable: true,
   },
-  {
-    field: "course",
-    headerName: "Subject",
-    width: 300,
-    editable: true,
-  },
+  // {
+  //   field: "course",
+  //   headerName: "Subject",
+  //   width: 300,
+  //   editable: true,
+  // },
   {
     field: "qMarks",
     headerName: "QA Marks",
@@ -59,63 +59,71 @@ const columns = [
   },
 ];
 
-const rows = [
-  {
-    id: 1,
-    Name: "Amin",
-    Subject: "english",
-    QAMarks: "1",
-    MCQsMarks: "1",
-    Outof: "1",
-    TotalMarks: "1",
-  },
-  {
-    id: 2,
-    Name: "Amin",
-    Subject: "english",
-    QAMarks: "1",
-    MCQsMarks: "1",
-    Outof: "1",
-    TotalMarks: "1",
-  },
-  {
-    id: 3,
-    Name: "Amin",
-    Subject: "english",
-    QAMarks: "1",
-    MCQsMarks: "1",
-    Outof: "1",
-    TotalMarks: "1",
-  },
-  {
-    id: 4,
-    Name: "Amin",
-    Subject: "english",
-    QAMarks: "1",
-    MCQsMarks: "1",
-    Outof: "1",
-    TotalMarks: "1",
-  },
-];
-
 const Result = () => {
 
-  const [resultData,setResultData]=useState([])
+  const [rowData,setRowData]=useState([])
   useEffect(()=>{
     fetchResults()
   },[])
 
-  const fetchResults=()=>{
-    const response=axios.get('https://localhost:7040/Get-Result')
-                  .then(res=>{
-                    if(res.status===200) {
-                      console.log(res.data)
-                      let data=[...res.data]
+  const fetchResults=async()=>{
+    await axios.get('https://localhost:7040/Get-Result').then(res=>{
+        if(res.status===200) {
+          console.log(res.data)
+          ShowCalculatedResults(res.data)
+        }})
+        .catch(err=>{
+        console.log('err',err)
+      })
+  }
 
-                    }
-                  }).catch(err=>{
-                    console.log('err',err)
-                  })
+  const ShowCalculatedResults=(response)=>{
+    let { register, qaMarks, mcQmarks }= response;
+    // console.log(register,' register');
+    // console.log( mcQmarks,'mcQmarks');
+    // console.log( qaMarks,' qaMarks');
+    let mergeArrays=[...qaMarks, ...mcQmarks]
+    console.log( mergeArrays,' mergeArrays');
+
+    let registerIDs=register.map(x=>x.id)
+    debugger
+    let filteredArrays = registerIDs.reduce((result, key) => {
+      const filteredArray = mergeArrays.filter(item => item.registerID === key);
+      result[key] = filteredArray.length && filteredArray.reduce(
+        (total, record) => {
+          total.obtainedSum +=record['qMarks'] ? Number(record.qMarks) : 0 + record['mcqMarks'] ? Number(record.mcqMarks) : 0;
+          total.totalSum += record.totalMarks;
+          total.mcqMarks += record['mcqMarks'] ? Number(record.mcqMarks) : 0;
+          total.qMarks += record['qMarks'] ? Number(record.qMarks) : 0;
+          total.key=record['registerID'];
+          total.userName=record.register.userName;
+          return total;
+        },
+        { obtainedSum: 0, totalSum: 0, mcqMarks: 0, qMarks:0, key:'' , userName:''}
+      );
+      return result;
+    }, {});
+    // filteredArrays=filteredArrays.filter(x=>x!==0)
+    console.log( filteredArrays,' filteredArrays');
+
+    let updatedRsultArray=Object.values(filteredArrays).filter(x=>x)
+    console.log( updatedRsultArray,' updatedRsultArray');
+
+    let mcqsResult=updatedRsultArray.map((x,index)=>{
+      return {
+        id:index,
+        registerID:x.registerID,
+        userName: x.userName,
+        qMarks: updatedRsultArray.find(item=>item.key===x?.register?.id)?.qMarks ?? 0,
+        mcqMarks: updatedRsultArray.find(item=>item.key===x?.register?.id)?.mcqMarks ?? 0,
+        ObtainedMarks: updatedRsultArray.find(item=>item.key===x?.register?.id)?.obtainedSum ?? 0,
+        totalMarks: updatedRsultArray.find(item=>item.key===x?.register?.id)?.totalSum ?? 0,
+      }
+    })
+
+    setRowData(mcqsResult)
+    console.log(mcqsResult,'mcqsResult')
+
   }
   return (
     <>
@@ -146,7 +154,7 @@ const Result = () => {
         <div className="col-12">
           <Box sx={{ height: 500, width: "100%" }}>
             <DataGrid
-              rows={rows}
+              rows={rowData}
               columns={columns}
               pageSize={10}
               rowsPerPageOptions={[10]}

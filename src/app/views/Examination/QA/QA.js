@@ -61,19 +61,8 @@ const QA = () => {
   const [post, setpost] = useState();
   const [formData, setformData] = useState({ ...INITIAL_STATE });
 
-  function reset(prevState) {
-    prevState.preventDefault();
-    setformData({
-      course: "",
-      question: "",
-      answer: "",
-      marks: "",
-      keyword1: "",
-      keyword2: "",
-      keyword3: "",
-      keyword4: "",
-      keyword5: "",
-    });
+  function reset() {
+    setformData({...INITIAL_STATE});
   }
 
   const getpost = () => {
@@ -97,6 +86,7 @@ const QA = () => {
       });
       handleClick(true)
       handleClose();
+      reset();
   };
 
   const names = [

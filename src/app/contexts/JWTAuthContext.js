@@ -85,7 +85,10 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (formData) => {
         const response = await axios.post('https://localhost:7040/api/Registration/Login',formData)
-         let user = response.data
+        let user=response.data
+        debugger
+         localStorage.setItem('userData',JSON.stringify(user))
+         setSession(user.id)
         dispatch({
             type: 'LOGIN',
             payload: {
@@ -102,7 +105,7 @@ export const AuthProvider = ({ children }) => {
         })
 
         const { accessToken, user } = response.data
-
+        setSession(accessToken)
         dispatch({
             type: 'REGISTER',
             payload: {

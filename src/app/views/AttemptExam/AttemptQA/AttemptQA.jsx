@@ -25,6 +25,7 @@ import axios from "axios";
 import DialogBox from "app/components/DialogBox/DialogBox";
 import { useNavigate } from "react-router-dom";
 import { CalculateResult } from "../CalculateExamResult/CaculateResultApi";
+import { getUserId } from "app/utils/utils";
 
 const AttemptQA = () => {
 
@@ -38,14 +39,14 @@ const AttemptQA = () => {
   const navigate =useNavigate()
   const handleOk = async() => {
     setScoreModal(false);
-    localStorage.setItem('QAMarks',Obtainedmarks)
     let courseData=tableData.map(x=>x.course).join(',')
     let obj={
       qMarks: Math.floor(Obtainedmarks) ?? 0,
       totalMarks: tableData.reduce( (acc, obj) => acc + +obj.marks, 0) ?? 0,
-      course :courseData ?? ''
+      course :courseData ?? '',
+      registerID: getUserId()
     };
-
+    debugger
     await CalculateResult('https://localhost:7040/api/QAmarks/Post-QAMarks',obj)
     .then(res=>res.status===200 ? navigate("/") : console.log('something went wrong!'))
     .catch(err=>console.log(err))

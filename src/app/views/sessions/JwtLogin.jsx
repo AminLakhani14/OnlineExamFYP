@@ -74,6 +74,7 @@ const JwtLogin = () => {
       await login(formData);
       setLoading(false);
       navigate("/");
+      localStorage.setItem('User',formData.type)
     } catch (e) {
       setLoading(false);
     }
