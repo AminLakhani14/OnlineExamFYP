@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Learning.Migrations
 {
-    public partial class initialMigration : Migration
+    public partial class initalMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -120,7 +120,7 @@ namespace Learning.Migrations
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RegisterID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    QMarks = table.Column<int>(type: "int", nullable: false),
+                    QMarks = table.Column<float>(type: "real", nullable: false),
                     TotalMarks = table.Column<int>(type: "int", nullable: false),
                     course = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ResultId = table.Column<int>(type: "int", nullable: true)

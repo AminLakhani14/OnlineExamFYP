@@ -43,14 +43,22 @@ const AttemptMCQ = () => {
     localStorage.setItem('MCQsMarks',Obtainedmarks)
     let courseData=tableData.map(x=>x.course).join(',')
     let obj={
-      mcqMarks:Obtainedmarks ?? 0,
+      mcqMarks:+Obtainedmarks ?? 0,
       totalMarks:tableData.reduce( (acc, obj) => acc + +obj.marks, 0) ?? 0,
       course:courseData ?? '',
       registerID: getUserId()
     }
    
     await CalculateResult('https://localhost:7040/api/QAmarks/Post-MCQsMarks',obj)
-    .then(res=>res.status===200 ? navigate("/") : console.log('something went wrong!'))
+    .then(res=>{
+      if(res.status===200){
+        let getAttemptedUsers=JSON.parse(localStorage.getItem('MCQSAttemptUsers'))
+        let array=getAttemptedUsers ? [...getAttemptedUsers] : [];
+        array.push(res.data.registerID)
+        localStorage.setItem('MCQSAttemptUsers',JSON.stringify(array))
+        navigate("/")
+      }
+    })
     .catch(err=>console.log(err))
   }
 

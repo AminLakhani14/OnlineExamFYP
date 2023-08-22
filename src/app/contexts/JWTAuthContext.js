@@ -2,6 +2,11 @@ import React, { createContext, useEffect, useReducer } from 'react'
 import jwtDecode from 'jwt-decode'
 import axios from 'axios.js'
 import { MatxLoading } from 'app/components'
+import jwt from 'jsonwebtoken';
+
+const JWT_SECRET = 'jwt_secret_key';
+const JWT_VALIDITY = '7 days';
+
 
 const initialState = {
     isAuthenticated: false,
@@ -85,16 +90,33 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (formData) => {
         const response = await axios.post('https://localhost:7040/api/Registration/Login',formData)
-        let user=response.data
-        debugger
-         localStorage.setItem('userData',JSON.stringify(user))
-         setSession(user.id)
-        dispatch({
-            type: 'LOGIN',
-            payload: {
-                user,
-            },
-        })
+        console.log(response)
+        if(response.status===200){
+            let user={...response?.data , accessToken:response?.data?.accessToken ?? ""}
+            debugger
+            const accessToken = jwt.sign({ userId: user.userName }, JWT_SECRET, {
+            expiresIn: JWT_VALIDITY,
+        });
+        
+        let registerResponse=await axios.get("https://localhost:7040/api/Registration/Get-Register")
+        let filterRecord=registerResponse?.data?.find(x=>x.userName?.trim()===user?.userName?.trim())
+             localStorage.setItem('accessToken',filterRecord?.id)
+             localStorage.setItem('loginUserId',filterRecord?.id)
+             localStorage.setItem('userData',JSON.stringify(user))
+    
+             setSession(user.accessToken)
+            dispatch({
+                type: 'LOGIN',
+                payload: {
+                    user,
+                    isAuthenticated: true,
+                },
+            })
+        
+
+        }else{
+            console.log('something went wrong')
+        }
     }
 
     const register = async (email, username, password) => {
@@ -116,22 +138,29 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         dispatch({ type: 'LOGOUT' })
+        console.log('LOGOUT')
+        localStorage.removeItem('User')
+        localStorage.removeItem('userData')
+        localStorage.removeItem('loginUserId')
+        localStorage.removeItem('accessToken')
     }
 
     useEffect(() => {
         ; (async () => {
             try {
-                const accessToken = window.localStorage.getItem('accessToken')
+                const accessToken = window.localStorage.getItem('loginUserId')
+                debugger
+                if (accessToken) {
+                    // const response = await axios.get('/api/auth/profile')
+                    let getuserData=JSON.parse(localStorage.getItem("userData"));
 
-                if (accessToken && isValidToken(accessToken)) {
-                    const response = await axios.get('/api/auth/profile')
-                    const { user } = response.data
+                    // const { user } = response.data
 
                     dispatch({
                         type: 'INIT',
                         payload: {
                             isAuthenticated: true,
-                            user,
+                            getuserData,
                         },
                     })
                 } else {

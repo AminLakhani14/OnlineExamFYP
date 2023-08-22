@@ -19,7 +19,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import HeadBreadCrumb from "app/components/BreadCrumb/HeadBreadCrumb";
 import { Modal } from "antd";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import DialogBox from "app/components/DialogBox/DialogBox";
@@ -37,18 +37,37 @@ const AttemptQA = () => {
   const [currentQuestion, setcurrentQuestion] = useState({})
 
   const navigate =useNavigate()
+
+  const fetchRegisteredIds=async()=>{
+    await axios.get('https://localhost:7040/Get-Result').then(res=>{
+        if(res.status===200) {
+          return res.data
+        }})
+        .catch(err=>{
+        console.log('err',err)
+      })
+  }
   const handleOk = async() => {
     setScoreModal(false);
+    debugger
     let courseData=tableData.map(x=>x.course).join(',')
+
     let obj={
-      qMarks: Math.floor(Obtainedmarks) ?? 0,
+      qMarks: Number(Obtainedmarks).toFixed(2) ?? 0.00,
       totalMarks: tableData.reduce( (acc, obj) => acc + +obj.marks, 0) ?? 0,
       course :courseData ?? '',
       registerID: getUserId()
     };
-    debugger
     await CalculateResult('https://localhost:7040/api/QAmarks/Post-QAMarks',obj)
-    .then(res=>res.status===200 ? navigate("/") : console.log('something went wrong!'))
+    .then(res=>{
+      if(res.status===200){
+        let getAttemptedUsers=JSON.parse(localStorage.getItem('QAattempUsers'))
+        let array=getAttemptedUsers ? [...getAttemptedUsers] : [];
+        array.push(res.data.registerID)
+        localStorage.setItem('QAattempUsers',JSON.stringify(array))
+        navigate("/")
+      }
+    })
     .catch(err=>console.log(err))
   };
   
@@ -57,6 +76,55 @@ const AttemptQA = () => {
     localStorage.setItem('QAMarks',Obtainedmarks)
     navigate('/')
   };
+
+  // const [time, setTime] = useState(() => {
+  //   const storedTime = localStorage.getItem('timer') || 60;
+  //   return parseInt(storedTime, 10);
+  // });
+
+  // useEffect(() => {
+  //   let timer = setInterval(() => {
+  //     setTime(prevTime => {
+  //       if (prevTime === 0) {
+  //         clearInterval(timer);
+  //         setScoreModal(true);
+  //         // Set score modal to true or take any other action when timer reaches 0
+  //         return 0;
+  //       } else {
+  //         // Store the current time in localStorage before decrementing
+  //         localStorage.setItem('timer', prevTime - 1);
+  //         return prevTime - 1;
+  //       }
+  //     });
+  //   }, 1000);
+
+  //   // Clean up the timer when the component unmounts
+  //   return () => {
+  //     clearInterval(timer);
+  //   };
+  // }, []);
+
+  // useEffect(() => {
+  //   function handleVisibilityChange() {
+  //     if (document.visibilityState === 'hidden') {
+  //       // The user switched to another tab or minimized the browser window
+  //       // Perform some actions here, such as pausing a video or showing a warning
+  //        alert('Please stay on this page');
+  //       setScoreModal(true);
+
+  //     } else {
+  //       // The user switched back to the tab
+  //       // Perform some actions here, such as resuming a video or hiding the warning
+  //     }
+  //   }
+
+  //   document.addEventListener('visibilitychange', handleVisibilityChange);
+
+  //   return () => {
+  //     document.removeEventListener('visibilitychange', handleVisibilityChange);
+  //   };
+  // }, []);
+
 
   const closeDialogBox=()=>{
     setOpenDialogBox(false)
@@ -92,14 +160,16 @@ const AttemptQA = () => {
     }
 
   }
+
   const handleSaveResult=()=>{
     let array=[...tableData]
+    debugger  
     let obj=array.find(x=>x.id===currentQuestion.id)
     let answerStr=answerData.split(" ")
-    let result=answerStr.filter(x=>x.toLowerCase() ===obj.keyword1.trim().toLowerCase() || x===obj.keyword2.trim().toLowerCase() || x===obj.keyword3.trim().toLowerCase() || x===obj.keyword4.trim().toLowerCase()|| x===obj.keyword5.trim().toLowerCase())
+    let result=answerStr.filter(x=>x.toLowerCase() ===obj.keyword1.trim().toLowerCase() || x.toLowerCase()===obj.keyword2.trim().toLowerCase() || x.toLowerCase()===obj.keyword3.trim().toLowerCase() || x.toLowerCase()===obj.keyword4.trim().toLowerCase()|| x.toLowerCase()===obj.keyword5.trim().toLowerCase())
     result=[...new Set(result)].filter(x=>x!=='')
     if(result.length===5 || answerData===obj.answer){
-      setObtainedmarks(prev=> prev + obj.marks)
+      setObtainedmarks(obj.marks)
     }else{
       let count=0
       let newArray= Object.entries(obj)
@@ -144,9 +214,9 @@ const AttemptQA = () => {
         </Button>,
       ]}
       >
-        <Box>
+          <Box>
           <Typography id="keep-mounted-modal-title" variant="h6" component="h2" className="mt-3 mb-4">
-            Your Marks is {Math.floor(Obtainedmarks)}/ {tableData.reduce(function (acc, obj) { return acc + +obj.marks; }, 0)}
+            Your Marks is {Number(Obtainedmarks)?.toFixed(2) ?? 0.00} / {tableData.reduce(function (acc, obj) { return acc + +obj.marks; }, 0)}
           </Typography>
           <div className="mb-4">
         </div>

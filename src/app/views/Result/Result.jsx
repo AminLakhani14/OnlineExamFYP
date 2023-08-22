@@ -18,6 +18,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
+import { getUserId } from "app/utils/utils";
 
 const columns = [
   { field: "id", headerName: "ID", width: 60, type: "number", editable: true },
@@ -47,7 +48,7 @@ const columns = [
   },
   {
     field: "ObtainedMarks",
-    headerName: "Total marks",
+    headerName: "Obtained Marks",
     width: 150,
     editable: true,
   },
@@ -59,6 +60,57 @@ const columns = [
   },
 ];
 
+export   const ShowCalculatedResults=(response)=>{
+  let { register, qaMarks, mcQmarks }= response;
+  let mergeArrays=[...qaMarks, ...mcQmarks]
+  console.log( mergeArrays,' mergeArrays');
+
+  let registerIDs=register.map(x=>x.id)
+  debugger
+  let filteredArrays = registerIDs.reduce((result, key) => {
+    const filteredArray = mergeArrays.filter(item => item.registerID === key);
+    result[key] = filteredArray.length && filteredArray.reduce(
+      (total, record) => {
+        total.obtainedSum +=record['qMarks'] ? Number(record.qMarks) : 0 + record['mcqMarks'] ? Number(record.mcqMarks) : 0;
+        total.totalSum += record.totalMarks;
+        total.mcqMarks += record['mcqMarks'] ? Number(record.mcqMarks) : 0;
+        total.qMarks += record['qMarks'] ? Number(record.qMarks) : 0;
+        total.key=record['registerID'];
+        total.userName=record.register.userName;
+        return total;
+      },
+      { obtainedSum: 0, totalSum: 0, mcqMarks: 0, qMarks:0, key:'' , userName:''}
+    );
+    return result;
+  }, {});
+  // filteredArrays=filteredArrays.filter(x=>x!==0)
+  console.log( filteredArrays,' filteredArrays');
+
+  let updatedRsultArray=Object.values(filteredArrays).filter(x=>x)
+  console.log( updatedRsultArray,' updatedRsultArray');
+
+  let mcqsResult=updatedRsultArray.map((x,index)=>{
+    return {
+      id:index+1,
+      registerID:x.key,
+      userName: x.userName,
+      qMarks: updatedRsultArray.find(item=>item.key===x?.key)?.qMarks ?? 0,
+      mcqMarks: updatedRsultArray.find(item=>item.key===x?.key)?.mcqMarks ?? 0,
+      ObtainedMarks: updatedRsultArray.find(item=>item.key===x?.key)?.obtainedSum ?? 0,
+      totalMarks: updatedRsultArray.find(item=>item.key===x?.key)?.totalSum ?? 0,
+    }
+  })
+  const checkAdmin=localStorage.getItem("User");
+  let displayResult=[];
+  if(checkAdmin!=="Student") displayResult=[...mcqsResult];
+  else{
+    displayResult=mcqsResult.filter(x=>x.registerID===getUserId());
+  }
+  return displayResult ?? mcqsResult
+  // setRowData(displayResult ?? mcqsResult)
+  // console.log(mcqsResult,'mcqsResult')
+
+}
 const Result = () => {
 
   const [rowData,setRowData]=useState([])
@@ -70,61 +122,15 @@ const Result = () => {
     await axios.get('https://localhost:7040/Get-Result').then(res=>{
         if(res.status===200) {
           console.log(res.data)
-          ShowCalculatedResults(res.data)
+          let result=ShowCalculatedResults(res.data)
+          setRowData(result)
+
         }})
         .catch(err=>{
         console.log('err',err)
       })
   }
 
-  const ShowCalculatedResults=(response)=>{
-    let { register, qaMarks, mcQmarks }= response;
-    // console.log(register,' register');
-    // console.log( mcQmarks,'mcQmarks');
-    // console.log( qaMarks,' qaMarks');
-    let mergeArrays=[...qaMarks, ...mcQmarks]
-    console.log( mergeArrays,' mergeArrays');
-
-    let registerIDs=register.map(x=>x.id)
-    debugger
-    let filteredArrays = registerIDs.reduce((result, key) => {
-      const filteredArray = mergeArrays.filter(item => item.registerID === key);
-      result[key] = filteredArray.length && filteredArray.reduce(
-        (total, record) => {
-          total.obtainedSum +=record['qMarks'] ? Number(record.qMarks) : 0 + record['mcqMarks'] ? Number(record.mcqMarks) : 0;
-          total.totalSum += record.totalMarks;
-          total.mcqMarks += record['mcqMarks'] ? Number(record.mcqMarks) : 0;
-          total.qMarks += record['qMarks'] ? Number(record.qMarks) : 0;
-          total.key=record['registerID'];
-          total.userName=record.register.userName;
-          return total;
-        },
-        { obtainedSum: 0, totalSum: 0, mcqMarks: 0, qMarks:0, key:'' , userName:''}
-      );
-      return result;
-    }, {});
-    // filteredArrays=filteredArrays.filter(x=>x!==0)
-    console.log( filteredArrays,' filteredArrays');
-
-    let updatedRsultArray=Object.values(filteredArrays).filter(x=>x)
-    console.log( updatedRsultArray,' updatedRsultArray');
-
-    let mcqsResult=updatedRsultArray.map((x,index)=>{
-      return {
-        id:index,
-        registerID:x.registerID,
-        userName: x.userName,
-        qMarks: updatedRsultArray.find(item=>item.key===x?.register?.id)?.qMarks ?? 0,
-        mcqMarks: updatedRsultArray.find(item=>item.key===x?.register?.id)?.mcqMarks ?? 0,
-        ObtainedMarks: updatedRsultArray.find(item=>item.key===x?.register?.id)?.obtainedSum ?? 0,
-        totalMarks: updatedRsultArray.find(item=>item.key===x?.register?.id)?.totalSum ?? 0,
-      }
-    })
-
-    setRowData(mcqsResult)
-    console.log(mcqsResult,'mcqsResult')
-
-  }
   return (
     <>
       <div className="row m-0 mt-3">

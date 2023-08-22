@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Learning.Migrations
 {
     [DbContext(typeof(QuestionAPIDbcontext))]
-    [Migration("20230527045321_initial Migration")]
-    partial class initialMigration
+    [Migration("20230804184712_inital Migration")]
+    partial class initalMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -106,8 +106,8 @@ namespace Learning.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("QMarks")
-                        .HasColumnType("int");
+                    b.Property<float>("QMarks")
+                        .HasColumnType("real");
 
                     b.Property<Guid>("RegisterID")
                         .HasColumnType("uniqueidentifier");

@@ -28,10 +28,10 @@ const Heading = styled('h6')(({ theme }) => ({
   color: theme.palette.primary.main,
 }));
 
-const StatCards = () => {
+const AdminStatCards = () => {
   const cardList = [
-    { name: 'Course Registered', amount: 6, icon: 'group' },
-    { name: 'Notification', amount: 'Notification', icon: 'attach_money' },
+    { name: 'Numbers of Student', amount: 10000, icon: 'group' },
+    { name: 'Faculty Notification', amount: 'Notification', icon: 'attach_money' },
     { name: 'Schedule', amount: 'Click to Check your Schedule', icon: 'store' },
     { name: 'Exam Schedule', amount: 'Click to Check your Schedule', icon: 'shopping_cart' },
   ];
@@ -61,4 +61,4 @@ const StatCards = () => {
   );
 };
 
-export default StatCards;
+export default AdminStatCards;

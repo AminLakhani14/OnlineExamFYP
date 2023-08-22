@@ -173,7 +173,7 @@ export const flat = (array) => {
 };
 
 export const getUserId=()=>{
-  let id=localStorage.getItem('accessToken');
+  let id=localStorage.getItem('loginUserId');
   if(!id) return;
   return id;
 }

@@ -1,13 +1,14 @@
+import React from 'react'
 import { Card, Grid, styled, useTheme } from '@mui/material';
-import { Fragment,useEffect } from 'react';
+import { Fragment } from 'react';
 import DoughnutChart from './shared/Doughnut';
 import StatCards from './shared/StatCards';
-import TopSellingTable from './shared/TopSellingTable';
-import UpgradeCard from './shared/UpgradeCard';
-import AdminDashBoard from './AdminDashBoard';
-import axios from 'axios';
+import AdminUpgradeCard from './shared/AdminUpgradeCard';
+import AdminTopSellingTable from './shared/AdminTopSellingTable';
+import AdminStatCards from './AdminStatCards';
 
-const Analytics = () => {
+
+function AdminDashBoard() {
   const ContentBox = styled('div')(({ theme }) => ({
     margin: '30px',
     paddingBottom: '40px',
@@ -37,17 +38,14 @@ const Analytics = () => {
 
 
   const { palette } = useTheme();
-
-  const checkAmin=localStorage.getItem("User");
-  if(checkAmin!=='Student') return <AdminDashBoard/>
   return (
     <Fragment className='dashboard'>
       <ContentBox className="analytics">
         <Grid container spacing={3}>
           <Grid item lg={8} md={8} sm={12} xs={12}>
             {/* <StatCards /> */}
-            <UpgradeCard />
-            {/* <TopSellingTable /> */}
+            <AdminUpgradeCard />
+            {/* <AdminTopSellingTable /> */}
             {/* <StatCards2 /> */}
           </Grid>
 
@@ -62,12 +60,12 @@ const Analytics = () => {
               />
             </Card> */}
 
-            <StatCards />
+            <AdminStatCards />
           </Grid>
         </Grid>
       </ContentBox>
     </Fragment>
   )
-};
+}
 
-export default Analytics;
+export default AdminDashBoard

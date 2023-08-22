@@ -64,17 +64,18 @@ const JwtLogin = () => {
         ...prev,
         [target.name]:target.value
       }))
+      if(target.name==="type")localStorage.setItem('User',target.value)
     } catch (error) {
       console.log(error)
     }
   }
   const handleFormSubmit = async () => {
     try {
+      if(!formData.type || !formData.userName || !formData.password) return ;
       setLoading(true);
       await login(formData);
-      setLoading(false);
       navigate("/");
-      localStorage.setItem('User',formData.type)
+      setLoading(false);
     } catch (e) {
       setLoading(false);
     }

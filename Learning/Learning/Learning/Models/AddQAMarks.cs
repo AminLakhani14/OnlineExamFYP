@@ -2,7 +2,7 @@
 {
     public class AddQAMarks
     {
-        public int QMarks { get; set; }
+        public float QMarks { get; set; }
         public Guid RegisterID { get; set; }
         public int TotalMarks { get; set; }
         public string course { get; set; }

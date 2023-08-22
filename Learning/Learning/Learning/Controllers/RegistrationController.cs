@@ -66,7 +66,7 @@ namespace Learning.Controllers
             };
             try
             {
-                var data = dbcontext.Register.Where(x => x.UserName == userlogin.UserName && x.Password == userlogin.Password).FirstOrDefault();
+                var data = dbcontext.Register.Where(x => x.UserName == userlogin.UserName && x.Password == userlogin.Password && x.Type == userlogin.Type).FirstOrDefault();
                 if (data != null)
                 {
                     return Ok(data);

@@ -104,8 +104,8 @@ namespace Learning.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("QMarks")
-                        .HasColumnType("int");
+                    b.Property<float>("QMarks")
+                        .HasColumnType("real");
 
                     b.Property<Guid>("RegisterID")
                         .HasColumnType("uniqueidentifier");

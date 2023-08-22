@@ -19,7 +19,7 @@ import { useEffect } from 'react'
 //   }
 // },[])
 
-function UploadExam() {
+export function UploadExam() {
   return {
     name: 'Upload Exam',
     icon: 'books',
@@ -35,10 +35,10 @@ function UploadExam() {
     ],
   }
 }
-function Dashboard() {
+export function Dashboard() {
   return { name: 'Dashboard', path: '/dashboard/default', icon: 'dashboard' }
 }
-function Manage() {
+export function Manage() {
   return {
     name: 'Manage',
     icon: <ManageAccountsIcon />,
@@ -48,7 +48,7 @@ function Manage() {
     ],
   }
 }
-function AttemptExam() {
+export function AttemptExam() {
   return {
     name: 'Attempt Exam',
     icon: 'home',
@@ -81,4 +81,5 @@ export const navigations = [
   },
 ]
 
-if (localStorage.getItem === 'Admin') navigations.splice(2, 1)
+// if (localStorage.getItem("User") === 'Student') navigations.splice(2, 2)
+// else if (localStorage.getItem("User") === 'Teacher' || localStorage.getItem("User") === 'Admin') navigations.splice(4, 1)
