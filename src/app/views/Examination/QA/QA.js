@@ -96,6 +96,8 @@ const QA = () => {
     "Software Engineering",
     "BlockChain",
     "Parallel and Distributive Programming",
+    "Pakistan Studies",
+    "World History",
   ];
  
 

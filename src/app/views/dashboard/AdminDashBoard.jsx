@@ -44,13 +44,13 @@ function AdminDashBoard() {
         <Grid container spacing={3}>
           <Grid item lg={8} md={8} sm={12} xs={12}>
             {/* <StatCards /> */}
-            <AdminUpgradeCard />
-            {/* <AdminTopSellingTable /> */}
+            {/* <AdminUpgradeCard /> */}
+            <AdminTopSellingTable />
             {/* <StatCards2 /> */}
           </Grid>
 
           <Grid item lg={4} md={4} sm={12} xs={12}>
-            {/* <Card sx={{ px: 3, py: 2, mb: 3 }}>
+            <Card sx={{ px: 3, py: 2, mb: 3 }}>
               <Title>CGPA Records</Title>
               <SubTitle>Last 4 years</SubTitle>
 
@@ -58,9 +58,9 @@ function AdminDashBoard() {
                 height="340px"
                 color={[palette.primary.dark, palette.primary.main, palette.primary.light]}
               />
-            </Card> */}
+            </Card>
 
-            <AdminStatCards />
+            {/* <AdminStatCards /> */}
           </Grid>
         </Grid>
       </ContentBox>

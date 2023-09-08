@@ -99,6 +99,8 @@ const MCQ = () => {
     "Software Engineering",
     "BlockChain",
     "Parallel and Distributive Programming",
+    "Pakistan Studies",
+    "World History",
   ];
 
   const handleChange = (e) => {

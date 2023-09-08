@@ -58,6 +58,7 @@ const AttemptQA = () => {
       course :courseData ?? '',
       registerID: getUserId()
     };
+    console.log(Obtainedmarks);
     await CalculateResult('https://localhost:7040/api/QAmarks/Post-QAMarks',obj)
     .then(res=>{
       if(res.status===200){
@@ -70,7 +71,7 @@ const AttemptQA = () => {
     })
     .catch(err=>console.log(err))
   };
-  
+
   const handleCancel = () => {
     setScoreModal(false);
     localStorage.setItem('QAMarks',Obtainedmarks)
@@ -96,7 +97,7 @@ const AttemptQA = () => {
   //         return prevTime - 1;
   //       }
   //     });
-  //   }, 1000);
+  //   }, 60);
 
   //   // Clean up the timer when the component unmounts
   //   return () => {
@@ -104,26 +105,26 @@ const AttemptQA = () => {
   //   };
   // }, []);
 
-  // useEffect(() => {
-  //   function handleVisibilityChange() {
-  //     if (document.visibilityState === 'hidden') {
-  //       // The user switched to another tab or minimized the browser window
-  //       // Perform some actions here, such as pausing a video or showing a warning
-  //        alert('Please stay on this page');
-  //       setScoreModal(true);
+  useEffect(() => {
+    function handleVisibilityChange() {
+      if (document.visibilityState === 'hidden') {
+        // The user switched to another tab or minimized the browser window
+        // Perform some actions here, such as pausing a video or showing a warning
+         alert('Please stay on this page');
+        setScoreModal(true);
 
-  //     } else {
-  //       // The user switched back to the tab
-  //       // Perform some actions here, such as resuming a video or hiding the warning
-  //     }
-  //   }
+      } else {
+        // The user switched back to the tab
+        // Perform some actions here, such as resuming a video or hiding the warning
+      }
+    }
 
-  //   document.addEventListener('visibilitychange', handleVisibilityChange);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
-  //   return () => {
-  //     document.removeEventListener('visibilitychange', handleVisibilityChange);
-  //   };
-  // }, []);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
 
 
   const closeDialogBox=()=>{
@@ -169,7 +170,7 @@ const AttemptQA = () => {
     let result=answerStr.filter(x=>x.toLowerCase() ===obj.keyword1.trim().toLowerCase() || x.toLowerCase()===obj.keyword2.trim().toLowerCase() || x.toLowerCase()===obj.keyword3.trim().toLowerCase() || x.toLowerCase()===obj.keyword4.trim().toLowerCase()|| x.toLowerCase()===obj.keyword5.trim().toLowerCase())
     result=[...new Set(result)].filter(x=>x!=='')
     if(result.length===5 || answerData===obj.answer){
-      setObtainedmarks(obj.marks)
+      setObtainedmarks(prev=> + prev + +obj.marks)
     }else{
       let count=0
       let newArray= Object.entries(obj)

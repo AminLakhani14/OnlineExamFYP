@@ -212,7 +212,7 @@ const handleChange=(e)=>{
        </BootstrapDialogTitle>
        <Box>
          <Typography id="keep-mounted-modal-title" variant="h6" component="h2" className="mt-3 mx-4 mb-4">
-           Do you want to Add this Question?
+           Do you want to Add this User ?
          </Typography>
          <div className="mb-4">
        <Button

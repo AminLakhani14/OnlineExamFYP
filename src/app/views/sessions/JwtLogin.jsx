@@ -77,6 +77,7 @@ const JwtLogin = () => {
       navigate("/");
       setLoading(false);
     } catch (e) {
+      alert("Wrong Credentials")
       setLoading(false);
     }
   };
@@ -147,8 +148,8 @@ const JwtLogin = () => {
                       </FormControl>
 
 
-                      <FlexBox justifyContent="space-between">
-                        <FlexBox gap={1}>
+                      <FlexBox justifyContent="space-between" >
+                        <FlexBox gap={1} style={{paddingRight:"8px"}}>
                           <Checkbox
                             size="small"
                             name="remember"
@@ -181,7 +182,7 @@ const JwtLogin = () => {
             <div className="col-12 col-md-6 col-lg-7 col-xl-8 align-self-end">
               <h1 className="loginHeading">
                 <span>Welcome to the</span> <br />
-                Iqra University <br /> Onine Examination System
+                Iqra University <br /> Online Examination System
               </h1>
             </div>
           </div>

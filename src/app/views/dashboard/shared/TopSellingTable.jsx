@@ -85,7 +85,7 @@ const TopSellingTable = () => {
                 Status
               </TableCell>
               <TableCell sx={{ px: 0 }} colSpan={1}>
-                GPA
+                Credit Hours
               </TableCell>
             </TableRow>
           </TableHead>
@@ -95,13 +95,12 @@ const TopSellingTable = () => {
               <TableRow key={index} hover>
                 <TableCell colSpan={4} align="left" sx={{ px: 0, textTransform: 'capitalize' }}>
                   <Box display="flex" alignItems="center">
-                    <Avatar src={product.imgUrl} />
-                    <Paragraph sx={{ m: 0, ml: 4 }}>{product.name}</Paragraph>
+                    <Paragraph sx={{ m: 0 }}>{product.name}</Paragraph>
                   </Box>
                 </TableCell>
 
                 <TableCell align="left" colSpan={2} sx={{ px: 0, textTransform: 'capitalize' }}>
-                  ${product.price > 999 ? (product.price / 1000).toFixed(1) + 'k' : product.price}
+                 {product.price}
                 </TableCell>
 
                 <TableCell sx={{ px: 0 }} align="left" colSpan={2}>
@@ -117,9 +116,7 @@ const TopSellingTable = () => {
                 </TableCell>
 
                 <TableCell sx={{ px: 0 }} colSpan={1}>
-                  <IconButton>
-                    <Icon color="primary">edit</Icon>
-                  </IconButton>
+                <Paragraph sx={{ m: 0, ml: 4 }}>{product.Credit}</Paragraph>
                 </TableCell>
               </TableRow>
             ))}
@@ -136,30 +133,35 @@ const productList = [
     name: 'Science',
     price: 'B+',
     available: 15,
+    Credit: '3'
   },
   {
     imgUrl: '/assets/images/products/headphone-3.jpg',
     name: 'Programming Fundamental',
     price: 'A',
     available: 30,
+    Credit: '3'
   },
   {
     imgUrl: '/assets/images/products/iphone-2.jpg',
     name: 'English',
     price: 'C',
     available: 35,
+    Credit: '3'
   },
   {
     imgUrl: '/assets/images/products/iphone-1.jpg',
     name: 'Pakistan Studies',
     price: 'C+',
     available: 0,
+    Credit: '2'
   },
   {
     imgUrl: '/assets/images/products/headphone-3.jpg',
     name: 'Object Oriented Programming',
     price: 'A+',
     available: 5,
+    Credit: '3'
   },
 ];
 
