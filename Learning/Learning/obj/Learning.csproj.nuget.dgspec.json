@@ -1,28 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "F:\\AminBranch\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj": {}
+    "C:\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj": {}
   },
   "projects": {
-    "F:\\AminBranch\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj": {
+    "C:\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\AminBranch\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj",
+        "projectUniqueName": "C:\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj",
         "projectName": "Learning",
-        "projectPath": "F:\\AminBranch\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj",
-        "packagesPath": "C:\\Users\\aminl\\.nuget\\packages\\",
-        "outputPath": "F:\\AminBranch\\OnlineExamFYP\\Learning\\Learning\\obj\\",
+        "projectPath": "C:\\OnlineExamFYP\\Learning\\Learning\\Learning.csproj",
+        "packagesPath": "C:\\Users\\Ameen\\.nuget\\packages\\",
+        "outputPath": "C:\\OnlineExamFYP\\Learning\\Learning\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\aminl\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Ameen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -30,8 +26,8 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -39,11 +35,16 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -101,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
