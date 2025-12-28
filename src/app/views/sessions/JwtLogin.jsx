@@ -1,6 +1,13 @@
 import { LoadingButton } from "@mui/lab";
-import { Card, Checkbox, Grid, Modal, TextField, Typography } from "@mui/material";
-import { Box, styled, useTheme } from "@mui/system";
+import {
+  Checkbox,
+  TextField,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
+import { Box, styled } from "@mui/system";
 import { Paragraph } from "app/components/Typography";
 import useAuth from "app/hooks/useAuth";
 import { Formik } from "formik";
@@ -33,8 +40,8 @@ const JWTRoot = styled(JustifyBox)(() => ({
 
 // inital login credentials
 const initialValues = {
-  email: "amin@gmail.com",
-  password: "amin12",
+  email: "admin@gmail.com",
+  password: "admin123",
   remember: true,
 };
 
@@ -49,7 +56,6 @@ const validationSchema = Yup.object().shape({
 });
 
 const JwtLogin = () => {
-  const theme = useTheme();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -58,7 +64,7 @@ const JwtLogin = () => {
   const handleFormSubmit = async (values) => {
     setLoading(true);
     try {
-      await login(values.email, values.password);
+      await login(values.email, values.password, values.type);
       navigate("/");
     } catch (e) {
       setLoading(false);
@@ -98,6 +104,23 @@ const JwtLogin = () => {
                     handleSubmit,
                   }) => (
                     <form onSubmit={handleSubmit}>
+                      <FormControl fullWidth size="small" sx={{ mb: 3 }}>
+                        <InputLabel id="type-select-label">Role</InputLabel>
+                        <Select
+                          labelId="type-select-label"
+                          id="type-select"
+                          value={values.type || "Student"}
+                          label="Role"
+                          name="type"
+                          onChange={handleChange}
+                        >
+                          <MenuItem value="SA">Super Admin</MenuItem>
+                          <MenuItem value="Admin">Admin</MenuItem>
+                          <MenuItem value="Student">Student</MenuItem>
+                          <MenuItem value="Teacher">Teacher</MenuItem>
+                        </Select>
+                      </FormControl>
+
                       <TextField
                         fullWidth
                         size="small"

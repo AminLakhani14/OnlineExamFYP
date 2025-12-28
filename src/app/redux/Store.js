@@ -1,22 +1,21 @@
-import { applyMiddleware, compose, createStore } from 'redux';
-import thunk from 'redux-thunk';
-import RootReducer from './reducers/RootReducer';
+import { configureStore } from "@reduxjs/toolkit";
+import notificationReducer from "./slices/notificationSlice";
+import navigationReducer from "./slices/navigationSlice";
 
-const initialState = {};
-const middlewares = [thunk];
-let devtools = (x) => x;
-
-if (
-  process &&
-  process.env.NODE_ENV !== 'production' &&
-  process.browser &&
-  window.__REDUX_DEVTOOLS_EXTENSION__
-) {
-  devtools = window.__REDUX_DEVTOOLS_EXTENSION__();
-}
-
-export const Store = createStore(
-  RootReducer,
-  initialState,
-  compose(applyMiddleware(...middlewares), devtools)
-);
+export const Store = configureStore({
+  reducer: {
+    notifications: notificationReducer,
+    navigations: navigationReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [
+          "notifications/getNotifications/pending",
+          "notifications/getNotifications/fulfilled",
+        ],
+        ignoredPaths: ["navigations"],
+      },
+    }),
+  devTools: process.env.NODE_ENV !== "production",
+});

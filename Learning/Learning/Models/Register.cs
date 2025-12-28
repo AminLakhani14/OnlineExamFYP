@@ -10,5 +10,15 @@
         public string Password { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
+        public int? SchoolId { get; set; }
+        public School School { get; set; }
+
+        public int? ClassId { get; set; }
+        public Class Class { get; set; }
+
+        // Gamification fields
+        public int XP { get; set; } = 0;
+        public int Level { get; set; } = 1;
+        public int TotalPoints { get; set; } = 0;
     }
 }

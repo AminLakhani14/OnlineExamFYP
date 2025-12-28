@@ -18,7 +18,7 @@ namespace Learning.Models
 
         public DateTime Created { get; set; }
 
-
-
+        public int? SchoolId { get; set; }
+        public School School { get; set; }
     }
 }

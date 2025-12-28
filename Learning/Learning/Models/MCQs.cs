@@ -11,5 +11,7 @@
         public string OptionD { get; set; }
         public string CorrectAnswer { get; set; }
         public string marks { get; set; }
+        public int? SchoolId { get; set; }
+        public School School { get; set; }
     }
 }

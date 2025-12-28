@@ -3,6 +3,12 @@ using Learning.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mail;
 using System.Net;
+using Microsoft.EntityFrameworkCore;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using Learning.Services;
 
 namespace Learning.Controllers
 {
@@ -11,15 +17,57 @@ namespace Learning.Controllers
     public class RegistrationController : Controller
     {
         private readonly QuestionAPIDbcontext dbcontext;
-        public RegistrationController(QuestionAPIDbcontext dbcontext)
+        private readonly IConfiguration _config;
+        private readonly IGamificationService _gamificationService;
+
+        public RegistrationController(QuestionAPIDbcontext dbcontext, IConfiguration config, IGamificationService gamificationService)
         {
             this.dbcontext = dbcontext;
+            _config = config;
+            _gamificationService = gamificationService;
+        }
+
+        private string GenerateJwtToken(Register user)
+        {
+            var jwtSettings = _config.GetSection("Jwt");
+            var key = Encoding.ASCII.GetBytes(jwtSettings["Key"]);
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()),
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.Type),
+                new Claim("SchoolId", user.SchoolId?.ToString() ?? "0")
+            };
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddDays(7),
+                Issuer = jwtSettings["Issuer"],
+                Audience = jwtSettings["Audience"],
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
         [HttpGet]
         [Route("Get-Register")]
         public async Task<IActionResult> GetRegister()
         {
             return Ok(dbcontext.Register.ToList());
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetUserById(int id)
+        {
+            var user = await dbcontext.Register.FindAsync(id);
+            if (user == null) return NotFound();
+            return Ok(user);
         }
 
         [HttpPost]
@@ -36,18 +84,23 @@ namespace Learning.Controllers
                 Password = AddUser.Password,
                 Country = AddUser.Country,
                 City = AddUser.City,
-
-
-
             };
             try
             {
-             await dbcontext.Register.AddAsync(addData);
-            await dbcontext.SaveChangesAsync();
-                SendEmail(AddUser.Email,AddUser.UserName,AddUser.Password,AddUser.Type);
+                await dbcontext.Register.AddAsync(addData);
+                await dbcontext.SaveChangesAsync();
+                
+                // Wrap email in its own try-catch so it doesn't fail the request if email fails
+                try {
+                    SendEmail(AddUser.Email, AddUser.UserName, AddUser.Password, AddUser.Type);
+                } catch (Exception ex) {
+                    // Log email failure but don't fail the user creation
+                    Console.WriteLine("Email failed: " + ex.Message);
+                }
             }
-            catch
+            catch (Exception ex)
             {
+                return StatusCode(500, "Internal Server Error: " + ex.Message + " | Inner: " + ex.InnerException?.Message);
             }
             return Ok(addData);
         }
@@ -57,6 +110,27 @@ namespace Learning.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Login(Login loginUser)
         {
+            // Auto-create admin if not exists
+            if (loginUser.UserName == "admin@gmail.com")
+            {
+                var admin = dbcontext.Register.IgnoreQueryFilters().FirstOrDefault(x => x.UserName == "admin@gmail.com");
+                if (admin == null)
+                {
+                    admin = new Register
+                    {
+                        UserName = "admin@gmail.com",
+                        Email = "admin@gmail.com",
+                        Password = "admin123",
+                        Type = "SA", // SA for Super Admin
+                        Age = "30",
+                        Country = "AdminCountry",
+                        City = "AdminCity"
+                    };
+                    dbcontext.Register.Add(admin);
+                    dbcontext.SaveChanges();
+                }
+            }
+
             var userlogin = new Login()
             {
                 UserName = loginUser.UserName,
@@ -65,24 +139,59 @@ namespace Learning.Controllers
             };
             try
             {
-                var data = dbcontext.Register.Where(x => x.UserName == userlogin.UserName && x.Password == userlogin.Password).FirstOrDefault();
+                // Verify by Email OR UserName, since frontend might send email in the UserName field
+                // USE IgnoreQueryFilters() because user is not yet authenticated
+                var data = dbcontext.Register.IgnoreQueryFilters()
+                    .Where(x => (x.UserName == userlogin.UserName || x.Email == userlogin.UserName) && x.Password == userlogin.Password)
+                    .FirstOrDefault();
                 if (data != null)
                 {
-                    return Ok(data);
+                    var token = GenerateJwtToken(data);
+                    
+                    // Update streak if student
+                    if (data.Type == "Student")
+                    {
+                        await _gamificationService.UpdateStreakAsync(data.ID);
+                    }
+
+                    return Ok(new 
+                    { 
+                        token, 
+                        user = data 
+                    });
                 }
                 else
                 {
-                    return BadRequest();
+                    return Unauthorized(new { message = "Invalid Username or Password" });
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
-
+                return BadRequest(new { message = ex.Message });
             }
         }
 
 
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(int id, Register user)
+        {
+            if (id != user.ID) return BadRequest();
+
+            dbcontext.Entry(user).State = EntityState.Modified;
+
+            try
+            {
+                await dbcontext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!dbcontext.Register.Any(e => e.ID == id)) return NotFound();
+                else throw;
+            }
+
+            return NoContent();
+        }
 
         public static bool SendEmail(string Emailto, string Usnername, string Password, string Type)
         {

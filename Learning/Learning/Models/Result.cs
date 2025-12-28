@@ -6,5 +6,7 @@
         public List<Register> Register { get; set; }
         public List<QAMarks> QAMarks { get; set; }
         public List<MCQmarks> MCQmarks { get; set; }
+        public int? SchoolId { get; set; }
+        public School School { get; set; }
     }
 }

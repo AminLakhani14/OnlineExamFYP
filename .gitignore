@@ -32,3 +32,12 @@ yarn-error.log*
 /package-AminLakhani.json
 /package-lock-AminLakhani.json
 /yarn-AminLakhani.lock
+
+# .NET Build Artifacts
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates

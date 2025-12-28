@@ -16,100 +16,100 @@ import {
   TextareaAutosize,
   TextField,
   Typography,
-} from '@mui/material'
-import SaveIcon from '@mui/icons-material/Save'
-import NavigateNextIcon from '@mui/icons-material/NavigateNext'
-import { Modal } from 'antd'
-import HeadBreadCrumb from 'app/components/BreadCrumb/HeadBreadCrumb'
-import { useState } from 'react'
-import axios from 'axios'
-import { useEffect } from 'react'
-import DialogBox from 'app/components/DialogBox/DialogBox'
-import { useNavigate } from 'react-router-dom'
+} from "@mui/material";
+import SaveIcon from "@mui/icons-material/Save";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { Modal } from "antd";
+import HeadBreadCrumb from "app/components/BreadCrumb/HeadBreadCrumb";
+import { useState } from "react";
+import axios from "../../../../axios";
+import { useEffect } from "react";
+import DialogBox from "app/components/DialogBox/DialogBox";
+import { useNavigate } from "react-router-dom";
 
 const AttemptMCQ = () => {
-  const [tableData, setTableData] = useState([])
-  const [currentQuestion, setcurrentQuestion] = useState({})
-  const [ScoreModal, setScoreModal] = useState(false)
-  const [selectedOption, setSelectedOption] = useState('')
-  const [openDialogbox, setOpenDialogBox] = useState(false)
-  const [Obtainedmarks, setObtainedmarks] = useState(0)
-  const navigate=useNavigate()
+  const [tableData, setTableData] = useState([]);
+  const [currentQuestion, setcurrentQuestion] = useState({});
+  const [ScoreModal, setScoreModal] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [openDialogbox, setOpenDialogBox] = useState(false);
+  const [Obtainedmarks, setObtainedmarks] = useState(0);
+  const navigate = useNavigate();
 
   const handleOk = () => {
-    setScoreModal(false)
-    localStorage.setItem('MCQsMarks',Obtainedmarks)
-    navigate("/")
-  }
+    setScoreModal(false);
+    localStorage.setItem("MCQsMarks", Obtainedmarks);
+    navigate("/");
+  };
 
   const handleCancel = () => {
-    setScoreModal(false)
-  }
+    setScoreModal(false);
+  };
 
   const getpost = () => {
-    debugger
+    debugger;
 
     axios
       .get(`https://localhost:7040/api/MCQs/Get-MCQs`)
       .then((res) => {
-        debugger
+        debugger;
         if (res.status === 200) {
           if (res.data.length) {
-            setTableData(res.data)
-            setcurrentQuestion(res.data[0])
+            setTableData(res.data);
+            setcurrentQuestion(res.data[0]);
           }
-          console.log('hello world', res.data)
+          console.log("hello world", res.data);
         } else {
-          console.log('something went wrong')
+          console.log("something went wrong");
         }
       })
       .catch((err) => {
-        debugger
-        console.error(err)
-      })
-  }
+        debugger;
+        console.error(err);
+      });
+  };
 
   useEffect(() => {
-    getpost()
-  }, [])
+    getpost();
+  }, []);
 
-  console.log(tableData)
+  console.log(tableData);
 
   const handleRadio = (e) => {
-    let { value } = e.target
-    setSelectedOption(value)
-  }
+    let { value } = e.target;
+    setSelectedOption(value);
+  };
 
   const clickNextQuestion = (e) => {
     if (!selectedOption) {
-      setOpenDialogBox(true)
+      setOpenDialogBox(true);
     } else {
-      handleSaveResult()
+      handleSaveResult();
     }
-  }
+  };
 
   const handleSaveResult = () => {
-    debugger
-    let array = [...tableData]
-    let selectedQuestion = array.find((x) => x.id === currentQuestion.id)
+    debugger;
+    let array = [...tableData];
+    let selectedQuestion = array.find((x) => x.id === currentQuestion.id);
     if (selectedOption === selectedQuestion.correctAnswer) {
-      setObtainedmarks((prev) => prev + +selectedQuestion.marks)
+      setObtainedmarks((prev) => prev + +selectedQuestion.marks);
     } else {
-      setObtainedmarks((prev) => prev + 0)
+      setObtainedmarks((prev) => prev + 0);
     }
     if (currentQuestion?.id !== array.slice(-1)[0]?.id) {
-      setSelectedOption('')
-      let index = array.findIndex((x) => x.id === currentQuestion.id)
-      let obj1 = array[index + 1]
-      setcurrentQuestion(obj1)
+      setSelectedOption("");
+      let index = array.findIndex((x) => x.id === currentQuestion.id);
+      let obj1 = array[index + 1];
+      setcurrentQuestion(obj1);
     } else {
-      setScoreModal(true)
+      setScoreModal(true);
     }
-  }
+  };
 
   const closeDialogBox = () => {
-    setOpenDialogBox(false)
-  }
+    setOpenDialogBox(false);
+  };
 
   return (
     <>
@@ -140,20 +140,20 @@ const AttemptMCQ = () => {
               component="h2"
               className="mt-3 mb-4"
             >
-              Your Marks is {Obtainedmarks}/{' '}
+              Your Marks is {Obtainedmarks}/{" "}
               {tableData.reduce(function (acc, obj) {
-                return acc + +obj.marks
+                return acc + +obj.marks;
               }, 0)}
             </Typography>
             <div className="mb-4"></div>
           </Box>
         </Modal>
       )}
-      <HeadBreadCrumb text1={'Dashboard'} text2={'MCQs'} url={'/'} />
+      <HeadBreadCrumb text1={"Dashboard"} text2={"MCQs"} url={"/"} />
       <div className="row m-0">
         <div className="d-flex justify-content-between mt-4">
           <h3 id="QuestionText" className="m-0 mt-2">
-            Question {currentQuestion?.id ?? ''}:
+            Question {currentQuestion?.id ?? ""}:
           </h3>
           <div className="align-items-center d-flex justify-content-end w-auto">
             <label className="align-items-center mt-2 d-flex px-2">
@@ -163,11 +163,11 @@ const AttemptMCQ = () => {
               className="mt-2 w-50"
               fullWidth
               disabled
-              value={currentQuestion?.marks ?? ''}
+              value={currentQuestion?.marks ?? ""}
               size="small"
               sx={{
-                '& legend': { display: 'none' },
-                '& fieldset': { top: 0 },
+                "& legend": { display: "none" },
+                "& fieldset": { top: 0 },
               }}
             />
           </div>
@@ -175,7 +175,7 @@ const AttemptMCQ = () => {
       </div>
       <div className="row m-0">
         <div className="col-12">
-          <h6>{currentQuestion?.question ?? ''}</h6>
+          <h6>{currentQuestion?.question ?? ""}</h6>
         </div>
       </div>
 
@@ -196,25 +196,25 @@ const AttemptMCQ = () => {
               onChange={handleRadio}
             >
               <FormControlLabel
-                label={currentQuestion?.optionA ?? ''}
+                label={currentQuestion?.optionA ?? ""}
                 control={<Radio />}
-                value={currentQuestion?.optionA ?? ''}
+                value={currentQuestion?.optionA ?? ""}
               />
               <FormControlLabel
-                label={currentQuestion?.optionB ?? ''}
+                label={currentQuestion?.optionB ?? ""}
                 control={<Radio />}
-                value={currentQuestion?.optionB ?? ''}
+                value={currentQuestion?.optionB ?? ""}
               />
 
               <FormControlLabel
-                label={currentQuestion?.optionC ?? ''}
+                label={currentQuestion?.optionC ?? ""}
                 control={<Radio />}
-                value={currentQuestion?.optionC ?? ''}
+                value={currentQuestion?.optionC ?? ""}
               />
               <FormControlLabel
-                label={currentQuestion?.optionD ?? ''}
+                label={currentQuestion?.optionD ?? ""}
                 control={<Radio />}
-                value={currentQuestion?.optionD ?? ''}
+                value={currentQuestion?.optionD ?? ""}
               />
             </RadioGroup>
           </FormControl>
@@ -231,8 +231,8 @@ const AttemptMCQ = () => {
             width: 200,
             color:
               currentQuestion?.id === tableData.slice(-1)[0]?.id
-                ? 'red'
-                : 'blue',
+                ? "red"
+                : "blue",
           }}
           endIcon={
             currentQuestion?.id === tableData.slice(-1)[0]?.id ? (
@@ -244,11 +244,11 @@ const AttemptMCQ = () => {
           onClick={clickNextQuestion}
         >
           {currentQuestion?.id === tableData.slice(-1)[0]?.id
-            ? 'Submit'
-            : 'Next Question'}
+            ? "Submit"
+            : "Next Question"}
         </Button>
       </div>
     </>
-  )
-}
-export default AttemptMCQ
+  );
+};
+export default AttemptMCQ;

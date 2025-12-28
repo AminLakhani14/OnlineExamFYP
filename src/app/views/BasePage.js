@@ -1,67 +1,135 @@
-import Loadable from 'app/components/Loadable';
-import { lazy } from 'react';
-import AttemptMCQ from './AttemptExam/AttemptMCQs/AttemptMCQ';
-import AttemptQA from './AttemptExam/AttemptQA/AttemptQA';
-import MCQ from './Examination/MCQs/MCQs';
-import QA from './Examination/QA/QA';
-import ViewMCQs from './Examination/ViewMCQs/ViewMCQs';
-import VQP from './Examination/VQP/VQP';
-import ExamRules from './ExamRules/ExamRules';
-import ViewExam from './Manage/ViewMCQExam/ViewExam';
-import ViewQAExam from './Manage/ViewQAExam/ViewQAExam';
-import Result from './Result/Result';
-import Signup from './sessions/Signup';
-
-// const AppTable = Loadable(lazy(() => import('./tables/AppTable')));
-// const AppForm = Loadable(lazy(() => import('./forms/AppForm')));
-// const AppButton = Loadable(lazy(() => import('./buttons/AppButton')));
-// const AppIcon = Loadable(lazy(() => import('./icons/AppIcon')));
-// const AppMenu = Loadable(lazy(() => import('./menu/AppMenu')));
-// const AppCheckbox = Loadable(lazy(() => import('./checkbox/AppCheckbox')));
-// const AppSwitch = Loadable(lazy(() => import('./switch/AppSwitch')));
-// const AppRadio = Loadable(lazy(() => import('./radio/AppRadio')));
-// const AppSlider = Loadable(lazy(() => import('./slider/AppSlider')));
-// const AppDialog = Loadable(lazy(() => import('./dialog/AppDialog')));
-// const AppSnackbar = Loadable(lazy(() => import('./snackbar/AppSnackbar')));
-// const AppAutoComplete = Loadable(lazy(() => import('./auto-complete/AppAutoComplete')));
-// const AppExpansionPanel = Loadable(lazy(() => import('./expansion-panel/AppExpansionPanel')));
+import AttemptMCQ from "./AttemptExam/AttemptMCQs/AttemptMCQ";
+import AttemptQA from "./AttemptExam/AttemptQA/AttemptQA";
+import MCQ from "./Examination/MCQs/MCQs";
+import QA from "./Examination/QA/QA";
+import ViewMCQs from "./Examination/ViewMCQs/ViewMCQs";
+import VQP from "./Examination/VQP/VQP";
+import ExamRules from "./ExamRules/ExamRules";
+import ViewExam from "./Manage/ViewMCQExam/ViewExam";
+import ViewQAExam from "./Manage/ViewQAExam/ViewQAExam";
+import Result from "./Result/Result";
+import Signup from "./sessions/Signup";
+import SchoolList from "./lms/SchoolList";
+import ClassList from "./lms/ClassList";
+import SubjectList from "./lms/SubjectList";
+import UserManagement from "./lms/UserManagement";
+import TenantSettings from "./lms/TenantSettings";
+import Attendance from "./operations/Attendance";
+import StudyMaterial from "./operations/StudyMaterial";
+import ChatRoom from "./operations/ChatRoom";
+import ManageExams from "./academics/ManageExams";
+import AttemptExams from "./academics/AttemptExams";
+import Assignments from "./academics/Assignments";
+import Games from "./games/Games";
+import SnakeGame from "./games/SnakeGame";
+import MemoryGame from "./games/MemoryGame";
+import MazeRunner from "./games/MazeRunner";
 
 const BasePage = [
   {
-    path: '/Examination/QA', element: <QA />,
+    path: "/operations/attendance",
+    element: <Attendance />,
   },
   {
-    path: '/Examination/MCQs', element: <MCQ />,
+    path: "/operations/materials",
+    element: <StudyMaterial />,
   },
   {
-    path: '/AttemptExam/AttemptMCQs', element: <AttemptMCQ />,
+    path: "/operations/chat",
+    element: <ChatRoom />,
   },
   {
-    path: '/AttemptExam/AttemptQA', element: <AttemptQA />,
+    path: "/academics/exams",
+    element: <ManageExams />,
   },
   {
-    path: '/Examination/VQP', element: <VQP />,
+    path: "/academics/attempt-exams",
+    element: <AttemptExams />,
   },
   {
-    path: '/Examination/ViewMCQs', element: <ViewMCQs />,
+    path: "/academics/assignments",
+    element: <Assignments />,
   },
   {
-    path: '/Manage/ViewQAExam', element: <ViewQAExam />,
+    path: "/admin/schools",
+    element: <SchoolList />,
   },
   {
-    path: '/Manage/ViewMCQExam', element: <ViewExam />,
+    path: "/admin/classes",
+    element: <ClassList />,
   },
   {
-    path: '/Result/Result', element: <Result />,
+    path: "/admin/subjects",
+    element: <SubjectList />,
   },
   {
-    path: '/ExamRules/ExamRules', element: <ExamRules />,
+    path: "/admin/users",
+    element: <UserManagement />,
   },
   {
-    path: '/sessions/Signup', element: <Signup />,
+    path: "/admin/settings",
+    element: <TenantSettings />,
   },
-  
-  
+  {
+    path: "/Examination/QA",
+    element: <QA />,
+  },
+  {
+    path: "/Examination/MCQs",
+    element: <MCQ />,
+  },
+  {
+    path: "/AttemptExam/AttemptMCQs",
+    element: <AttemptMCQ />,
+  },
+  {
+    path: "/AttemptExam/AttemptQA",
+    element: <AttemptQA />,
+  },
+  {
+    path: "/Examination/VQP",
+    element: <VQP />,
+  },
+  {
+    path: "/Examination/ViewMCQs",
+    element: <ViewMCQs />,
+  },
+  {
+    path: "/Manage/ViewQAExam",
+    element: <ViewQAExam />,
+  },
+  {
+    path: "/Manage/ViewMCQExam",
+    element: <ViewExam />,
+  },
+  {
+    path: "/Result/Result",
+    element: <Result />,
+  },
+  {
+    path: "/ExamRules/ExamRules",
+    element: <ExamRules />,
+  },
+  {
+    path: "/sessions/Signup",
+    element: <Signup />,
+  },
+  {
+    path: "/games",
+    element: <Games />,
+  },
+  {
+    path: "/games/snake",
+    element: <SnakeGame />,
+  },
+  {
+    path: "/games/memory",
+    element: <MemoryGame />,
+  },
+  {
+    path: "/games/maze",
+    element: <MazeRunner />,
+  },
 ];
 
 export default BasePage;
